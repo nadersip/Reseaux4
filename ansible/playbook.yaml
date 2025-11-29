@@ -1,0 +1,123 @@
+- name: Updating servers and installing services
+  hosts: rackservers
+  become: yes
+
+  vars:
+    ansible_become_pass: "" #admin password
+  tasks:
+   - name: Servers update
+     shell: sudo apt update && sudo apt upgrade -y
+   
+   - name: Apache2 installation
+     apt:
+      name: apache2
+      state: present
+
+   - name: Dnsmasq installation
+     apt: 
+      name: dnsmasq
+      state: present
+
+   - name: Chrony installation
+     apt: 
+      name: chrony
+      state: present
+      
+   - name: TFTP installation
+     apt: 
+      name: tftpd-hpa
+      state: present
+
+   - name: DHCP installation
+     apt: 
+      name: isc-dhcp-server
+      state: present
+
+   - name: Syslog installation
+     apt: 
+      name: rsyslog 
+      state: present
+      
+- name: Web page for Rack-A
+  hosts: rack_a
+  become: yes
+  vars:
+    ansible_become_pass: "" #admin password
+  tasks:
+    - name : Get the html and css code for GitHub
+      get_url:
+        url: "{{ item.url }}"
+        dest: /var/www/html/
+      loop:
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_a/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_a/style.css"}
+
+- name: Web page for Rack-B
+  hosts: rack_b
+  become: yes
+  vars:
+    ansible_become_pass: "" #admin password
+  tasks:
+    - name : Get the html and css code for GitHub
+      get_url:
+        url: "{{ item.url }}"
+        dest: /var/www/html/
+      loop:
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_b/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_b/style.css"}
+
+- name: Web page for Rack-C
+  hosts: rack_c
+  become: yes
+  vars:
+    ansible_become_pass: "" #admin password
+  tasks:
+    - name : Get the html and css code for GitHub
+      get_url:
+        url: "{{ item.url }}"
+        dest: /var/www/html/
+      loop:
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_c/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_c/style.css"}
+
+- name: Web page for Rack-D
+  hosts: rack_d
+  become: yes
+  vars:
+    ansible_become_pass: "" #admin password
+  tasks:
+    - name : Get the html and css code for GitHub
+      get_url:
+        url: "{{ item.url }}"
+        dest: /var/www/html/
+      loop:
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_d/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_d/style.css"}
+
+- name: Web page for Rack-E
+  hosts: rack_e
+  become: yes
+  vars:
+    ansible_become_pass: "" #admin password
+  tasks:
+    - name : Get the html and css code for GitHub
+      get_url:
+        url: "{{ item.url }}"
+        dest: /var/www/html/
+      loop:
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_e/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_e/style.css"}
+
+- name: Web page for Rack-F
+  hosts: rack_f
+  become: yes
+  vars:
+    ansible_become_pass: "" #admin password
+  tasks:
+    - name : Get the html and css code for GitHub
+      get_url:
+        url: "{{ item.url }}"
+        dest: /var/www/html/
+      loop:
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_f/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_f/style.css"}
