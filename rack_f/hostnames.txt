@@ -1,1 +1,2 @@
 #Ip add     name
+10.0.199.26 www.rack-f.local
