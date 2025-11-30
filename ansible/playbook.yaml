@@ -18,23 +18,26 @@
       name: dnsmasq
       state: present
 
-   - name : Dnsmasq enable service
+   - name : Chaning the directory cisco permission 
      file:
       path: /home/cisco
       state: directory
       mode: '0755'
-     
+
+   - name : Creating the hostnames.txt file for dnsmasq
      file:
       path: /home/cisco/hostnames.txt
       state: touch
       mode: '0666'
 
+   - name : Disable systemd-resolved service
      systemd:
       name: systemd-resolved
       state: stopped
       enabled: false
      become: yes
 
+   - name : Dnsmasq enable service
      systemd:
       name: dnsmasq
       state: restart
