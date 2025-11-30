@@ -56,7 +56,7 @@
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_a/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-a.local
 
-- name: Web page for Rack-B
+- name: Config for server Rack-B
   hosts: rack_b
   become: yes
   vars:
@@ -69,8 +69,12 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_b/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_b/style.css"}
+    - name : Get the dnsmasq config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_b/dnsmasq-config"
+        dest: /etc/dnsmasq.d/rack-B.local
 
-- name: Web page for Rack-C
+- name: Config for server Rack-C
   hosts: rack_c
   become: yes
   vars:
@@ -83,8 +87,12 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_c/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_c/style.css"}
+    - name : Get the dnsmasq config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_c/dnsmasq-config"
+        dest: /etc/dnsmasq.d/rack-c.local
 
-- name: Web page for Rack-D
+- name: Config for server Rack-D
   hosts: rack_d
   become: yes
   vars:
@@ -97,8 +105,12 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_d/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_d/style.css"}
+    - name : Get the dnsmasq config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_d/dnsmasq-config"
+        dest: /etc/dnsmasq.d/rack-d.local
 
-- name: Web page for Rack-E
+- name: Config for server Rack-E
   hosts: rack_e
   become: yes
   vars:
@@ -111,8 +123,12 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_e/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_e/style.css"}
+    - name : Get the dnsmasq config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_e/dnsmasq-config"
+        dest: /etc/dnsmasq.d/rack-e.local
 
-- name: Web page for Rack-F
+- name: Config for server Rack-F
   hosts: rack_f
   become: yes
   vars:
@@ -125,3 +141,7 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_f/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_f/style.css"}
+    - name : Get the dnsmasq config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_f/dnsmasq-config"
+        dest: /etc/dnsmasq.d/rack-f.local

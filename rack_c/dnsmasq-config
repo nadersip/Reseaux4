@@ -1,10 +1,10 @@
 no-dhcp-interface=ens18
 bogus-priv 
-domain=rack-a.local
+domain=rack-c.local
 no-hosts
 addn-hosts=/home/cisco/hostnames.txt
 expand-hosts 
-local=/rack-a.local/
+local=/rack-c.local/
 domain-needed 
 no-resolv 
 no-poll 
