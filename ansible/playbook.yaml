@@ -41,7 +41,7 @@
      systemd:
       name: dnsmasq
       state: restarted
-      enable: true
+      enabled: true
      become: yes
 
    - name: Chrony installation
