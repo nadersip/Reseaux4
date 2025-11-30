@@ -18,6 +18,29 @@
       name: dnsmasq
       state: present
 
+   - name : Dnsmasq enable service
+     file:
+      path: /home/cisco
+      state: directory
+      mode: '0755'
+     
+     file:
+      path: /home/cisco/hostnames.txt
+      state: touch
+      mode: '0666'
+
+     systemd:
+      name: systemd-resolved
+      state: stopped
+      enabled: false
+     become: yes
+
+     systemd:
+      name: dnsmasq
+      state: restart
+      enable: true
+     become: yes
+
    - name: Chrony installation
      apt: 
       name: chrony
