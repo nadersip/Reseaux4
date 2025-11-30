@@ -40,7 +40,7 @@
    - name : Dnsmasq enable service
      systemd:
       name: dnsmasq
-      state: restart
+      state: restarted
       enable: true
      become: yes
 
