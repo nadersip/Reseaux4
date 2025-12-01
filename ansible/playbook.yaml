@@ -95,6 +95,10 @@
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_a/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
+    - name : Set the dhcp interface
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_a/isc-dhcp-server"
+        dest: /etc/default/isc-dhcp-server
 
 - name: Config for server Rack-B
   hosts: rack_b
@@ -127,6 +131,10 @@
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_b/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
+    - name : Set the dhcp interface
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_b/isc-dhcp-server"
+        dest: /etc/default/isc-dhcp-server 
 
 - name: Config for server Rack-C
   hosts: rack_c
@@ -159,6 +167,10 @@
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_c/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
+    - name : Set the dhcp interface
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_c/isc-dhcp-server"
+        dest: /etc/default/isc-dhcp-server
 
 - name: Config for server Rack-D
   hosts: rack_d
@@ -190,7 +202,11 @@
     - name : Get the dhcp pool config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_d/dhcpd.conf"
-        dest: /etc/dhcp/dhcpd.conf       
+        dest: /etc/dhcp/dhcpd.conf
+    - name : Set the dhcp interface
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_d/isc-dhcp-server"
+        dest: /etc/default/isc-dhcp-server         
 
 - name: Config for server Rack-E
   hosts: rack_e
@@ -223,6 +239,10 @@
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_e/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
+    - name : Set the dhcp interface
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_e/isc-dhcp-server"
+        dest: /etc/default/isc-dhcp-server
 
 - name: Config for server Rack-F
   hosts: rack_f
@@ -255,3 +275,7 @@
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_f/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
+    - name : Set the dhcp interface
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_f/isc-dhcp-server"
+        dest: /etc/default/isc-dhcp-server
