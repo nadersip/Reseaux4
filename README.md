@@ -11,6 +11,8 @@ Pour communiquer avec moi directement, vous pouvez me joindre à l’adresse sui
 
 ## Topologie utilisée pour les laboratoires 1 à 3
 
+![Topo](topo/topo1-3.png)
+
 ## Serveurs pour les racks
 
 Pour chaque rack, il y a un serveur Ubuntu. Il s’agit d’une machine virtuelle qui fonctionne sur le serveur Proxmox. Elle est configurée avec une adresse IP statique et exécute plusieurs services, tels que : HTTP, DNS, DHCP, NTP, Syslog et TFTP.
