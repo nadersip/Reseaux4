@@ -91,6 +91,10 @@
         state: restarted
         enabled: true
       become: yes
+    - name : Get the dhcp pool config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_a/dhcpd.conf"
+        dest: /etc/dhcp/dhcpd.conf
 
 - name: Config for server Rack-B
   hosts: rack_b
@@ -119,6 +123,10 @@
         state: restarted
         enabled: true
       become: yes
+    - name : Get the dhcp pool config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_b/dhcpd.conf"
+        dest: /etc/dhcp/dhcpd.conf
 
 - name: Config for server Rack-C
   hosts: rack_c
@@ -147,6 +155,10 @@
         state: restarted
         enabled: true
       become: yes
+    - name : Get the dhcp pool config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_c/dhcpd.conf"
+        dest: /etc/dhcp/dhcpd.conf
 
 - name: Config for server Rack-D
   hosts: rack_d
@@ -174,7 +186,11 @@
         name: dnsmasq
         state: restarted
         enabled: true
-      become: yes        
+      become: yes
+    - name : Get the dhcp pool config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_d/dhcpd.conf"
+        dest: /etc/dhcp/dhcpd.conf       
 
 - name: Config for server Rack-E
   hosts: rack_e
@@ -203,6 +219,10 @@
         state: restarted
         enabled: true
       become: yes
+    - name : Get the dhcp pool config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_e/dhcpd.conf"
+        dest: /etc/dhcp/dhcpd.conf
 
 - name: Config for server Rack-F
   hosts: rack_f
@@ -231,3 +251,7 @@
         state: restarted
         enabled: true
       become: yes
+    - name : Get the dhcp pool config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_f/dhcpd.conf"
+        dest: /etc/dhcp/dhcpd.conf
