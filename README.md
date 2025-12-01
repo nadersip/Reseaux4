@@ -9,7 +9,7 @@ Veuillez garder à l’esprit que ce répertoire est toujours en développement.
 
 Pour communiquer avec moi directement, vous pouvez me joindre à l’adresse suivante : msipah@lacitec.on.ca
 
-## Topologie utilisée pour les laboratoires 1 à 3
+## Topologie utilisée pour les laboratoires 1 à 4
 
 ![Topo](topo/topo1-3.png)
 
