@@ -84,7 +84,13 @@
     - name: Get hostnames.txt file
       get_url: 
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_a/hostnames.txt"
-        dest: /home/cisco/hostnames.txt 
+        dest: /home/cisco/hostnames.txt
+    - name : Restarting Dnsmasq service
+      systemd:
+        name: dnsmasq
+        state: restarted
+        enabled: true
+      become: yes
 
 - name: Config for server Rack-B
   hosts: rack_b
@@ -103,6 +109,16 @@
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_b/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-B.local
+    - name: Get hostnames.txt file
+      get_url: 
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_b/hostnames.txt"
+        dest: /home/cisco/hostnames.txt
+    - name : Restarting Dnsmasq service
+      systemd:
+        name: dnsmasq
+        state: restarted
+        enabled: true
+      become: yes
 
 - name: Config for server Rack-C
   hosts: rack_c
@@ -121,6 +137,16 @@
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_c/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-c.local
+    - name: Get hostnames.txt file
+      get_url: 
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_c/hostnames.txt"
+        dest: /home/cisco/hostnames.txt
+    - name : Restarting Dnsmasq service
+      systemd:
+        name: dnsmasq
+        state: restarted
+        enabled: true
+      become: yes
 
 - name: Config for server Rack-D
   hosts: rack_d
@@ -139,6 +165,16 @@
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_d/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-d.local
+    - name: Get hostnames.txt file
+      get_url: 
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_d/hostnames.txt"
+        dest: /home/cisco/hostnames.txt
+    - name : Restarting Dnsmasq service
+      systemd:
+        name: dnsmasq
+        state: restarted
+        enabled: true
+      become: yes        
 
 - name: Config for server Rack-E
   hosts: rack_e
@@ -157,6 +193,16 @@
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_e/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-e.local
+    - name: Get hostnames.txt file
+      get_url: 
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_e/hostnames.txt"
+        dest: /home/cisco/hostnames.txt
+    - name : Restarting Dnsmasq service
+      systemd:
+        name: dnsmasq
+        state: restarted
+        enabled: true
+      become: yes
 
 - name: Config for server Rack-F
   hosts: rack_f
@@ -175,3 +221,13 @@
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_f/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-f.local
+    - name: Get hostnames.txt file
+      get_url: 
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_f/hostnames.txt"
+        dest: /home/cisco/hostnames.txt
+    - name : Restarting Dnsmasq service
+      systemd:
+        name: dnsmasq
+        state: restarted
+        enabled: true
+      become: yes
