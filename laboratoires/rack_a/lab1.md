@@ -53,11 +53,11 @@ b. Configurez le routage inter-VLAN et attribuez la première adresse IP disponi
 # Étape 4 – Configuration du routage statique et dynamique 
 a. Configurez le routage OSPF sur tous les routeurs.
 
-    • Utilisez le numéro de processus ID 1 et la zone 0.
+•   Utilisez le numéro de processus ID 1 et la zone 0.
 
-    • Annoncez dans OSPF uniquement les réseaux connectés à chaque routeur, sauf le réseau qui mène vers SW-Internet.
+•   Annoncez dans OSPF uniquement les réseaux connectés à chaque routeur, sauf le réseau qui mène vers SW-Internet.
 
-    • Configurez les interfaces passives aux endroits appropriés.
+•   Configurez les interfaces passives aux endroits appropriés.
 
 b. Sur RACK-A-R1, configurez une route par défaut pointant vers SW-Internet en utilisant l’interface de sortie. Sur RACK-A-R1, utilisez la commande appropriée pour propager cette route par défaut à ses voisins OSPF.
 
