@@ -1,0 +1,2 @@
+#Ip add     name
+10.0.199.22 www.rack-b.local
