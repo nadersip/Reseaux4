@@ -76,7 +76,7 @@
         dest: /var/www/html/
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/index.html"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/rack_a/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/style.css"}
     - name : Get the dnsmasq config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/dnsmasq-config"
