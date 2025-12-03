@@ -20,8 +20,8 @@
 # Table VLAN
 |Equipments|VLAN     | Nom VLAN    |
 |----------|--------------|---------------|
-|RACK-B-SW1, RACK-B-SW2 et RACK-B-SW3|VLAN 30| VLAN40
-|          |VLAN 30| VLAN40
+|RACK-B-SW1, RACK-B-SW2 et RACK-B-SW3|VLAN 30| VLAN30
+|          |VLAN 40| VLAN40
 |          |VLAN 99| Mgmt_Native
 
 # Table de ports
@@ -29,9 +29,9 @@
 |----------|-----|----------|
 |RACK-B-SW1 |F1/0/1, F1/0/2, F1/0/3| Trunk
 |RACK-B-SW2 |F1/0/2, F1/0/4| Trunk
-||F1/0/5| Vlan 10
+||F1/0/5| Vlan 30
 |RACK-B-SW3 |F1/0/3, F1/0/4| Trunk
-||F1/0/5| Vlan 20
+||F1/0/5| Vlan 40
 
 # Étape 1 – Configuration des paramètres de base
 a. Configurez les noms d’hôte (hostname)

@@ -10,8 +10,8 @@
 |Equipments|Interface     | IP Address     | Subnet Mask     | Default Gateway | Description
 |----------|--------------|---------------|----------------|------------------|------------------|
 |RACK-C-R1 |G0/0/1   |192.168.90.2       |255.255.255.248           | N/A|Connexion a internet via la switch
-|          |G0/0/0   |10.0.0.5   |255.255.255.252| N/A|Connexion au routeur R2
-|RACK-C-R2 |G0/0/1   |10.0.0.6   |255.255.255.252| N/A|Connexion au routeur R1
+|          |G0/0/0   |10.0.0.9   |255.255.255.252| N/A|Connexion au routeur R2
+|RACK-C-R2 |G0/0/1   |10.0.0.10   |255.255.255.252| N/A|Connexion au routeur R1
 |          |G0/0/0.50|172.16.50.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 50
 |          |G0/0/0.60|172.16.60.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 60
 |RACK-C-PC1|Fa0      |DHCP       |DHCP  | DHCP   |    |
@@ -20,8 +20,8 @@
 # Table VLAN
 |Equipments|VLAN     | Nom VLAN    |
 |----------|--------------|---------------|
-|RACK-C-SW1, RACK-C-SW2 et RACK-C-SW3|VLAN 50| VLAN60
-|          |VLAN 50| VLAN60
+|RACK-C-SW1, RACK-C-SW2 et RACK-C-SW3|VLAN 50| VLAN50
+|          |VLAN 60| VLAN60
 |          |VLAN 99| Mgmt_Native
 
 # Table de ports
@@ -29,9 +29,9 @@
 |----------|-----|----------|
 |RACK-C-SW1 |F1/0/1, F1/0/2, F1/0/3| Trunk
 |RACK-C-SW2 |F1/0/2, F1/0/4| Trunk
-||F1/0/5| Vlan 10
+||F1/0/5| Vlan 50
 |RACK-C-SW3 |F1/0/3, F1/0/4| Trunk
-||F1/0/5| Vlan 20
+||F1/0/5| Vlan 60
 
 # Étape 1 – Configuration des paramètres de base
 a. Configurez les noms d’hôte (hostname)
