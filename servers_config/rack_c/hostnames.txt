@@ -1,2 +1,2 @@
 #Ip add     name
-10.0.199.23 www.rack-c.local
+192.168.30.200 www.rack-c.local

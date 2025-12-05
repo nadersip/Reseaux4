@@ -1,2 +1,2 @@
 #Ip add     name
-10.0.199.24 www.rack-d.local
+192.168.40.200 www.rack-d.local
