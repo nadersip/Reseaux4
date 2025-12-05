@@ -63,7 +63,17 @@
      apt: 
       name: rsyslog 
       state: present
-      
+
+   - name: openbsd-inetd installation
+     apt: 
+      name: openbsd-inetd 
+      state: present
+
+   - name: telnetd installation
+     apt: 
+      name: telnetd 
+      state: present
+
 - name: Config for server Rack-A
   hosts: rack_a
   become: yes
