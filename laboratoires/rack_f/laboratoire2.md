@@ -1,5 +1,5 @@
 
-# Laboratoire 1 - Configuration des ACL étendues et standards, OSPF, SSH
+# Laboratoire 2 - Configuration des ACL étendues et standards, OSPF, SSH
 
 # Topologie
 
@@ -62,7 +62,7 @@ a. Configurez le routage OSPF sur tous les routeurs.
 b. Sur RACK-F-R1, configurez une route par défaut pointant vers SW-Internet en utilisant l’interface de sortie. Sur RACK-F-R1, utilisez la commande appropriée pour propager cette route par défaut à ses voisins OSPF.
 
 # Étape 5 – Configuration du DHCP 
-Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante : 192.168.60.200
+Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante :
 Vous devez configurer IP Helper pour qu’il pointe vers ce serveur DHCP.
 
 # Étape 6 – Configuration de SSH 					
@@ -79,17 +79,10 @@ e. Version 2
 f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
 # Étape 7 – Configuration des ACL standards	
-Configurez une ACL standard nommée ACL_VLAN90 qui filtre selon les critères suivants :
-
-•	Empêche le réseau 172.16.110.0/24 d’accéder au réseau 172.16.120.0/24
-
-•	Tout autre trafic est permis
-
-•	Appliquez la ACL au meilleur endroit pour être le plus efficace (selon les meilleurs pratiques)
+Écrire une ACL standard nommée ALLOW_SSH qui permettra seulement au RACK F-PC1 de faire une connexion SSH sur RACK-F-R1. Toute tentatives de connexion via SSH depuis tout autre périphérique doit échouer.
 
 # Étape 8 – Configuration des ACL étendues
-Configurez une ACL étendu numérotée 100 qui :
-
-•	Bloque le traffic web en provenance du réseau 172.16.110.0/24 vers le serveur le web (on souhaite ici interdit l’accès aux pages web).
-
-•	Tout autre type de traffic est autorisé
+Écrire une ACL étendue nommée DROITS-PC qui donne les accès suivants: 
+•	Pour RACK F-PC1: Autorise le trafic Telnet (23), DNS (53), HTTP (80) et HTTPS (443) sur le serveur 192.168.10.200, tout autre trafic partant de RACK F-PC1 vers le serveur externe publique est refusé.
+•	Pour RACK F-PC2: autorise seulement FTP (ports 20 et 21) sur le serveur 192.168.10.200
+•	Appliquer la ACL convenablement

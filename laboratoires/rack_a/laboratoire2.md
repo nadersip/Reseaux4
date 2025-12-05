@@ -1,5 +1,5 @@
 
-# Laboratoire 1 - Configuration des ACL étendues et standards, OSPF, SSH
+# Laboratoire 2 - Configuration des ACL étendues et standards, OSPF, SSH
 
 # Topologie
 
@@ -79,17 +79,10 @@ e. Version 2
 f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
 # Étape 7 – Configuration des ACL standards	
-Configurez une ACL standard nommée ACL_VLAN10 qui filtre selon les critères suivants :
-
-•	Empêche le réseau 172.16.10.0/24 d’accéder au réseau 172.16.20.0/24
-
-•	Tout autre trafic est permis
-
-•	Appliquez la ACL au meilleur endroit pour être le plus efficace (selon les meilleurs pratiques)
+Écrire une ACL standard nommée ALLOW_SSH qui permettra seulement au RACK A-PC1 de faire une connexion SSH sur RACK-A-R1. Toute tentatives de connexion via SSH depuis tout autre périphérique doit échouer.
 
 # Étape 8 – Configuration des ACL étendues
-Configurez une ACL étendu numérotée 100 qui :
-
-•	Bloque le traffic web en provenance du réseau 172.16.10.0/24 vers le serveur le web (on souhaite ici interdit l’accès aux pages web).
-
-•	Tout autre type de traffic est autorisé
+Écrire une ACL étendue nommée DROITS-PC qui donne les accès suivants: 
+•	Pour RACK A-PC1: Autorise le trafic Telnet (23), DNS (53), HTTP (80) et HTTPS (443) sur le serveur 192.168.10.200, tout autre trafic partant de RACK A-PC1 vers le serveur externe publique est refusé.
+•	Pour RACK A-PC2: autorise seulement FTP (ports 20 et 21) sur le serveur 192.168.10.200
+•	Appliquer la ACL convenablement
