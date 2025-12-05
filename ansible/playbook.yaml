@@ -5,6 +5,7 @@
   vars:
     ansible_become_pass: "" #admin password
   tasks:
+   
    - name: Servers update
      shell: sudo apt update && sudo apt upgrade -y
    
@@ -80,6 +81,7 @@
   vars:
     ansible_become_pass: "" #admin password
   tasks:
+    
     - name : Get the html and css code for GitHub
       get_url:
         url: "{{ item.url }}"
@@ -87,28 +89,73 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/style.css"}
+
+    - name: Ensure SSL directory exists
+      file:
+        path: /etc/apache2/ssl
+        state: directory
+        mode: '0755'
+
+    - name: Generate self-signed SSL certificate
+      command: >
+        openssl req -x509 -nodes -days 365
+        -newkey rsa:2048
+        -keyout /etc/apache2/ssl/apache.key
+        -out /etc/apache2/ssl/apache.crt
+        -subj "/C=CA/ST=ON/L=Ottawa/O=rack-a/CN=rack-a"
+      args:
+        creates: /etc/apache2/ssl/apache.crt
+
+    - name : Enable HTTPS for local Apache
+      apache2_module:
+        name: ssl
+        state: present
+
+    - name: Enable default SSL site
+      command: a2ensite default-ssl.conf
+
+    - name : Get the ssl config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/default-ssl.conf"
+        dest: /etc/apache2/sites-available/default-ssl.conf
+
+    - name: Reload Apache
+      systemd:
+        name: apache2
+        state: reloaded
+
+    - name: Restart Apache
+      systemd:
+        name: apache2
+        state: restarted
+
     - name : Get the dnsmasq config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-a.local
+    
     - name: Get hostnames.txt file
       get_url: 
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/hostnames.txt"
         dest: /home/cisco/hostnames.txt
+    
     - name : Restarting Dnsmasq service
       systemd:
         name: dnsmasq
         state: restarted
         enabled: true
       become: yes
+    
     - name : Get the dhcp pool config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
+    
     - name : Set the dhcp interface
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server
+    
     - name : Restarting dhcp service
       systemd:
         name: isc-dhcp-server
@@ -128,28 +175,73 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/style.css"}
+
+    - name: Ensure SSL directory exists
+      file:
+        path: /etc/apache2/ssl
+        state: directory
+        mode: '0755'
+
+    - name: Generate self-signed SSL certificate
+      command: >
+        openssl req -x509 -nodes -days 365
+        -newkey rsa:2048
+        -keyout /etc/apache2/ssl/apache.key
+        -out /etc/apache2/ssl/apache.crt
+        -subj "/C=CA/ST=ON/L=Ottawa/O=rack-b/CN=rack-b"
+      args:
+        creates: /etc/apache2/ssl/apache.crt
+
+    - name : Enable HTTPS for local Apache
+      apache2_module:
+        name: ssl
+        state: present
+
+    - name: Enable default SSL site
+      command: a2ensite default-ssl.conf
+
+    - name : Get the ssl config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/default-ssl.conf"
+        dest: /etc/apache2/sites-available/default-ssl.conf
+
+    - name: Reload Apache
+      systemd:
+        name: apache2
+        state: reloaded
+
+    - name: Restart Apache
+      systemd:
+        name: apache2
+        state: restarted
+
     - name : Get the dnsmasq config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-B.local
+    
     - name: Get hostnames.txt file
       get_url: 
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/hostnames.txt"
         dest: /home/cisco/hostnames.txt
+    
     - name : Restarting Dnsmasq service
       systemd:
         name: dnsmasq
         state: restarted
         enabled: true
       become: yes
+    
     - name : Get the dhcp pool config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
+    
     - name : Set the dhcp interface
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server 
+    
     - name : Restarting dhcp service
       systemd:
         name: isc-dhcp-server
@@ -162,6 +254,7 @@
   vars:
     ansible_become_pass: "" #admin password
   tasks:
+    
     - name : Get the html and css code for GitHub
       get_url:
         url: "{{ item.url }}"
@@ -169,28 +262,73 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/style.css"}
+    
+    - name: Ensure SSL directory exists
+      file:
+        path: /etc/apache2/ssl
+        state: directory
+        mode: '0755'
+
+    - name: Generate self-signed SSL certificate
+      command: >
+        openssl req -x509 -nodes -days 365
+        -newkey rsa:2048
+        -keyout /etc/apache2/ssl/apache.key
+        -out /etc/apache2/ssl/apache.crt
+        -subj "/C=CA/ST=ON/L=Ottawa/O=rack-c/CN=rack-c"
+      args:
+        creates: /etc/apache2/ssl/apache.crt
+
+    - name : Enable HTTPS for local Apache
+      apache2_module:
+        name: ssl
+        state: present
+
+    - name: Enable default SSL site
+      command: a2ensite default-ssl.conf
+
+    - name : Get the ssl config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/default-ssl.conf"
+        dest: /etc/apache2/sites-available/default-ssl.conf
+
+    - name: Reload Apache
+      systemd:
+        name: apache2
+        state: reloaded
+
+    - name: Restart Apache
+      systemd:
+        name: apache2
+        state: restarted
+
     - name : Get the dnsmasq config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-c.local
+    
     - name: Get hostnames.txt file
       get_url: 
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/hostnames.txt"
         dest: /home/cisco/hostnames.txt
+    
     - name : Restarting Dnsmasq service
       systemd:
         name: dnsmasq
         state: restarted
         enabled: true
       become: yes
+    
     - name : Get the dhcp pool config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
+    
     - name : Set the dhcp interface
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server
+    
     - name : Restarting dhcp service
       systemd:
         name: isc-dhcp-server
@@ -203,6 +341,7 @@
   vars:
     ansible_become_pass: "" #admin password
   tasks:
+    
     - name : Get the html and css code for GitHub
       get_url:
         url: "{{ item.url }}"
@@ -210,28 +349,73 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/style.css"}
+    
+    - name: Ensure SSL directory exists
+      file:
+        path: /etc/apache2/ssl
+        state: directory
+        mode: '0755'
+
+    - name: Generate self-signed SSL certificate
+      command: >
+        openssl req -x509 -nodes -days 365
+        -newkey rsa:2048
+        -keyout /etc/apache2/ssl/apache.key
+        -out /etc/apache2/ssl/apache.crt
+        -subj "/C=CA/ST=ON/L=Ottawa/O=rack-d/CN=rack-d"
+      args:
+        creates: /etc/apache2/ssl/apache.crt
+
+    - name : Enable HTTPS for local Apache
+      apache2_module:
+        name: ssl
+        state: present
+
+    - name: Enable default SSL site
+      command: a2ensite default-ssl.conf
+
+    - name : Get the ssl config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/default-ssl.conf"
+        dest: /etc/apache2/sites-available/default-ssl.conf
+
+    - name: Reload Apache
+      systemd:
+        name: apache2
+        state: reloaded
+
+    - name: Restart Apache
+      systemd:
+        name: apache2
+        state: restarted    
+
     - name : Get the dnsmasq config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-d.local
+    
     - name: Get hostnames.txt file
       get_url: 
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/hostnames.txt"
         dest: /home/cisco/hostnames.txt
+    
     - name : Restarting Dnsmasq service
       systemd:
         name: dnsmasq
         state: restarted
         enabled: true
       become: yes
+    
     - name : Get the dhcp pool config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
+    
     - name : Set the dhcp interface
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server
+    
     - name : Restarting dhcp service
       systemd:
         name: isc-dhcp-server
@@ -244,6 +428,7 @@
   vars:
     ansible_become_pass: "" #admin password
   tasks:
+    
     - name : Get the html and css code for GitHub
       get_url:
         url: "{{ item.url }}"
@@ -251,28 +436,73 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/style.css"}
+    
     - name : Get the dnsmasq config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-e.local
+    
+    - name: Ensure SSL directory exists
+      file:
+        path: /etc/apache2/ssl
+        state: directory
+        mode: '0755'
+
+    - name: Generate self-signed SSL certificate
+      command: >
+        openssl req -x509 -nodes -days 365
+        -newkey rsa:2048
+        -keyout /etc/apache2/ssl/apache.key
+        -out /etc/apache2/ssl/apache.crt
+        -subj "/C=CA/ST=ON/L=Ottawa/O=rack-e/CN=rack-e"
+      args:
+        creates: /etc/apache2/ssl/apache.crt
+
+    - name : Enable HTTPS for local Apache
+      apache2_module:
+        name: ssl
+        state: present
+
+    - name: Enable default SSL site
+      command: a2ensite default-ssl.conf
+
+    - name : Get the ssl config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/default-ssl.conf"
+        dest: /etc/apache2/sites-available/default-ssl.conf
+
+    - name: Reload Apache
+      systemd:
+        name: apache2
+        state: reloaded
+
+    - name: Restart Apache
+      systemd:
+        name: apache2
+        state: restarted
+
     - name: Get hostnames.txt file
       get_url: 
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/hostnames.txt"
         dest: /home/cisco/hostnames.txt
+    
     - name : Restarting Dnsmasq service
       systemd:
         name: dnsmasq
         state: restarted
         enabled: true
       become: yes
+    
     - name : Get the dhcp pool config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
+    
     - name : Set the dhcp interface
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server
+    
     - name : Restarting dhcp service
       systemd:
         name: isc-dhcp-server
@@ -285,6 +515,7 @@
   vars:
     ansible_become_pass: "" #admin password
   tasks:
+    
     - name : Get the html and css code for GitHub
       get_url:
         url: "{{ item.url }}"
@@ -292,28 +523,73 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/style.css"}
+    
+    - name: Ensure SSL directory exists
+      file:
+        path: /etc/apache2/ssl
+        state: directory
+        mode: '0755'
+
+    - name: Generate self-signed SSL certificate
+      command: >
+        openssl req -x509 -nodes -days 365
+        -newkey rsa:2048
+        -keyout /etc/apache2/ssl/apache.key
+        -out /etc/apache2/ssl/apache.crt
+        -subj "/C=CA/ST=ON/L=Ottawa/O=rack-f/CN=rack-f"
+      args:
+        creates: /etc/apache2/ssl/apache.crt
+
+    - name : Enable HTTPS for local Apache
+      apache2_module:
+        name: ssl
+        state: present
+
+    - name: Enable default SSL site
+      command: a2ensite default-ssl.conf
+
+    - name : Get the ssl config file
+      get_url:
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/default-ssl.conf"
+        dest: /etc/apache2/sites-available/default-ssl.conf
+
+    - name: Reload Apache
+      systemd:
+        name: apache2
+        state: reloaded
+
+    - name: Restart Apache
+      systemd:
+        name: apache2
+        state: restarted
+
     - name : Get the dnsmasq config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-f.local
+    
     - name: Get hostnames.txt file
       get_url: 
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/hostnames.txt"
         dest: /home/cisco/hostnames.txt
+    
     - name : Restarting Dnsmasq service
       systemd:
         name: dnsmasq
         state: restarted
         enabled: true
       become: yes
+    
     - name : Get the dhcp pool config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
+    
     - name : Set the dhcp interface
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server
+    
     - name : Restarting dhcp service
       systemd:
         name: isc-dhcp-server
