@@ -89,6 +89,7 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/surfing_gif.gif"}
 
     - name: Ensure SSL directory exists
       file:
@@ -175,6 +176,7 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/surfing_gif.gif"}
 
     - name: Ensure SSL directory exists
       file:
@@ -262,6 +264,7 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/surfing_gif.gif"}
     
     - name: Ensure SSL directory exists
       file:
@@ -349,7 +352,8 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/style.css"}
-    
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/surfing_gif.gif"}
+
     - name: Ensure SSL directory exists
       file:
         path: /etc/apache2/ssl
@@ -436,6 +440,7 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/surfing_gif.gif"}
     
     - name : Get the dnsmasq config file
       get_url:
@@ -523,6 +528,7 @@
       loop:
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/index.html"}
         - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/surfing_gif.gif"}
     
     - name: Ensure SSL directory exists
       file:
