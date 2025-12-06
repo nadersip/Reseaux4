@@ -1,2 +1,3 @@
 #Ip add     name
+192.168.50.200 rack-d.local
 192.168.50.200 www.rack-e.local
