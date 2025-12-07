@@ -1,5 +1,5 @@
 
-# Laboratoire 2 - Configuration des ACL étendues et standards, OSPF, SSH
+# Laboratoire 3 - Configuration des ACL étendues et standards, OSPF, SSH
 
 # Topologie
 
@@ -81,13 +81,20 @@ f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 # Étape 7 – Configuration du NAT
 a.	Créer une liste d’accès standard nommée NAT pour permettre les réseaux du 
 VLAN 110, du VLAN 120 et interdire tout autres réseaux.
+
 b.	Créer un NAT pool nommée NAT-POOL entre les adresses 192.168.120.3 et 192.168.120.5.
+
 c.	Créer un NAT statique pour le serveur RACK-F-PC1 avec l’adresse 192.168.120.6.
+
 d.	Tester le NAT avant de continuer.
 
 # Étape 8 – Configuration des ACL étendues	
 Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
+
 •	Appliquer la ACL convenablement sur le routeur RACK-F-R1.
+
 •	Autorise le retour du trafic FTP (ports 20 et 21), DNS (53), HTTPS (443) du serveur externe (192.168.60.200) au réseaux privés.
+
 •	Autorise les pings du serveur externe (192.168.60.200) vers le serveur RACK-F-PC1.
+
 •	Interdire tout autres trafics.
