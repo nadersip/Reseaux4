@@ -1,5 +1,5 @@
 
-# Laboratoire 2 - Configuration des ACL étendues et standards, OSPF, SSH
+# Laboratoire 3 - Configuration des ACL étendues, OSPF, SSH et NAT
 
 # Topologie
 
