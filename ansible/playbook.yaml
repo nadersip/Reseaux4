@@ -87,9 +87,9 @@
         url: "{{ item.url }}"
         dest: /var/www/html/
       loop:
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/index.html"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/style.css"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/surfing_gif.gif"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/web/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/web/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/web/surfing_gif.gif"}
 
     - name: Ensure SSL directory exists
       file:
@@ -117,7 +117,7 @@
 
     - name : Get the ssl config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/default-ssl.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/web/default-ssl.conf"
         dest: /etc/apache2/sites-available/default-ssl.conf
 
     - name: Reload Apache
@@ -132,12 +132,12 @@
 
     - name : Get the dnsmasq config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/dnsmasq-config"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/dns/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-a.local
     
     - name: Get hostnames.txt file
       get_url: 
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/hostnames.txt"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/dns/hostnames.txt"
         dest: /home/cisco/hostnames.txt
     
     - name : Restarting Dnsmasq service
@@ -149,12 +149,12 @@
     
     - name : Get the dhcp pool config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/dhcpd.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/dhcp/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
     
     - name : Set the dhcp interface
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/isc-dhcp-server"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_a/dhcp/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server
     
     - name : Restarting dhcp service
@@ -174,9 +174,9 @@
         url: "{{ item.url }}"
         dest: /var/www/html/
       loop:
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/index.html"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/style.css"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/surfing_gif.gif"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/web/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/web/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/web/surfing_gif.gif"}
 
     - name: Ensure SSL directory exists
       file:
@@ -204,7 +204,7 @@
 
     - name : Get the ssl config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/default-ssl.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/web/default-ssl.conf"
         dest: /etc/apache2/sites-available/default-ssl.conf
 
     - name: Reload Apache
@@ -219,12 +219,12 @@
 
     - name : Get the dnsmasq config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/dnsmasq-config"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/dns/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-B.local
     
     - name: Get hostnames.txt file
       get_url: 
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/hostnames.txt"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/dns/hostnames.txt"
         dest: /home/cisco/hostnames.txt
     
     - name : Restarting Dnsmasq service
@@ -236,12 +236,12 @@
     
     - name : Get the dhcp pool config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/dhcpd.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/dhcp/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
     
     - name : Set the dhcp interface
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/isc-dhcp-server"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/dhcp/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server 
     
     - name : Restarting dhcp service
@@ -262,9 +262,9 @@
         url: "{{ item.url }}"
         dest: /var/www/html/
       loop:
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/index.html"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/style.css"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/surfing_gif.gif"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/web/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/web/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/web/surfing_gif.gif"}
     
     - name: Ensure SSL directory exists
       file:
@@ -292,7 +292,7 @@
 
     - name : Get the ssl config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/default-ssl.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/web/default-ssl.conf"
         dest: /etc/apache2/sites-available/default-ssl.conf
 
     - name: Reload Apache
@@ -307,12 +307,12 @@
 
     - name : Get the dnsmasq config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/dnsmasq-config"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/dns/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-c.local
     
     - name: Get hostnames.txt file
       get_url: 
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/hostnames.txt"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/dns/hostnames.txt"
         dest: /home/cisco/hostnames.txt
     
     - name : Restarting Dnsmasq service
@@ -324,12 +324,12 @@
     
     - name : Get the dhcp pool config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/dhcpd.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/dhcp/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
     
     - name : Set the dhcp interface
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/isc-dhcp-server"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_c/dhcp/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server
     
     - name : Restarting dhcp service
@@ -350,9 +350,9 @@
         url: "{{ item.url }}"
         dest: /var/www/html/
       loop:
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/index.html"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/style.css"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/surfing_gif.gif"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/web/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/web/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/web/surfing_gif.gif"}
 
     - name: Ensure SSL directory exists
       file:
@@ -380,7 +380,7 @@
 
     - name : Get the ssl config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/default-ssl.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/web/default-ssl.conf"
         dest: /etc/apache2/sites-available/default-ssl.conf
 
     - name: Reload Apache
@@ -395,12 +395,12 @@
 
     - name : Get the dnsmasq config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/dnsmasq-config"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/dns/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-d.local
     
     - name: Get hostnames.txt file
       get_url: 
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/hostnames.txt"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/dns/hostnames.txt"
         dest: /home/cisco/hostnames.txt
     
     - name : Restarting Dnsmasq service
@@ -412,12 +412,12 @@
     
     - name : Get the dhcp pool config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/dhcpd.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/dhcp/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
     
     - name : Set the dhcp interface
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/isc-dhcp-server"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_d/dhcp/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server
     
     - name : Restarting dhcp service
@@ -438,13 +438,13 @@
         url: "{{ item.url }}"
         dest: /var/www/html/
       loop:
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/index.html"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/style.css"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/surfing_gif.gif"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/web/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/web/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/web/surfing_gif.gif"}
     
     - name : Get the dnsmasq config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/dnsmasq-config"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/dns/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-e.local
     
     - name: Ensure SSL directory exists
@@ -473,7 +473,7 @@
 
     - name : Get the ssl config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/default-ssl.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/web/default-ssl.conf"
         dest: /etc/apache2/sites-available/default-ssl.conf
 
     - name: Reload Apache
@@ -488,7 +488,7 @@
 
     - name: Get hostnames.txt file
       get_url: 
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/hostnames.txt"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/dns/hostnames.txt"
         dest: /home/cisco/hostnames.txt
     
     - name : Restarting Dnsmasq service
@@ -500,12 +500,12 @@
     
     - name : Get the dhcp pool config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/dhcpd.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/dhcp/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
     
     - name : Set the dhcp interface
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/isc-dhcp-server"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_e/dhcp/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server
     
     - name : Restarting dhcp service
@@ -526,9 +526,9 @@
         url: "{{ item.url }}"
         dest: /var/www/html/
       loop:
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/index.html"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/style.css"}
-        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/surfing_gif.gif"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/web/index.html"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/web/style.css"}
+        - { url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/web/surfing_gif.gif"}
     
     - name: Ensure SSL directory exists
       file:
@@ -556,7 +556,7 @@
 
     - name : Get the ssl config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/default-ssl.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/web/default-ssl.conf"
         dest: /etc/apache2/sites-available/default-ssl.conf
 
     - name: Reload Apache
@@ -571,12 +571,12 @@
 
     - name : Get the dnsmasq config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/dnsmasq-config"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/dns/dnsmasq-config"
         dest: /etc/dnsmasq.d/rack-f.local
     
     - name: Get hostnames.txt file
       get_url: 
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/hostnames.txt"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/dns/hostnames.txt"
         dest: /home/cisco/hostnames.txt
     
     - name : Restarting Dnsmasq service
@@ -588,12 +588,12 @@
     
     - name : Get the dhcp pool config file
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/dhcpd.conf"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/dhcp/dhcpd.conf"
         dest: /etc/dhcp/dhcpd.conf
     
     - name : Set the dhcp interface
       get_url:
-        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/isc-dhcp-server"
+        url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_f/dhcp/isc-dhcp-server"
         dest: /etc/default/isc-dhcp-server
     
     - name : Restarting dhcp service
