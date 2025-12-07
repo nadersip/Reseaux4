@@ -9,14 +9,17 @@
    - name: Servers update
      shell: sudo apt update && sudo apt upgrade -y
    
-   - name: Apache2 installation
+   - name: Installation services Web, DNS, NTP, TFTP, DHCP, Syslog, Telnet
      apt:
-      name: apache2
-      state: present
-
-   - name: Dnsmasq installation
-     apt: 
-      name: dnsmasq
+      name: 
+        - apache2
+        - dnsmasq
+        - chrony
+        - tftpd-hpa
+        - isc-dhcp-server
+        - rsyslog
+        - openbsd-inetd
+        - telnetd
       state: present
 
    - name : Chaning the directory cisco permission 
@@ -44,36 +47,6 @@
       state: restarted
       enabled: true
      become: yes
-
-   - name: Chrony installation
-     apt: 
-      name: chrony
-      state: present
-      
-   - name: TFTP installation
-     apt: 
-      name: tftpd-hpa
-      state: present
-
-   - name: DHCP installation
-     apt: 
-      name: isc-dhcp-server
-      state: present
-
-   - name: Syslog installation
-     apt: 
-      name: rsyslog 
-      state: present
-
-   - name: openbsd-inetd installation
-     apt: 
-      name: openbsd-inetd 
-      state: present
-
-   - name: telnetd installation
-     apt: 
-      name: telnetd 
-      state: present
 
 - name: Config for server Rack-A
   hosts: rack_a
