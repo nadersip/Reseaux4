@@ -220,7 +220,7 @@
     - name : Get the dnsmasq config file
       get_url:
         url: "https://raw.githubusercontent.com/nadersip/Reseaux4/refs/heads/main/servers_config/rack_b/dns/dnsmasq-config"
-        dest: /etc/dnsmasq.d/rack-B.local
+        dest: /etc/dnsmasq.d/rack-b.local
     
     - name: Get hostnames.txt file
       get_url: 
