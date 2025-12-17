@@ -134,3 +134,14 @@
         name: isc-dhcp-server
         state: restarted
         enabled: true
+
+    - name: Get Telnet config
+      get_url:
+        url: "{{ base_url }}/telnet/inetd.conf"
+        dest: /etc/inetd.conf
+
+    - name: Restart Telnet
+      systemd:
+        name: openbsd-inetd
+        state: restarted
+        enabled: true
