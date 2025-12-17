@@ -98,10 +98,15 @@
         name: apache2
         state: restarted
 
-    - name: Get dnsmasq config
+    - name: Get dnsmasq zone config
       get_url:
         url: "{{ base_url }}/dns/dnsmasq-config"
         dest: "/etc/dnsmasq.d/{{ rack_name }}.local"
+    
+    - name: Get dnsmasq config file
+      get_url:
+        url: "{{ base_url }}/dns/dnsmasq.conf"
+        dest: "/etc/dnsmasq.conf"
 
     - name: Get hostnames file
       get_url:
