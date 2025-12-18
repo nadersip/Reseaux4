@@ -9,9 +9,9 @@
 
 |Equipments|Interface     | IP Address     | Subnet Mask     | Default Gateway | Description
 |----------|--------------|---------------|----------------|------------------|------------------|
-|RACK-C-R1 |G0/0/1   |192.168.90.2       |255.255.255.248           | N/A|Connexion a internet via la switch
-|          |G0/0/0   |10.0.0.9   |255.255.255.252| N/A|Connexion au routeur R2
-|RACK-C-R2 |G0/0/1   |10.0.0.10   |255.255.255.252| N/A|Connexion au routeur R1
+|RACK-C-R1 |G0/0/1   |10.10.10.18       |255.255.255.248           | N/A|Connexion a internet via la switch
+|          |G0/0/0   |10.0.0.13   |255.255.255.252| N/A|Connexion au routeur R2
+|RACK-C-R2 |G0/0/1   |10.0.0.14   |255.255.255.252| N/A|Connexion au routeur R1
 |          |G0/0/0.50|172.16.50.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 50
 |          |G0/0/0.60|172.16.60.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 60
 |RACK-C-PC1|Fa0      |DHCP       |DHCP  | DHCP   |    |
@@ -82,9 +82,9 @@ f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 a.	Créer une liste d’accès standard nommée NAT pour permettre les réseaux du 
 VLAN 50, du VLAN 60 et interdire tout autres réseaux.
 
-b.	Créer un NAT pool nommée NAT-POOL entre les adresses 192.168.90.3 et 192.168.90.5.
+b.	Créer un NAT pool nommée NAT-POOL entre les adresses 10.10.10.19 et 10.10.10.21.
 
-c.	Créer un NAT statique pour le serveur RACK-C-PC1 avec l’adresse 192.168.90.6.
+c.	Créer un NAT statique pour le serveur RACK-C-PC1 avec l’adresse 10.10.10.22.
 
 d.	Tester le NAT avant de continuer.
 

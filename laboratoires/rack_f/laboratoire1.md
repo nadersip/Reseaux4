@@ -9,9 +9,9 @@
 
 |Equipments|Interface     | IP Address     | Subnet Mask     | Default Gateway | Description
 |----------|--------------|---------------|----------------|------------------|------------------|
-|RACK-F-R1 |G0/0/1   |192.168.120.2       |255.255.255.248           | N/A|Connexion a internet via la switch
-|          |G0/0/0   |10.0.0.21   |255.255.255.252| N/A|Connexion au routeur R2
-|RACK-F-R2 |G0/0/1   |10.0.0.22   |255.255.255.252| N/A|Connexion au routeur R1
+|RACK-F-R1 |G0/0/1   |10.10.10.42       |255.255.255.248           | N/A|Connexion a internet via la switch
+|          |G0/0/0   |10.0.0.25   |255.255.255.252| N/A|Connexion au routeur R2
+|RACK-F-R2 |G0/0/1   |10.0.0.26   |255.255.255.252| N/A|Connexion au routeur R1
 |          |G0/0/0.110|172.16.110.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 100
 |          |G0/0/0.120|172.16.120.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 120
 |RACK-F-PC1|Fa0      |DHCP       |DHCP  | DHCP   |    |
