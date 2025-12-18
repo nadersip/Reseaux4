@@ -11,7 +11,7 @@ Pour communiquer avec moi directement, vous pouvez me joindre à l’adresse sui
 
 ## Topologie utilisée pour les laboratoires 1 à 4
 
-![Topo](topo/topo1-3.png)
+![Topo](topo/topo1-4.png)
 
 ## Serveurs pour les racks
 
