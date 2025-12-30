@@ -90,6 +90,6 @@ Configurez une ACL standard nommée ACL_VLAN30 qui filtre selon les critères su
 # Étape 8 – Configuration des ACL étendues
 Configurez une ACL étendu numérotée 100 qui :
 
-•	Bloque le traffic web en provenance du réseau 172.16.30.0/24 vers le serveur le web (on souhaite ici interdit l’accès aux pages web).
+•	Bloque le traffic web en provenance du réseau 172.16.30.0/24 vers le serveur le web 192.168.20.200 (on souhaite ici interdit l’accès aux pages web).
 
 •	Tout autre type de traffic est autorisé
