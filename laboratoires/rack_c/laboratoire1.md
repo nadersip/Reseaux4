@@ -93,3 +93,17 @@ Configurez une ACL étendu numérotée 100 qui :
 •	Bloque le traffic web en provenance du réseau 172.16.50.0/24 vers le serveur le web 192.168.30.200 (on souhaite ici interdit l’accès aux pages web).
 
 •	Tout autre type de traffic est autorisé
+
+# Captures à remettre dans le pigeonnier
+
+a. Faites la commande show vlan brief sur tous les switches.
+
+b. Faites la commande show ip interface brief sur tous les routeurs.
+
+c. Faites la commande show ip route sur tous les routeurs.
+
+d. Faites la commande ipconfig sur les PC.
+
+e. Effectuez un ping du PC VLAN 50 au PC VLAN 60.
+
+f. Effectuez un ping du PC VLAN 50 au serveur 192.168.30.200.
