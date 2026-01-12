@@ -107,3 +107,5 @@ d. Faites la commande ipconfig sur les PC.
 e. Effectuez un ping du PC VLAN 10 au PC VLAN 20.
 
 f. Effectuez un ping du PC VLAN 10 au serveur 192.168.10.200.
+
+g. Faites la commande show ip access-list sur le routeur RACK-A-R2.
