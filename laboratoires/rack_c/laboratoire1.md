@@ -97,8 +97,13 @@ Configurez une ACL étendu numérotée 100 qui :
 # Captures à remettre dans le pigeonnier
 
 a. Faites la commande show vlan brief sur tous les switches.
+
 b. Faites la commande show ip interface brief sur tous les routeurs.
+
 c. Faites la commande show ip route sur tous les routeurs.
+
 d. Faites la commande ipconfig sur les PC.
+
 e. Effectuez un ping du PC VLAN 50 au PC VLAN 60.
+
 f. Effectuez un ping du PC VLAN 50 au serveur 192.168.30.200.
