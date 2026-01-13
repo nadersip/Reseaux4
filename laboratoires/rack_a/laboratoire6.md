@@ -3,7 +3,7 @@
 
 # Topologie
 
-![Topo](../../topo/rack-a/topo1-4.png)
+![Topo](../../topo/rack-a/topo6.png)
 
 # Table d’adressage :
 
