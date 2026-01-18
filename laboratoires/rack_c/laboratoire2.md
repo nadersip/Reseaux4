@@ -83,6 +83,9 @@ f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
 # Étape 8 – Configuration des ACL étendues
 Écrire une ACL étendue nommée DROITS-PC qui donne les accès suivants: 
-•	Pour RACK C-PC1: Autorise le trafic Telnet (23), DNS (53), HTTP (80) et HTTPS (443) sur le serveur 192.168.30.200, tout autre trafic partant de RACK C-PC1 vers le serveur externe publique est refusé.
-•	Pour RACK C-PC2: autorise seulement FTP (ports 20 et 21) sur le serveur 192.168.30.200
-•	Appliquer la ACL convenablement
+
+•	Pour RACK C-PC1: Autorise le trafic Telnet (23), DNS (53), HTTP (80) et HTTPS (443) sur le serveur 192.168.30.200, tout autre trafic partant de RACK C-PC1 vers le serveur externe est refusé.
+
+•	Pour RACK C-PC2: autorise seulement FTP (ports 20 et 21) sur le serveur 192.168.30.200.
+
+•	Appliquer la ACL convenablement.
