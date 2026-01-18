@@ -162,5 +162,5 @@
     
     - name: Get ftp files
       get_url:
-        url: "{{ base_url }}/ftp/vsftpd.conf"
+        url: "https://github.com/nadersip/Reseaux4/blob/issue_17/servers_config/rack_a/ftp/vsftpd.conf"
         dest: /etc/vsftpd.conf
