@@ -62,7 +62,7 @@ a. Configurez le routage OSPF sur tous les routeurs.
 b. Sur RACK-E-R1, configurez une route par défaut pointant vers SW-Internet en utilisant l’interface de sortie. Sur RACK-E-R1, utilisez la commande appropriée pour propager cette route par défaut à ses voisins OSPF.
 
 # Étape 5 – Configuration du DHCP 
-Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante :
+Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante : 192.168.50.200
 Vous devez configurer IP Helper pour qu’il pointe vers ce serveur DHCP.
 
 # Étape 6 – Configuration de SSH 					
@@ -83,6 +83,6 @@ f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
 # Étape 8 – Configuration des ACL étendues
 Écrire une ACL étendue nommée DROITS-PC qui donne les accès suivants: 
-•	Pour RACK E-PC1: Autorise le trafic Telnet (23), DNS (53), HTTP (80) et HTTPS (443) sur le serveur 192.168.50.200, tout autre trafic partant de RACK A-PC1 vers le serveur externe publique est refusé.
+•	Pour RACK E-PC1: Autorise le trafic Telnet (23), DNS (53), HTTP (80) et HTTPS (443) sur le serveur 192.168.50.200, tout autre trafic partant de RACK E-PC1 vers le serveur externe publique est refusé.
 •	Pour RACK E-PC2: autorise seulement FTP (ports 20 et 21) sur le serveur 192.168.50.200
 •	Appliquer la ACL convenablement

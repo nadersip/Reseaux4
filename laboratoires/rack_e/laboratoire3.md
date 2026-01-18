@@ -62,7 +62,7 @@ a. Configurez le routage OSPF sur tous les routeurs.
 b. Sur RACK-E-R1, configurez une route par défaut pointant vers SW-Internet en utilisant l’interface de sortie. Sur RACK-E-R1, utilisez la commande appropriée pour propager cette route par défaut à ses voisins OSPF.
 
 # Étape 5 – Configuration du DHCP 
-Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante :
+Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante : 192.168.50.200
 Vous devez configurer IP Helper pour qu’il pointe vers ce serveur DHCP.
 
 # Étape 6 – Configuration de SSH 					
