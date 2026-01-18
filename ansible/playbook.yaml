@@ -37,6 +37,19 @@
       name: systemd-resolved
       state: stopped
       enabled: false
+     ignore_errors: yes
+    
+   - name : Remove systemd-resolved service
+     apt:
+      name: systemd-resolved
+      state: absent
+      purge: yes
+
+   - name: Set resolv.conf to localhost DNS
+     copy:
+      dest: /etc/resolv.conf
+      content: |
+        nameserver 127.0.0.1
 
 
    - name : Dnsmasq enable service
