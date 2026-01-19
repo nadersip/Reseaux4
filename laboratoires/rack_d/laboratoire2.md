@@ -82,6 +82,15 @@ f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 Écrire une ACL standard nommée ALLOW_SSH qui permettra seulement au RACK D-PC1 de faire une connexion SSH sur RACK-D-R1. Toute tentatives de connexion via SSH depuis tout autre périphérique doit échouer.
 
 # Étape 8 – Configuration des ACL étendues
+
+🔴 Avant de commencer les ACL, assurez-vous de faire les tests sur les deux PC. Par exemple :
+
+🔴 Accéder à une page web en HTTP et HTTPS.
+
+🔴 Vérifier que le DNS fonctionne correctement.
+
+🔴 Essayer de vous connecter au serveur en utilisant Telnet et FTP.
+
 Écrire une ACL étendue nommée DROITS-PC qui donne les accès suivants: 
 
 •	Pour RACK D-PC1: autorise le trafic Telnet (23), DNS (53), DHCP(67, 68),  HTTP (80) et HTTPS (443) sur le serveur 192.168.40.200, tout autre trafic partant de RACK D-PC1 vers le serveur externe est refusé.
