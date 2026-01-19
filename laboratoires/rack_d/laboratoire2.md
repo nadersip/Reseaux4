@@ -89,7 +89,7 @@ f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
 🔴 Vérifier que le DNS fonctionne correctement.
 
-🔴 Essayer de vous connecter au serveur en utilisant Telnet et FTP.
+🔴 Essayer de vous connecter au serveur en utilisant [Telnet](../../documentation/telnet_connection.md) et [FTP](../../documentation/ftp_connection.md).
 
 Écrire une ACL étendue nommée DROITS-PC qui donne les accès suivants: 
 
