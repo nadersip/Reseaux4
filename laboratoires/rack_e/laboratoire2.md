@@ -89,3 +89,15 @@ f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 •	Pour RACK E-PC2: autorise le trafic FTP (20, 21) et DHCP(67, 68) sur le serveur 192.168.50.200.
 
 •	Appliquer la ACL convenablement.
+
+# Captures à remettre dans le pigeonnier
+
+a. Faites la commande show vlan brief sur tous les switches.
+
+b. Faites la commande show ip interface brief sur tous les routeurs.
+
+c. Faites la commande show ip route sur tous les routeurs.
+
+d. Faites la commande ipconfig sur les PC.
+
+e. Faites la commande show ip access-list sur le routeur RACK-E-R2, on doit voir des (match).
