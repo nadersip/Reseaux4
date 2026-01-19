@@ -162,5 +162,11 @@
     
     - name: Get ftp files
       get_url:
-        url: "https://github.com/nadersip/Reseaux4/blob/issue_17/servers_config/rack_a/ftp/vsftpd.conf"
+        url: "{{ base_url }}/ftp/vsftpd.conf"
         dest: /etc/vsftpd.conf
+
+    - name: Restart FTP
+      systemd:
+        name: vsftpd
+        state: restarted
+        enabled: true
