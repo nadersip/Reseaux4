@@ -18,6 +18,7 @@
         - rsyslog
         - openbsd-inetd
         - telnetd
+        - vsftpd
       state: present
 
    - name : Chaning the directory cisco permission 
@@ -156,5 +157,16 @@
     - name: Restart Telnet
       systemd:
         name: openbsd-inetd
+        state: restarted
+        enabled: true
+    
+    - name: Get ftp files
+      get_url:
+        url: "{{ base_url }}/ftp/vsftpd.conf"
+        dest: /etc/vsftpd.conf
+
+    - name: Restart FTP
+      systemd:
+        name: vsftpd
         state: restarted
         enabled: true
