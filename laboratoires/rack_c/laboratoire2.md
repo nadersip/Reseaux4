@@ -89,7 +89,7 @@ f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
 🔴 Vérifier que le DNS fonctionne correctement.
 
-🔴 Essayer de vous connecter au serveur en utilisant Telnet et FTP.
+🔴 Essayer de vous connecter au serveur en utilisant [Telnet](../../documentation/telnet_connection.md) et [FTP](../../documentation/ftp_connection.md).
 
 Note : Utilisez «user» comme nom d’utilisateur et «cisco1234» comme mot de passe pour vous connecter.
 
