@@ -82,10 +82,33 @@ f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 Écrire une ACL standard nommée ALLOW_SSH qui permettra seulement au RACK A-PC1 de faire une connexion SSH sur RACK-A-R1. Toute tentatives de connexion via SSH depuis tout autre périphérique doit échouer.
 
 # Étape 8 – Configuration des ACL étendues
+
+🔴 Avant de commencer les ACL, assurez-vous de faire les tests sur les deux PC. Par exemple :
+
+🔴 Accéder à une page web en HTTP et HTTPS.
+
+🔴 Vérifier que le DNS fonctionne correctement.
+
+🔴 Essayer de vous connecter au serveur en utilisant [Telnet](../../documentation/telnet_connection.md) et [FTP](../../documentation/ftp_connection.md).
+
+Note : Utilisez «user» comme nom d’utilisateur et «cisco1234» comme mot de passe pour vous connecter.
+
 Écrire une ACL étendue nommée DROITS-PC qui donne les accès suivants: 
 
-•	Pour RACK A-PC1: Autorise le trafic Telnet (23), DNS (53), DHCP(67, 68), HTTP (80) et HTTPS (443) sur le serveur 192.168.10.200, tout autre trafic partant de RACK A-PC1 vers le serveur externe est refusé.
+•	Pour RACK A-PC1: autorise le trafic Telnet (23), DNS (53), DHCP(67, 68), HTTP (80) et HTTPS (443) sur le serveur 192.168.10.200, tout autre trafic partant de RACK A-PC1 vers le serveur externe est refusé.
 
 •	Pour RACK A-PC2: autorise le trafic FTP (20, 21) et DHCP(67, 68) sur le serveur 192.168.10.200.
 
 •	Appliquer la ACL convenablement.
+
+# Captures à remettre dans le pigeonnier
+
+a. Faites la commande show vlan brief sur tous les switches.
+
+b. Faites la commande show ip interface brief sur tous les routeurs.
+
+c. Faites la commande show ip route sur tous les routeurs.
+
+d. Faites la commande ipconfig sur les PC.
+
+e. Faites la commande show ip access-list sur le routeur RACK-A-R2, on doit voir des (match).
