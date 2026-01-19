@@ -91,6 +91,8 @@ f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
 🔴 Essayer de vous connecter au serveur en utilisant [Telnet](../../documentation/telnet_connection.md) et [FTP](../../documentation/ftp_connection.md).
 
+Note : Utilisez «user» comme nom d’utilisateur et «cisco1234» comme mot de passe pour vous connecter.
+
 Écrire une ACL étendue nommée DROITS-PC qui donne les accès suivants: 
 
 •	Pour RACK D-PC1: autorise le trafic Telnet (23), DNS (53), DHCP(67, 68),  HTTP (80) et HTTPS (443) sur le serveur 192.168.40.200, tout autre trafic partant de RACK D-PC1 vers le serveur externe est refusé.
