@@ -14,8 +14,10 @@
 |RACK-A-R2 |G0/0/1   |10.0.0.6   |255.255.255.252| N/A|Connexion au routeur R1
 |          |G0/0/0.10|172.16.10.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 10
 |          |G0/0/0.20|172.16.20.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 20
-|RACK-A-PC1|Fa0      |DHCP       |DHCP  | DHCP   |    |
-|RACK-A-PC2|Fa0      |DHCP       |DHCP  | DHCP   |    |
+|RACK-A-PC1|Fa0      |172.16.10.100      |255.255.255.0  | 172.16.10.1   |    |
+|RACK-A-PC2|Fa0      |172.16.20.100      |255.255.255.0  | 172.16.20.1   |    |
+
+Note: utiliser le serveur 192.168.10.200 pour DNS
 
 # Table VLAN
 |Equipments|VLAN     | Nom VLAN    |
@@ -61,11 +63,7 @@ a. Configurez le routage OSPF sur tous les routeurs.
 
 b. Sur RACK-A-R1, configurez une route par défaut pointant vers SW-Internet en utilisant l’interface de sortie. Sur RACK-A-R1, utilisez la commande appropriée pour propager cette route par défaut à ses voisins OSPF.
 
-# Étape 5 – Configuration du DHCP 
-Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante : 192.168.10.200
-Vous devez configurer IP Helper pour qu’il pointe vers ce serveur DHCP.
-
-# Étape 6 – Configuration de SSH 					
+# Étape 5 – Configuration de SSH 					
 a. Configurez SSH sur le routeur RACK-A-R1.
 
 b. Définissez le nom de domaine à rack-a.local
@@ -78,7 +76,7 @@ e. Version 2
 
 f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
-# Étape 7 – Configuration du NAT
+# Étape 6 – Configuration du NAT
 a.	Créer une liste d’accès standard nommée NAT pour permettre les réseaux du 
 VLAN 10, du VLAN 20 et interdire tout autres réseaux.
 
@@ -87,6 +85,16 @@ b.	Créer un NAT pool nommée NAT-POOL entre les adresses 10.10.10.3 et 10.10.10
 c.	Créer un NAT statique pour le serveur RACK-A-PC1 avec l’adresse 10.10.10.6.
 
 d.	Tester le NAT avant de continuer.
+
+Test a effectuer avant de continuer: 
+
+connectez vous en ssh au serveur 192.168.10.200 utiliser "user" et "cisco1234" et essayer de ping le PC du RACK-A-PC1 
+
+essayez de ping 8.8.8.8 a travers les PC
+
+essayer d'ouvrir la page web de google.ca
+
+
 
 # Étape 8 – Configuration des ACL étendues	
 Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
