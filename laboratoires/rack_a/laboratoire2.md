@@ -85,7 +85,7 @@ f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
 🔴 Avant de commencer les ACL, assurez-vous de faire les tests sur les deux PC. Par exemple :
 
-🔴 Accéder à une page web www.rack-a.local en HTTP et HTTPS.
+🔴 Accéder à une page web www.rack-a.local en HTTP (http://www.rack-a.local) et HTTPS (https://www.rack-a.local). 
 
 🔴 Vérifier que le DNS fonctionne correctement.
 
