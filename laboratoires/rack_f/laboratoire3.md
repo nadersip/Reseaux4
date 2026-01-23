@@ -14,8 +14,8 @@
 |RACK-F-R2 |G0/0/1   |10.0.0.26   |255.255.255.252| N/A|Connexion au routeur R1
 |          |G0/0/0.110|172.16.110.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 100
 |          |G0/0/0.120|172.16.120.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 120
-|RACK-F-PC1|Fa0      |DHCP       |DHCP  | DHCP   |    |
-|RACK-F-PC2|Fa0      |DHCP       |DHCP  | DHCP   |    |
+|RACK-F-PC1|Fa0      |172.16.110.100       |255.255.255.0  | 172.16.110.1   |    |
+|RACK-F-PC2|Fa0      |172.16.120.100       |255.255.255.0  | 172.16.120.1   |    |
 
 # Table VLAN
 |Equipments|VLAN     | Nom VLAN    |
@@ -61,11 +61,7 @@ a. Configurez le routage OSPF sur tous les routeurs.
 
 b. Sur RACK-F-R1, configurez une route par défaut pointant vers SW-Internet en utilisant l’interface de sortie. Sur RACK-F-R1, utilisez la commande appropriée pour propager cette route par défaut à ses voisins OSPF.
 
-# Étape 5 – Configuration du DHCP 
-Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante : 192.168.60.200
-Vous devez configurer IP Helper pour qu’il pointe vers ce serveur DHCP.
-
-# Étape 6 – Configuration de SSH 					
+# Étape 5 – Configuration de SSH 					
 a. Configurez SSH sur le routeur RACK-F-R1.
 
 b. Définissez le nom de domaine à rack-f.local
@@ -78,7 +74,7 @@ e. Version 2
 
 f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
-# Étape 7 – Configuration du NAT
+# Étape 6 – Configuration du NAT
 a.	Créer une liste d’accès standard nommée NAT pour permettre les réseaux du 
 VLAN 110, du VLAN 120 et interdire tout autres réseaux.
 
@@ -96,7 +92,7 @@ d.	Tester le NAT avant de continuer.
 
 🔴 Si tous vos tests sont concluants, vous pouvez continuer avec les ACL étendues.
 
-# Étape 8 – Configuration des ACL étendues	
+# Étape 7 – Configuration des ACL étendues	
 Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
 
 •	Appliquer la ACL convenablement sur le routeur RACK-F-R1.

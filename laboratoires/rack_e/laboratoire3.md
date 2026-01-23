@@ -14,8 +14,8 @@
 |RACK-E-R2 |G0/0/1   |10.0.0.22   |255.255.255.252| N/A|Connexion au routeur R1
 |          |G0/0/0.90|172.16.90.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 90
 |          |G0/0/0.100|172.16.100.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 100
-|RACK-E-PC1|Fa0      |DHCP       |DHCP  | DHCP   |    |
-|RACK-E-PC2|Fa0      |DHCP       |DHCP  | DHCP   |    |
+|RACK-E-PC1|Fa0      |172.16.90.100        |255.255.255.0  | 172.16.90.1    |    |
+|RACK-E-PC2|Fa0      |172.16.100.100       |255.255.255.0  | 172.16.100.1   |    |
 
 # Table VLAN
 |Equipments|VLAN     | Nom VLAN    |
@@ -61,11 +61,7 @@ a. Configurez le routage OSPF sur tous les routeurs.
 
 b. Sur RACK-E-R1, configurez une route par défaut pointant vers SW-Internet en utilisant l’interface de sortie. Sur RACK-E-R1, utilisez la commande appropriée pour propager cette route par défaut à ses voisins OSPF.
 
-# Étape 5 – Configuration du DHCP 
-Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante : 192.168.50.200
-Vous devez configurer IP Helper pour qu’il pointe vers ce serveur DHCP.
-
-# Étape 6 – Configuration de SSH 					
+# Étape 5 – Configuration de SSH 					
 a. Configurez SSH sur le routeur RACK-E-R1.
 
 b. Définissez le nom de domaine à rack-e.local
@@ -78,7 +74,7 @@ e. Version 2
 
 f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
-# Étape 7 – Configuration du NAT
+# Étape 6 – Configuration du NAT
 a.	Créer une liste d’accès standard nommée NAT pour permettre les réseaux du 
 VLAN 90, du VLAN 100 et interdire tout autres réseaux.
 
@@ -96,7 +92,7 @@ d.	Tester le NAT avant de continuer.
 
 🔴 Si tous vos tests sont concluants, vous pouvez continuer avec les ACL étendues.
 
-# Étape 8 – Configuration des ACL étendues	
+# Étape 7 – Configuration des ACL étendues	
 Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
 
 •	Appliquer la ACL convenablement sur le routeur RACK-E-R1.
