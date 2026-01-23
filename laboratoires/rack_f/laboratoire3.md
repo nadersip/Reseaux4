@@ -88,6 +88,14 @@ c.	Créer un NAT statique pour le serveur RACK-F-PC1 avec l’adresse 10.10.10.4
 
 d.	Tester le NAT avant de continuer.
 
+🔴 Connectez-vous en SSH au serveur 192.168.60.200 en utilisant l’utilisateur "user" et le mot de passe "cisco1234", puis essayez de pinguer le PC RACK-F-PC1.
+
+🔴 Essayez ensuite de pinguer 8.8.8.8 à travers les PC.
+
+🔴 Essayez d’ouvrir la page Web google.ca.
+
+🔴 Si tous vos tests sont concluants, vous pouvez continuer avec les ACL étendues.
+
 # Étape 8 – Configuration des ACL étendues	
 Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
 

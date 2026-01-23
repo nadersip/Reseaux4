@@ -88,13 +88,13 @@ d.	Tester le NAT avant de continuer.
 
 Test a effectuer avant de continuer: 
 
-connectez vous en ssh au serveur 192.168.10.200 utiliser "user" et "cisco1234" et essayer de ping le PC du RACK-A-PC1 
+🔴 Connectez-vous en SSH au serveur 192.168.10.200 en utilisant l’utilisateur "user" et le mot de passe "cisco1234", puis essayez de pinguer le PC RACK-A-PC1.
 
-essayez de ping 8.8.8.8 a travers les PC
+🔴 Essayez ensuite de pinguer 8.8.8.8 à travers les PC.
 
-essayer d'ouvrir la page web de google.ca
+🔴 Essayez d’ouvrir la page Web google.ca.
 
-
+🔴 Si tous vos tests sont concluants, vous pouvez continuer avec les ACL étendues.
 
 # Étape 8 – Configuration des ACL étendues	
 Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
