@@ -79,7 +79,7 @@ e. Version 2
 f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
 # Étape 7 – Configuration des ACL standards	
-Écrire une ACL standard nommée ALLOW_SSH qui permettra seulement au RACK D-PC1 de faire une connexion SSH sur RACK-D-R1. Toute tentatives de connexion via SSH depuis tout autre périphérique doit échouer.
+Écrire une ACL standard nommée ALLOW_SSH qui permettra seulement le réseaux du VLAN70 de faire une connexion SSH sur RACK-D-R1. Toute tentatives de connexion via SSH depuis tout autre périphérique doit échouer.
 
 # Étape 8 – Configuration des ACL étendues
 
@@ -95,11 +95,11 @@ Note : Utilisez «user» comme nom d’utilisateur et «cisco1234» comme mot de
 
 Écrire une ACL étendue nommée DROITS-PC qui donne les accès suivants: 
 
-•	Pour RACK D-PC1: autorise le trafic Telnet (23), DNS (53), DHCP(67, 68),  HTTP (80) et HTTPS (443) sur le serveur 192.168.40.200, tout autre trafic partant de RACK D-PC1 vers le serveur externe est refusé.
+•	Autorise le trafic Telnet (23), DNS (53), DHCP(67, 68), HTTP (80) et HTTPS (443) du VLAN70 sur le serveur 192.168.40.200, tout autre trafic partant du VLAN70 vers le serveur externe est refusé.
 
-•	Pour RACK D-PC2: autorise le trafic FTP (20, 21) et DHCP(67, 68) sur le serveur 192.168.40.200.
+•	Autorise le trafic FTP (20, 21) et DHCP(67, 68) du VLAN80 sur le serveur 192.168.40.200, tout autre trafic partant du VLAN80 vers le serveur externe est refusé.
 
-•	Appliquer la ACL convenablement
+•	Appliquer la ACL convenablement.
 
 # Captures à remettre dans le pigeonnier
 
