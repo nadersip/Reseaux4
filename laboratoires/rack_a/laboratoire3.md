@@ -1,5 +1,5 @@
 
-# Laboratoire 3 - Configuration des ACL étendues, OSPF, SSH et NAT
+# Laboratoire 3 - Configuration des ACL étendues, OSPF et NAT
 
 # Topologie
 
@@ -14,8 +14,10 @@
 |RACK-A-R2 |G0/0/1   |10.0.0.6   |255.255.255.252| N/A|Connexion au routeur R1
 |          |G0/0/0.10|172.16.10.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 10
 |          |G0/0/0.20|172.16.20.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 20
-|RACK-A-PC1|Fa0      |DHCP       |DHCP  | DHCP   |    |
-|RACK-A-PC2|Fa0      |DHCP       |DHCP  | DHCP   |    |
+|RACK-A-PC1|Fa0      |172.16.10.100      |255.255.255.0  | 172.16.10.1   |    |
+|RACK-A-PC2|Fa0      |172.16.20.100      |255.255.255.0  | 172.16.20.1   |    |
+
+Note: utiliser le serveur 192.168.10.200 pour DNS
 
 # Table VLAN
 |Equipments|VLAN     | Nom VLAN    |
@@ -61,24 +63,7 @@ a. Configurez le routage OSPF sur tous les routeurs.
 
 b. Sur RACK-A-R1, configurez une route par défaut pointant vers SW-Internet en utilisant l’interface de sortie. Sur RACK-A-R1, utilisez la commande appropriée pour propager cette route par défaut à ses voisins OSPF.
 
-# Étape 5 – Configuration du DHCP 
-Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante : 192.168.10.200
-Vous devez configurer IP Helper pour qu’il pointe vers ce serveur DHCP.
-
-# Étape 6 – Configuration de SSH 					
-a. Configurez SSH sur le routeur RACK-A-R1.
-
-b. Définissez le nom de domaine à rack-a.local
-
-c. Créez un utilisateur cisco avec le mot de passe cisco1234.
-
-d. Créez une clé RSA 2048 bits.
-
-e. Version 2
-
-f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
-
-# Étape 7 – Configuration du NAT
+# Étape 5 – Configuration du NAT
 a.	Créer une liste d’accès standard nommée NAT pour permettre les réseaux du 
 VLAN 10, du VLAN 20 et interdire tout autres réseaux.
 
@@ -86,15 +71,38 @@ b.	Créer un NAT pool nommée NAT-POOL entre les adresses 10.10.10.3 et 10.10.10
 
 c.	Créer un NAT statique pour le serveur RACK-A-PC1 avec l’adresse 10.10.10.6.
 
-d.	Tester le NAT avant de continuer.
+🔴 Test a effectuer avant de continuer: 
 
-# Étape 8 – Configuration des ACL étendues	
+🔴 Connectez-vous en SSH au serveur 192.168.10.200 en utilisant l’utilisateur "user" et le mot de passe "cisco1234", puis essayez de pinguer le PC RACK-A-PC1.
+
+🔴 Essayez ensuite de ping 8.8.8.8 à travers les PC. (Capture à remettre)
+
+🔴 Essayez d’ouvrir la page Web google.ca. (Capture à remettre)
+
+🔴 Si tous vos tests sont concluants, vous pouvez continuer avec les ACL étendues.
+
+# Étape 6 – Configuration des ACL étendues	
+
+🔴 Avant de commencer les ACL, assurez-vous de faire les tests sur les deux PC. Par exemple :
+
+🔴 Accéder à une page web www.rack-a.local en HTTP et HTTPS.
+
+🔴 Vérifier que le DNS fonctionne correctement.
+
+🔴 Essayer de vous connecter au serveur en utilisant [Telnet](../../documentation/telnet_connection.md), [FTP](../../documentation/ftp_connection.md) et SSH
+
 Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
 
 •	Appliquer la ACL convenablement sur le routeur RACK-A-R1.
 
-•	Autorise le retour du trafic FTP (ports 20 et 21), DNS (53), HTTPS (443) du serveur externe (192.168.10.200) au réseaux privés.
+•	Autorise le retour du trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443) du serveur externe (192.168.10.200) au réseaux du VLAN 10 et VLAN20.
 
-•	Autorise les pings du serveur externe (192.168.10.200) vers le serveur RACK-A-PC1.
+•	Autorise les pings du serveur externe (192.168.10.200) vers le PC RACK-A-PC1.
 
 •	Interdire tout autres trafics.
+
+# Captures à remettre dans le pigeonnier
+
+a. Exécuter la commande show ip access-list sur le routeur RACK-A-R2. On doit voir des match sur toutes les lignes.
+
+b. Exécuter la commande show ip nat translations sur le routeur RACK-A-R1.
