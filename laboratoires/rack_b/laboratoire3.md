@@ -84,11 +84,11 @@ b.	Créer un NAT pool nommée NAT-POOL entre les adresses 10.10.10.11 et 10.10.1
 
 c.	Créer un NAT statique pour le serveur RACK-B-PC1 avec l’adresse 10.10.10.14.
 
-d.	Tester le NAT avant de continuer.
+🔴 Test a effectuer avant de continuer: 
 
 🔴 Connectez-vous en SSH au serveur 192.168.20.200 en utilisant l’utilisateur "user" et le mot de passe "cisco1234", puis essayez de pinguer le PC RACK-B-PC1.
 
-🔴 Essayez ensuite de pinguer 8.8.8.8 à travers les PC.
+🔴 Essayez ensuite de ping 8.8.8.8 à travers les PC.
 
 🔴 Essayez d’ouvrir la page Web google.ca.
 
@@ -99,7 +99,7 @@ d.	Tester le NAT avant de continuer.
 
 •	Appliquer la ACL convenablement sur le routeur RACK-B-R1.
 
-•	Autorise le retour du trafic FTP (ports 20 et 21), DNS (53), HTTPS (443) du serveur externe (192.168.20.200) au réseaux privés.
+•	Autorise le retour du trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443) du serveur externe (192.168.20.200) au réseaux du VLAN30 et VLAN40.
 
 •	Autorise les pings du serveur externe (192.168.20.200) vers le serveur RACK-B-PC1.
 
