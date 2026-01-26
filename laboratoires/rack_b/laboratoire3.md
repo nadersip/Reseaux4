@@ -17,7 +17,7 @@
 |RACK-B-PC1|Fa0      |172.16.30.100       |255.255.255.0  |172.16.30.1   |    |
 |RACK-B-PC2|Fa0      |172.16.40.100       |255.255.255.0  |172.16.40.1   |    |
 
-Note: utiliser le serveur 192.168.10.200 pour DNS
+Note: utiliser le serveur 192.168.20.200 pour DNS
 
 # Table VLAN
 |Equipments|VLAN     | Nom VLAN    |
