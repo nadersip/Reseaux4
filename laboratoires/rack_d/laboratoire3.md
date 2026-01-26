@@ -101,6 +101,6 @@ c.	Créer un NAT statique pour le serveur RACK-D-PC1 avec l’adresse 10.10.10.3
 
 # Captures à remettre dans le pigeonnier
 
-a. Effectuer un ping du serveur externe (192.168.40.200) vers le PC RACK-D-PC1.
+a. Exécuter la commande show ip access-list sur le routeur RACK-D-R2. On doit voir des match sur toutes les lignes.
 
-b. Exécuter la commande show ip access-list sur le routeur RACK-D-R2. On doit voir des match sur toutes les lignes.
+b. Exécuter la commande show ip nat translations sur le routeur RACK-D-R1.

@@ -103,6 +103,6 @@ c.	Créer un NAT statique pour le serveur RACK-B-PC1 avec l’adresse 10.10.10.1
 
 # Captures à remettre dans le pigeonnier
 
-a. Effectuer un ping du serveur externe (192.168.20.200) vers le PC RACK-B-PC1.
+a. Exécuter la commande show ip access-list sur le routeur RACK-B-R2. On doit voir des match sur toutes les lignes.
 
-b. Exécuter la commande show ip access-list sur le routeur RACK-B-R2. On doit voir des match sur toutes les lignes.
+b. Exécuter la commande show ip nat translations sur le routeur RACK-B-R1.
