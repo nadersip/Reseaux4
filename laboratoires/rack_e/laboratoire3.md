@@ -61,20 +61,7 @@ a. Configurez le routage OSPF sur tous les routeurs.
 
 b. Sur RACK-E-R1, configurez une route par défaut pointant vers SW-Internet en utilisant l’interface de sortie. Sur RACK-E-R1, utilisez la commande appropriée pour propager cette route par défaut à ses voisins OSPF.
 
-# Étape 5 – Configuration de SSH 					
-a. Configurez SSH sur le routeur RACK-E-R1.
-
-b. Définissez le nom de domaine à rack-e.local
-
-c. Créez un utilisateur cisco avec le mot de passe cisco1234.
-
-d. Créez une clé RSA 2048 bits.
-
-e. Version 2
-
-f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
-
-# Étape 6 – Configuration du NAT
+# Étape 5 – Configuration du NAT
 a.	Créer une liste d’accès standard nommée NAT pour permettre les réseaux du 
 VLAN 90, du VLAN 100 et interdire tout autres réseaux.
 
@@ -86,19 +73,25 @@ c.	Créer un NAT statique pour le serveur RACK-E-PC1 avec l’adresse 10.10.10.3
 
 🔴 Connectez-vous en SSH au serveur 192.168.50.200 en utilisant l’utilisateur "user" et le mot de passe "cisco1234", puis essayez de pinguer le PC RACK-E-PC1.
 
-🔴 Essayez ensuite de ping 8.8.8.8 à travers les PC.
+🔴 Essayez ensuite de ping 8.8.8.8 à travers les PC. (Capture à remettre)
 
-🔴 Essayez d’ouvrir la page Web google.ca.
+🔴 Essayez d’ouvrir la page Web google.ca. (Capture à remettre)
 
 🔴 Si tous vos tests sont concluants, vous pouvez continuer avec les ACL étendues.
 
-# Étape 7 – Configuration des ACL étendues	
+# Étape 6 – Configuration des ACL étendues	
 Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
 
 •	Appliquer la ACL convenablement sur le routeur RACK-E-R1.
 
 •	Autorise le retour du trafic FTP (ports 20 et 21), SSH(22), DNS (53), HTTPS (443) du serveur externe (192.168.50.200) au réseaux du VLAN90 et VLAN100.
 
-•	Autorise les pings du serveur externe (192.168.50.200) vers le serveur RACK-E-PC1.
+•	Autorise les pings du serveur externe (192.168.50.200) vers le PC RACK-E-PC1.
 
 •	Interdire tout autres trafics.
+
+# Captures à remettre dans le pigeonnier
+
+a. Effectuer un ping du serveur externe (192.168.50.200) vers le PC RACK-E-PC1.
+
+b. Exécuter la commande show ip access-list sur le routeur RACK-E-R2. On doit voir des match sur toutes les lignes.
