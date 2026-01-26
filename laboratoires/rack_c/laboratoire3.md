@@ -1,5 +1,5 @@
 
-# Laboratoire 3 - Configuration des ACL étendues, OSPF, SSH et NAT
+# Laboratoire 3 - Configuration des ACL étendues, OSPF et NAT
 
 # Topologie
 
@@ -80,6 +80,15 @@ c.	Créer un NAT statique pour le serveur RACK-C-PC1 avec l’adresse 10.10.10.2
 🔴 Si tous vos tests sont concluants, vous pouvez continuer avec les ACL étendues.
 
 # Étape 6 – Configuration des ACL étendues	
+
+🔴 Avant de commencer les ACL, assurez-vous de faire les tests sur les deux PC. Par exemple :
+
+🔴 Accéder à une page web www.rack-c.local en HTTP et HTTPS.
+
+🔴 Vérifier que le DNS fonctionne correctement.
+
+🔴 Essayer de vous connecter au serveur en utilisant [Telnet](../../documentation/telnet_connection.md), [FTP](../../documentation/ftp_connection.md) et SSH
+
 Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
 
 •	Appliquer la ACL convenablement sur le routeur RACK-C-R1.
