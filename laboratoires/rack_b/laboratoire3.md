@@ -71,6 +71,8 @@ b.	Créer un NAT pool nommée NAT-POOL entre les adresses 10.10.10.11 et 10.10.1
 
 c.	Créer un NAT statique pour le serveur RACK-B-PC1 avec l’adresse 10.10.10.14.
 
+d. Appliquer le NAT sur les interfaces du routeur.
+
 🔴 Test a effectuer avant de continuer: 
 
 🔴 Connectez-vous en SSH au serveur 192.168.20.200 en utilisant l’utilisateur "user" et le mot de passe "cisco1234", puis essayez de pinguer le PC RACK-B-PC1.
