@@ -103,6 +103,6 @@ c.	Créer un NAT statique pour le serveur RACK-A-PC1 avec l’adresse 10.10.10.6
 
 # Captures à remettre dans le pigeonnier
 
-a. Exécuter la commande show ip access-list sur le routeur RACK-A-R2. On doit voir des match sur toutes les lignes.
+a. Exécuter la commande show ip access-list sur le routeur RACK-A-R1. On doit voir des match sur toutes les lignes.
 
 b. Exécuter la commande show ip nat translations sur le routeur RACK-A-R1.
