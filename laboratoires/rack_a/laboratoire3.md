@@ -69,7 +69,7 @@ VLAN 10, du VLAN 20 et interdire tout autres réseaux.
 
 b.	Créer un NAT pool nommée NAT-POOL entre les adresses 10.10.10.3 et 10.10.10.5.
 
-c.	Créer un NAT statique pour le serveur RACK-A-PC1 avec l’adresse 10.10.10.6.
+c.	Créer un NAT statique pour le PC RACK-A-PC1 avec l’adresse 10.10.10.6.
 
 d. Appliquer le NAT sur les interfaces du routeur.
 

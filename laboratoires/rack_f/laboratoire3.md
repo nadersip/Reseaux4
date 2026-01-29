@@ -69,7 +69,7 @@ VLAN 110, du VLAN 120 et interdire tout autres réseaux.
 
 b.	Créer un NAT pool nommée NAT-POOL entre les adresses 10.10.10.43 et 10.10.10.45.
 
-c.	Créer un NAT statique pour le serveur RACK-F-PC1 avec l’adresse 10.10.10.46.
+c.	Créer un NAT statique pour le PC RACK-F-PC1 avec l’adresse 10.10.10.46.
 
 d. Appliquer le NAT sur les interfaces du routeur.
 

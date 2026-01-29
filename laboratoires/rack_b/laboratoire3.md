@@ -69,7 +69,7 @@ VLAN 30, du VLAN 40 et interdire tout autres réseaux.
 
 b.	Créer un NAT pool nommée NAT-POOL entre les adresses 10.10.10.11 et 10.10.10.13.
 
-c.	Créer un NAT statique pour le serveur RACK-B-PC1 avec l’adresse 10.10.10.14.
+c.	Créer un NAT statique pour le PC RACK-B-PC1 avec l’adresse 10.10.10.14.
 
 d. Appliquer le NAT sur les interfaces du routeur.
 
