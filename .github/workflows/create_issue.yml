@@ -1,0 +1,28 @@
+name: Thank You on Issue Open
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Add comment to new issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `👋 Thanks for opening this GitHub issue!
+
+              Our team will review it shortly and get back to you as soon as possible.
+
+              We appreciate your contribution!`
+            })
