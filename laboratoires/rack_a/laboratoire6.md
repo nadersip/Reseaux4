@@ -1,6 +1,5 @@
 
-# Laboratoire 6 - Configuration des ACL étendues, OSPF, SSH et NAT
-
+# Laboratoire 6 - Configuration GRE, NAT, SSH 
 # Topologie
 
 ![Topo](../../topo/rack-a/topo6.png)
