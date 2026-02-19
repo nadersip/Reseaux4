@@ -1,100 +1,69 @@
 
-# Laboratoire 3 - Configuration des ACL étendues, OSPF, SSH et NAT
-
+# Laboratoire 6 - Configuration GRE, NAT, SSH 
 # Topologie
 
-![Topo](../../topo/rack-f/topo1-4.png)
+![Topo](../../topo/rack-f/topo6.png)
 
 # Table d’adressage :
 
 |Equipments|Interface     | IP Address     | Subnet Mask     | Default Gateway | Description
 |----------|--------------|---------------|----------------|------------------|------------------|
-|RACK-F-R1 |G0/0/1   |10.10.10.42       |255.255.255.248           | N/A|Connexion a internet via la switch
-|          |G0/0/0   |10.0.0.25   |255.255.255.252| N/A|Connexion au routeur R2
-|RACK-F-R2 |G0/0/1   |10.0.0.26   |255.255.255.252| N/A|Connexion au routeur R1
-|          |G0/0/0.110|172.16.110.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 100
-|          |G0/0/0.120|172.16.120.1|255.255.255.0  | N/A|Connexion au switch SW1 - VLAN 120
-|RACK-F-PC1|Fa0      |DHCP       |DHCP  | DHCP   |    |
-|RACK-F-PC2|Fa0      |DHCP       |DHCP  | DHCP   |    |
+|ISP |G1/0/1   |10.10.10.2       |255.255.255.248         | N/A|Connexion a internet 
+|          |G1/0/2   |10.0.0.5   |255.255.255.252| N/A|Connexion a RACK-F-R1-MTL
+|          |G1/0/3   |10.0.0.9   |255.255.255.252| N/A|Connexion a RACK-F-R2-Ottawa
+|RACK-F-R1-MTL |G0/0/1   |10.0.0.6       |255.255.255.252           | N/A|Connexion a ISP
+|          |G0/0/0   |172.16.10.1   |255.255.255.0| N/A|Connexion au switch RACK F-SW-MTL
+|          |Tunnel 1   |172.16.25.1   |255.255.255.252| N/A|Connexion Tunnel au RACK-F-R2-Ottawa
+|RACK-F-R2-Ottawa |G0/0/1   |10.0.0.10   |255.255.255.252| N/A|Connexion a ISP
+|          |G0/0/0|172.16.20.1|255.255.255.0  | N/A|Connexion au switch RACK F-SW-Ottawa
+|          |Tunnel 1   |172.16.25.2   |255.255.255.252| N/A|Connexion Tunnel au RACK-F-R1-MTL
+|RACK-F-PC1|Fa0      |172.16.10.100       |255.255.255.0  | 172.16.10.1   |    |
+|RACK-F-PC2|Fa0      |172.16.20.100       |255.255.255.0  | 172.16.20.1   |    |
 
-# Table VLAN
-|Equipments|VLAN     | Nom VLAN    |
-|----------|--------------|---------------|
-|RACK-E-SW1, RACK-E-SW2 et RACK-E-SW3|VLAN 110| VLAN110
-|          |VLAN 120| VLAN120
-|          |VLAN 99| Mgmt_Native
-
-# Table de ports
-|Equipments|Ports |  |
-|----------|-----|----------|
-|RACK-F-SW1 |F1/0/1, F1/0/2, F1/0/3| Trunk
-|RACK-F-SW2 |F1/0/2, F1/0/4| Trunk
-||F1/0/5| Vlan 110
-|RACK-F-SW3 |F1/0/3, F1/0/4| Trunk
-||F1/0/5| Vlan 120
+Note: utiliser le serveur 192.168.10.200 pour DNS
 
 # Étape 1 – Configuration des paramètres de base
 a. Configurez les noms d’hôte (hostname)
 
-c. Désactivez la résolution des noms de domaine
-
-d. Désactivez le délai d’attente sur la console
-
-e. Activez la synchronisation des messages de la console
-
-# Étape 2 – Configuration des VLANs et assignation des ports du switch			
-a. À l’aide des tableaux des VLANs et des ports, configurez les VLANs et les ports.
-
-# Étape 3 – Configuration des adresses IP et du routage inter-VLAN
+# Étape 2 – Configuration des adresses IP
 a. À l’aide du tableau d’adresses IP, configurez les adresses IP.
 
-b. Configurez le routage inter-VLAN et attribuez la première adresse IP disponible de chaque réseau aux sous-interfaces du routeur RACK-F-R2
+# Étape 3 – Configuration du routage statique
+a. Sur ISP, configurez une route par défaut route entièrement spécifiée pointant vers SW-Internet.
 
-# Étape 4 – Configuration du routage statique et dynamique 
-a. Configurez le routage OSPF sur tous les routeurs.
+b. Sur RACK-F-R1-MTL, configurez une route par défaut route entièrement spécifiée pointant vers ISP.
+
+c. Sur RACK-F-R2-Ottawa, configurez une route par défaut route entièrement spécifiée pointant vers ISP.
+
+# Étape 4 – Configuration du tunnel GRE
+a. Configurer le tunnel GRE entre les routeurs RACK-F-R1-MTL et RACK-F-R2-Ottawa
+
+# Étape 5 – Configuration du routage dynamique 
+a. Configurez le routage OSPF sur tous les routeurs RACK-F-R1-MTL et RACK-F-R2-Ottawa.
 
 •   Utilisez le numéro de processus ID 1 et la zone 0.
 
-•   Annoncez dans OSPF uniquement les réseaux connectés à chaque routeur, sauf le réseau qui mène vers SW-Internet.
+•   Annoncez dans OSPF uniquement les réseaux connectés, sauf les réseaux qui mène vers ISP.
 
 •   Configurez les interfaces passives aux endroits appropriés.
 
-b. Sur RACK-F-R1, configurez une route par défaut pointant vers SW-Internet en utilisant l’interface de sortie. Sur RACK-F-R1, utilisez la commande appropriée pour propager cette route par défaut à ses voisins OSPF.
+# Étape 6 – Configuration du NAT sur RACK-F-R1-MTL et RACK-F-R2-Ottawa
+a.	Créer une liste d’accès standard nommée NAT sur RACK-F-R1-MTL pour permettre le réseau
+172.16.10.0/24 et interdire tout autres réseaux.
 
-# Étape 5 – Configuration du DHCP 
-Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante :
-Vous devez configurer IP Helper pour qu’il pointe vers ce serveur DHCP.
+b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-F-R1-MTL.
 
-# Étape 6 – Configuration de SSH 					
-a. Configurez SSH sur le routeur RACK-F-R1.
+a.	Créer une liste d’accès standard nommée NAT sur RACK-F-R2-Ottawa pour permettre le réseau
+172.16.20.0/24 et interdire tout autres réseaux.
 
-b. Définissez le nom de domaine à rack-f.local
-
-c. Créez un utilisateur cisco avec le mot de passe cisco1234.
-
-d. Créez une clé RSA 2048 bits.
-
-e. Version 2
-
-f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
-
-# Étape 7 – Configuration du NAT
-a.	Créer une liste d’accès standard nommée NAT pour permettre les réseaux du 
-VLAN 110, du VLAN 120 et interdire tout autres réseaux.
-
-b.	Créer un NAT pool nommée NAT-POOL entre les adresses 10.10.10.43 et 10.10.10.45.
-
-c.	Créer un NAT statique pour le serveur RACK-F-PC1 avec l’adresse 10.10.10.46.
+b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-F-R2-Ottawa.
 
 d.	Tester le NAT avant de continuer.
 
-# Étape 8 – Configuration des ACL étendues	
-Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
+# Captures à remettre dans le pigeonnier
 
-•	Appliquer la ACL convenablement sur le routeur RACK-F-R1.
+a. Vous devez effectuer un traceroute entre le PC RACK-F-PC1 et le PC RACK-F-PC2. Le trafic doit passer à travers le tunnel.
 
-•	Autorise le retour du trafic FTP (ports 20 et 21), DNS (53), HTTPS (443) du serveur externe (192.168.60.200) au réseaux privés.
+b. Vous devez effectuer un traceroute entre le PC RACK-F-PC1 et google.com. Le trafic ne doit pas passer dans le tunnel.
 
-•	Autorise les pings du serveur externe (192.168.60.200) vers le serveur RACK-F-PC1.
-
-•	Interdire tout autres trafics.
+c. Vous devez effectuer un traceroute entre le PC RACK-F-PC2 et google.com. Le trafic ne doit pas passer dans le tunnel.
