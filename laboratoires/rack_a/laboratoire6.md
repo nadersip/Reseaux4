@@ -8,17 +8,19 @@
 
 |Equipments|Interface     | IP Address     | Subnet Mask     | Default Gateway | Description
 |----------|--------------|---------------|----------------|------------------|------------------|
-|ISB |G1/0/1   |10.10.10.2       |255.255.255.248         | N/A|Connexion a internet 
+|ISP |G1/0/1   |10.10.10.2       |255.255.255.248         | N/A|Connexion a internet 
 |          |G1/0/2   |10.0.0.5   |255.255.255.252| N/A|Connexion a RACK-A-R1-MTL
 |          |G1/0/3   |10.0.0.9   |255.255.255.252| N/A|Connexion a RACK-A-R2-Ottawa
 |RACK-A-R1-MTL |G0/0/1   |10.0.0.6       |255.255.255.252           | N/A|Connexion a ISP
 |          |G0/0/0   |172.16.10.1   |255.255.255.0| N/A|Connexion au switch RACK A-SW-MTL
+|          |Tunnel 1   |172.16.25.1   |255.255.255.252| N/A|Connexion Tunnel au RACK-A-R2-Ottawa
 |RACK-A-R2-Ottawa |G0/0/1   |10.0.0.10   |255.255.255.252| N/A|Connexion a ISP
 |          |G0/0/0|172.16.20.1|255.255.255.0  | N/A|Connexion au switch RACK A-SW-Ottawa
-|RACK-A-PC1|Fa0      |DHCP       |DHCP  | DHCP   |    |
-|RACK-A-PC2|Fa0      |DHCP       |DHCP  | DHCP   |    |
+|          |Tunnel 1   |172.16.25.2   |255.255.255.252| N/A|Connexion Tunnel au RACK-A-R1-MTL
+|RACK-A-PC1|Fa0      |172.16.10.100       |255.255.255.0  | 172.16.10.1   |    |
+|RACK-A-PC2|Fa0      |172.16.20.100       |255.255.255.0  | 172.16.20.1   |    |
 
-
+Note: utiliser le serveur 192.168.10.200 pour DNS
 
 # Étape 1 – Configuration des paramètres de base
 a. Configurez les noms d’hôte (hostname)
@@ -29,44 +31,39 @@ a. À l’aide du tableau d’adresses IP, configurez les adresses IP.
 # Étape 3 – Configuration du routage statique
 a. Sur ISP, configurez une route par défaut route entièrement spécifiée pointant vers SW-Internet.
 
+b. Sur RACK-A-R1-MTL, configurez une route par défaut route entièrement spécifiée pointant vers ISP.
+
+c. Sur RACK-A-R2-Ottawa, configurez une route par défaut route entièrement spécifiée pointant vers ISP.
+
 # Étape 4 – Configuration du tunnel GRE
 a. Configurer le tunnel GRE entre les routeurs RACK-A-R1-MTL et RACK-A-R2-Ottawa
 
 # Étape 5 – Configuration du routage dynamique 
-a. Configurez le routage OSPF sur tous les routeurs et ISP.
+a. Configurez le routage OSPF sur tous les routeurs RACK-A-R1-MTL et RACK-A-R2-Ottawa.
 
 •   Utilisez le numéro de processus ID 1 et la zone 0.
 
-•   Annoncez dans OSPF uniquement les réseaux connectés, sauf le réseau qui mène vers SW-Internet.
+•   Annoncez dans OSPF uniquement les réseaux connectés, sauf les réseaux qui mène vers ISP.
 
 •   Configurez les interfaces passives aux endroits appropriés.
 
-b. Sur ISP, utilisez la commande appropriée pour propager cette route par défaut à ses voisins OSPF.
+# Étape 6 – Configuration du NAT sur RACK-A-R1-MTL et RACK-A-R2-Ottawa
+a.	Créer une liste d’accès standard nommée NAT sur RACK-A-R1-MTL pour permettre le réseau
+172.16.10.0/24 et interdire tout autres réseaux.
 
-# Étape 6 – Configuration du NAT
-a.	Créer une liste d’accès standard nommée NAT pour permettre les réseaux
-172.16.10.0/24, 172.16.20.0/24 et interdire tout autres réseaux.
+b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-A-R1-MTL.
 
-b.	Créer un NAT pool nommée NAT-POOL entre les adresses 10.10.10.3 et 10.10.10.5.
+a.	Créer une liste d’accès standard nommée NAT sur RACK-A-R2-Ottawa pour permettre le réseau
+172.16.20.0/24 et interdire tout autres réseaux.
 
-c.	Créer un NAT statique pour le routeur RACK-A-R1-MTL avec l’adresse 10.10.10.6.
+b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-A-R2-Ottawa.
 
 d.	Tester le NAT avant de continuer.
 
-# Étape 7 – Configuration du DHCP 
-Le serveur DHCP est déjà configuré pour vous. Son adresse IP est la suivante : 192.168.10.200
-Vous devez configurer IP Helper pour qu’il pointe vers ce serveur DHCP.
+# Captures à remettre dans le pigeonnier
 
-# Étape 8 – Configuration de SSH 					
-a. Configurez SSH sur le routeur RACK-A-R1-MTL.
+a. Vous devez effectuer un traceroute entre le PC RACK-A-PC1 et le PC RACK-A-PC2. Le trafic doit passer à travers le tunnel.
 
-b. Définissez le nom de domaine à rack-a.local
+b. Vous devez effectuer un traceroute entre le PC RACK-A-PC1 et google.com. Le trafic ne doit pas passer dans le tunnel.
 
-c. Créez un utilisateur cisco avec le mot de passe cisco1234.
-
-d. Créez une clé RSA 2048 bits.
-
-e. Version 2
-
-f. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
-
+c. Vous devez effectuer un traceroute entre le PC RACK-A-PC2 et google.com. Le trafic ne doit pas passer dans le tunnel.
