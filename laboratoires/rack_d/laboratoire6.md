@@ -8,19 +8,19 @@
 
 |Equipments|Interface     | IP Address     | Subnet Mask     | Default Gateway | Description
 |----------|--------------|---------------|----------------|------------------|------------------|
-|ISP |G1/0/1   |10.10.10.2       |255.255.255.248         | N/A|Connexion a internet 
-|          |G1/0/2   |10.0.0.5   |255.255.255.252| N/A|Connexion a RACK-D-R1-MTL
-|          |G1/0/3   |10.0.0.9   |255.255.255.252| N/A|Connexion a RACK-D-R2-Ottawa
-|RACK-D-R1-MTL |G0/0/1   |10.0.0.6       |255.255.255.252           | N/A|Connexion a ISP
-|          |G0/0/0   |172.16.10.1   |255.255.255.0| N/A|Connexion au switch RACK D-SW-MTL
-|          |Tunnel 1   |172.16.25.1   |255.255.255.252| N/A|Connexion Tunnel au RACK-D-R2-Ottawa
-|RACK-D-R2-Ottawa |G0/0/1   |10.0.0.10   |255.255.255.252| N/A|Connexion a ISP
-|          |G0/0/0|172.16.20.1|255.255.255.0  | N/A|Connexion au switch RACK D-SW-Ottawa
-|          |Tunnel 1   |172.16.25.2   |255.255.255.252| N/A|Connexion Tunnel au RACK-D-R1-MTL
-|RACK-D-PC1|Fa0      |172.16.10.100       |255.255.255.0  | 172.16.10.1   |    |
-|RACK-D-PC2|Fa0      |172.16.20.100       |255.255.255.0  | 172.16.20.1   |    |
+|ISP |G1/0/1   |10.10.10.18       |255.255.255.248         | N/A|Connexion a internet 
+|          |G1/0/2   |10.0.0.29   |255.255.255.252| N/A|Connexion a RACK-D-R1-MTL
+|          |G1/0/3   |10.0.0.33   |255.255.255.252| N/A|Connexion a RACK-D-R2-Ottawa
+|RACK-D-R1-MTL |G0/0/1   |10.0.0.30       |255.255.255.252           | N/A|Connexion a ISP
+|          |G0/0/0   |172.16.70.1   |255.255.255.0| N/A|Connexion au switch RACK D-SW-MTL
+|          |Tunnel 1   |172.16.85.1   |255.255.255.252| N/A|Connexion Tunnel au RACK-D-R2-Ottawa
+|RACK-D-R2-Ottawa |G0/0/1   |10.0.0.34   |255.255.255.252| N/A|Connexion a ISP
+|          |G0/0/0|172.16.80.1|255.255.255.0  | N/A|Connexion au switch RACK D-SW-Ottawa
+|          |Tunnel 1   |172.16.85.2   |255.255.255.252| N/A|Connexion Tunnel au RACK-D-R1-MTL
+|RACK-D-PC1|Fa0      |172.16.70.100       |255.255.255.0  | 172.16.70.1   |    |
+|RACK-D-PC2|Fa0      |172.16.80.100       |255.255.255.0  | 172.16.80.1   |    |
 
-Note: utiliser le serveur 192.168.10.200 pour DNS
+Note: utiliser le serveur 192.168.40.200 pour DNS
 
 # Étape 1 – Configuration des paramètres de base
 a. Configurez les noms d’hôte (hostname)
@@ -49,12 +49,12 @@ a. Configurez le routage OSPF sur tous les routeurs RACK-D-R1-MTL et RACK-D-R2-O
 
 # Étape 6 – Configuration du NAT sur RACK-D-R1-MTL et RACK-D-R2-Ottawa
 a.	Créer une liste d’accès standard nommée NAT sur RACK-D-R1-MTL pour permettre le réseau
-172.16.10.0/24 et interdire tout autres réseaux.
+172.16.70.0/24 et interdire tout autres réseaux.
 
 b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-D-R1-MTL.
 
 a.	Créer une liste d’accès standard nommée NAT sur RACK-D-R2-Ottawa pour permettre le réseau
-172.16.20.0/24 et interdire tout autres réseaux.
+172.16.80.0/24 et interdire tout autres réseaux.
 
 b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-D-R2-Ottawa.
 
