@@ -14,7 +14,7 @@
 |RACK-B-R1-MTL |G0/0/1   |10.0.0.14       |255.255.255.252           | N/A|Connexion a ISP
 |          |G0/0/0   |172.16.30.1   |255.255.255.0| N/A|Connexion au switch RACK B-SW-MTL
 |          |Tunnel 1   |172.16.45.1   |255.255.255.252| N/A|Connexion Tunnel au RACK-B-R2-Ottawa
-|RACK-B-R2-Ottawa |G0/0/1   |10.0.0.16   |255.255.255.252| N/A|Connexion a ISP
+|RACK-B-R2-Ottawa |G0/0/1   |10.0.0.18   |255.255.255.252| N/A|Connexion a ISP
 |          |G0/0/0|172.16.40.1|255.255.255.0  | N/A|Connexion au switch RACK B-SW-Ottawa
 |          |Tunnel 1   |172.16.45.2   |255.255.255.252| N/A|Connexion Tunnel au RACK-B-R1-MTL
 |RACK-B-PC1|Fa0      |172.16.30.100       |255.255.255.0  | 172.16.30.1   |    |
