@@ -8,7 +8,7 @@
 
 |Equipments|Interface     | IP Address     | Subnet Mask     | Default Gateway | Description
 |----------|--------------|---------------|----------------|------------------|------------------|
-|ISP |G1/0/1   |10.10.10.18       |255.255.255.248         | N/A|Connexion a internet 
+|ISP |G1/0/1   |10.10.10.26       |255.255.255.248         | N/A|Connexion a internet 
 |          |G1/0/2   |10.0.0.29   |255.255.255.252| N/A|Connexion a RACK-D-R1-MTL
 |          |G1/0/3   |10.0.0.33   |255.255.255.252| N/A|Connexion a RACK-D-R2-Ottawa
 |RACK-D-R1-MTL |G0/0/1   |10.0.0.30       |255.255.255.252           | N/A|Connexion a ISP
