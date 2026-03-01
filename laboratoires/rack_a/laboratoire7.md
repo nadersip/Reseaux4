@@ -63,9 +63,11 @@ d.	Tester le NAT avant de continuer.
 # Étape 7 – Configuration du QoS
 a.	Créer une liste d’accès étendue nommée QoS sur RACK-A-R1-MTL afin de faire correspondre le trafic provenant du réseau 172.16.10.0/24 vers n’importe quelle destination sur le port 443.
 
-b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-A-R1-MTL.
+b.	Créer une policy sur RACK-A-R1-MTL afin de faire correspondre le trafic défini dans l’ACL QoS.
 
-a.	Créer une liste d’accès étendue nommée QoS sur RACK-A-R1-MTL afin de faire correspondre le trafic provenant du réseau 172.16.20.0/24 vers n’importe quelle destination sur le port 443.
+a.	Créer une liste d’accès étendue nommée QoS sur RACK-A-R2-Ottawa afin de faire correspondre le trafic provenant du réseau 172.16.20.0/24 vers n’importe quelle destination sur le port 443.
+
+b.	Créer une policy sur RACK-A-R1-MTL afin de faire correspondre le trafic défini dans l’ACL QoS.
 
 b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-A-R2-Ottawa.
 
