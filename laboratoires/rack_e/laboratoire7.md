@@ -1,5 +1,5 @@
 
-# Laboratoire 6 - Configuration GRE, NAT, SSH 
+# Laboratoire 7 - Configuration GRE, NAT, QoS 
 # Topologie
 
 ![Topo](../../topo/rack-e/topo6.png)
