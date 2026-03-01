@@ -61,17 +61,21 @@ b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-C-R2-Ottawa.
 d.	Tester le NAT avant de continuer.
 
 # Étape 7 – Configuration du QoS
-a.	Créer une liste d’accès standard nommée NAT sur RACK-A-R1-MTL pour permettre le réseau
-172.16.10.0/24 et interdire tout autres réseaux.
+a.  Créer une liste d’accès étendue nommée QoS sur RACK-C-R1-MTL afin de faire correspondre le trafic provenant du réseau 172.16.50.0/24 vers n’importe quelle destination sur le port 443.
 
-b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-A-R1-MTL.
+b.  Créer une class-map nommée HTTPS sur RACK-C-R1-MTL afin de faire correspondre le trafic défini dans l’ACL QoS.
 
-a.	Créer une liste d’accès standard nommée NAT sur RACK-A-R2-Ottawa pour permettre le réseau
-172.16.20.0/24 et interdire tout autres réseaux.
+c.  Créer une policy-map nommée HTTPS-QoS sur RACK-C-R1-MTL afin d’allouer 60 % de la bande passante au trafic HTTPS.
 
-b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-A-R2-Ottawa.
+d.  Appliquer la policy-map sur l’interface pointant vers Internet sur le routeur RACK-C-R1-MTL.
 
-d.	Tester le NAT avant de continuer.
+e.  Créer une liste d’accès étendue nommée QoS sur RACK-C-R2-Ottawa afin de faire correspondre le trafic provenant du réseau 172.16.60.0/24 vers n’importe quelle destination sur le port 443.
+
+f.  Créer une class-map nommée HTTPS sur RACK-C-R2-Ottawa afin de faire correspondre le trafic défini dans l’ACL QoS.
+
+g.  Créer une policy-map nommée HTTPS-QoS sur RACK-C-R2-Ottawa afin d’allouer 60 % de la bande passante au trafic HTTPS.
+
+h.  Appliquer la policy-map sur l’interface pointant vers Internet sur le routeur RACK-C-R2-Ottawa.
 
 # Captures à remettre dans le pigeonnier
 
@@ -80,3 +84,11 @@ a. Vous devez effectuer un traceroute entre le PC RACK-C-PC1 et le PC RACK-C-PC2
 b. Vous devez effectuer un traceroute entre le PC RACK-C-PC1 et google.com. Le trafic ne doit pas passer dans le tunnel.
 
 c. Vous devez effectuer un traceroute entre le PC RACK-C-PC2 et google.com. Le trafic ne doit pas passer dans le tunnel.
+
+d. Ouvrir www.google.com dans le navigateur web sur RACK-C-PC1.
+
+e. Ouvrir www.google.com dans le navigateur web sur RACK-C-PC2.
+
+f. Exécuter la commande show policy-map interface G0/0/1 sur RACK-C-R1-MTL.
+
+g. Exécuter la commande show policy-map interface G0/0/1 sur RACK-C-R2-Ottawa.
