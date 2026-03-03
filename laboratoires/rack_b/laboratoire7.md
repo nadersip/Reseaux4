@@ -61,7 +61,7 @@ b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-B-R2-Ottawa.
 d.	Tester le NAT avant de continuer.
 
 # Étape 7 – Configuration du QoS
-a.  Créer une liste d’accès étendue nommée QoS sur RACK-B-R1-MTL afin de faire correspondre le trafic provenant du réseau 172.16.30.0/24 vers n’importe quelle destination sur le port 443.
+a.  Créer une liste d’accès étendue nommée QoS sur RACK-B-R1-MTL afin de faire correspondre le trafic provenant de l’adresse IP publique du routeur vers n’importe quelle destination sur le port 443.
 
 b.  Créer une class-map nommée HTTPS sur RACK-B-R1-MTL afin de faire correspondre le trafic défini dans l’ACL QoS.
 
@@ -69,7 +69,7 @@ c.  Créer une policy-map nommée HTTPS-QoS sur RACK-B-R1-MTL afin d’allouer 6
 
 d.  Appliquer la policy-map sur l’interface pointant vers Internet sur le routeur RACK-B-R1-MTL.
 
-e.  Créer une liste d’accès étendue nommée QoS sur RACK-B-R2-Ottawa afin de faire correspondre le trafic provenant du réseau 172.16.40.0/24 vers n’importe quelle destination sur le port 443.
+e.  Créer une liste d’accès étendue nommée QoS sur RACK-B-R2-Ottawa afin de faire correspondre le trafic provenant de l’adresse IP publique du routeur vers n’importe quelle destination sur le port 443.
 
 f.  Créer une class-map nommée HTTPS sur RACK-B-R2-Ottawa afin de faire correspondre le trafic défini dans l’ACL QoS.
 
