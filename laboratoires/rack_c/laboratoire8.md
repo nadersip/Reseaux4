@@ -17,6 +17,8 @@
 |RACK-C-R2-Ottawa |G0/0/1   |10.0.0.26   |255.255.255.252| N/A|Connexion a ISP
 |          |G0/0/0|172.16.60.1|255.255.255.0  | N/A|Connexion au switch RACK C-SW-Ottawa
 |          |Tunnel 1   |172.16.65.2   |255.255.255.252| N/A|Connexion Tunnel au RACK-C-R1-MTL
+|RACK-C-SW1-MTL |SVI  |172.16.50.2   |255.255.255.0| 172.16.50.1|
+|RACK-C-SW2-Ottawa |SVI  |172.16.60.2   |255.255.255.0| 172.16.60.1|
 |RACK-C-PC1|Fa0      |172.16.50.100       |255.255.255.0  | 172.16.50.1   |    |
 |RACK-C-PC2|Fa0      |172.16.60.100       |255.255.255.0  | 172.16.60.1   |    |
 

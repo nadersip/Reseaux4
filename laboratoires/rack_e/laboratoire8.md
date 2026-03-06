@@ -17,6 +17,8 @@
 |RACK-E-R2-Ottawa |G0/0/1   |10.0.0.42   |255.255.255.252| N/A|Connexion a ISP
 |          |G0/0/0|172.16.100.1|255.255.255.0  | N/A|Connexion au switch RACK E-SW-Ottawa
 |          |Tunnel 1   |172.16.105.2   |255.255.255.252| N/A|Connexion Tunnel au RACK-E-R1-MTL
+|RACK-A-SW1-MTL |SVI  |172.16.90.2   |255.255.255.0| 172.16.90.1|
+|RACK-A-SW2-Ottawa |SVI  |172.16.100.2   |255.255.255.0| 172.16.100.1|
 |RACK-E-PC1|Fa0      |172.16.90.100       |255.255.255.0  | 172.16.90.1   |    |
 |RACK-E-PC2|Fa0      |172.16.100.100       |255.255.255.0  | 172.16.100.1   |    |
 
