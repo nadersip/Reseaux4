@@ -62,12 +62,10 @@ d.	Tester le NAT avant de continuer.
 
 # Étape 7 – Configuration NTP.
 
-a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack comme serveur NTP.
+a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack en tant que serveur NTP.
 
-# Étape 7 – Configuration Syslog.
+# Étape 8 – Configuration Syslog.
 
-a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack comme serveur Syslog.
-
+a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack en tant que serveur Syslog.
 
 # Captures à remettre dans le pigeonnier
-
