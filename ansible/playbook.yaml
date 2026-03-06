@@ -170,3 +170,14 @@
         name: vsftpd
         state: restarted
         enabled: true
+
+    - name: Get NTP configuration file
+      get_url:
+        url: "{{ base_url }}/ntp/chrony.conf"
+        dest: /etc/chrony/chrony.conf
+
+    - name: Restart NTP
+      systemd:
+        name: chronyd
+        state: restarted
+        enabled: true
