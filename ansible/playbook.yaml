@@ -33,6 +33,12 @@
       state: touch
       mode: '0666'
 
+   - name : Creating syslog folder
+     file:
+      path: /log/var/cisco
+      state: directory
+      mode: '0777'
+
    - name : Disable systemd-resolved service
      systemd:
       name: systemd-resolved
@@ -179,5 +185,21 @@
     - name: Restart NTP
       systemd:
         name: chronyd
+        state: restarted
+        enabled: true
+
+    - name: Get Syslog configuration file
+      get_url:
+        url: "{{ base_url }}/syslog/rsyslog.conf"
+        dest: /etc/rsyslog.conf
+
+    - name: Get Syslog template file
+      get_url:
+        url: "{{ base_url }}/syslog/cisco.conf"
+        dest: /etc/rsyslog.d/cisco.conf
+
+    - name: Restart Syslog
+      systemd:
+        name: rsyslog
         state: restarted
         enabled: true
