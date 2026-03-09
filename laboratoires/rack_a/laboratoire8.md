@@ -104,4 +104,4 @@ e. Exécuter la commande "show ntp associations" sur les routeurs RACK-A-R1-MTL,
 
 ![NTP](../../documentation/screenshots/6.png)
 
-f. Connectez-vous au serveur et déplacez-vous dans le dossier suivant "/var/log/remote". Exécutez la commande "ls" pour voir les répertoires. Vous devriez voir un répertoire pour chaque routeur et pour chaque switch.
+f. Connectez-vous au serveur et déplacez-vous dans le dossier suivant « /var/log/cisco ». Exécutez la commande « ls » pour voir les répertoires. Vous devriez voir un répertoire pour chaque routeur et pour chaque commutateur. Entrez dans les répertoires et utilisez la commande « cat » pour afficher les messages de log.
