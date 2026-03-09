@@ -70,4 +70,38 @@ a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serve
 
 a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack en tant que serveur Syslog.
 
+# Étape 9 – Configuration des ACL étendues sur RACK-E-R1-MTL et RACK-E-R2-Ottawa
+
+🔴 Avant de commencer les ACL, assurez-vous de faire les tests sur les deux PC. Par exemple :
+
+🔴 Accéder à une page web www.rack-e.local en HTTP et HTTPS.
+
+🔴 Accéder à une page web google.com en HTTP et HTTPS.
+
+🔴 Vérifier que le DNS fonctionne correctement.
+
+🔴 Essayer de vous connecter au serveur en utilisant [FTP](../../documentation/ftp_connection.md) et SSH
+
+Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
+
+•	Autorise le trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443) ainsi que le NTP provenant du serveur externe (192.168.50.200) à retourner.
+
+•   Autorise le trafic GRE entre les routeurs.
+
+•	Interdire tout autres trafics.
+
 # Captures à remettre dans le pigeonnier
+
+a. Vous devez effectuer un traceroute entre le PC RACK-E-PC1 et le PC RACK-E-PC2. Le trafic doit passer à travers le tunnel.
+
+b. Vous devez effectuer un traceroute entre le PC RACK-E-PC1 et google.com. Le trafic ne doit pas passer dans le tunnel.
+
+c. Vous devez effectuer un traceroute entre le PC RACK-E-PC2 et google.com. Le trafic ne doit pas passer dans le tunnel.
+
+d. Exécuter la commande "show ip access-list" sur les routeurs RACK-E-R1-MTL et RACK-E-R2-Ottawa. On doit voir des match sur toutes les lignes.
+
+e. Exécuter la commande "show ntp associations" sur les routeurs RACK-E-R1-MTL, RACK-E-R2-Ottawa, RACK-E-SW1-MTL et RACK-E-SW2-Ottawa. Vous devriez voir un résultat similaire à celui-ci.
+
+![NTP](../../documentation/screenshots/6.png)
+
+f. Connectez-vous au serveur et déplacez-vous dans le dossier suivant "/var/log/remote". Exécutez la commande "ls" pour voir les répertoires. Vous devriez voir un répertoire pour chaque routeur et pour chaque switch.
