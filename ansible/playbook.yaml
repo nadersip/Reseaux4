@@ -35,7 +35,7 @@
 
    - name : Creating syslog folder
      file:
-      path: /log/var/cisco
+      path: /var/log/cisco
       state: directory
       mode: '0777'
 
