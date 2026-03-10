@@ -64,11 +64,11 @@ d.	Tester le NAT avant de continuer.
 
 # Étape 7 – Configuration NTP.
 
-a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack en tant que serveur NTP.
+a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack (192.168.10.200) en tant que serveur NTP.
 
 # Étape 8 – Configuration Syslog.
 
-a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack en tant que serveur Syslog.
+a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack (192.168.10.200) en tant que serveur Syslog.
 
 # Étape 9 – Configuration des ACL étendues sur RACK-A-R1-MTL et RACK-A-R2-Ottawa
 
