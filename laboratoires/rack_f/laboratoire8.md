@@ -76,15 +76,13 @@ a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serve
 
 🔴 Accéder à une page web www.rack-f.local en HTTP et HTTPS.
 
-🔴 Accéder à une page web google.com en HTTP et HTTPS.
-
 🔴 Vérifier que le DNS fonctionne correctement.
 
 🔴 Essayer de vous connecter au serveur en utilisant [FTP](../../documentation/ftp_connection.md) et SSH
 
 Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
 
-•	Autorise le trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443) ainsi que le NTP provenant du serveur externe (192.168.60.200) à retourner.
+•	Autorise le trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443) et NTP (123) provenant du serveur externe (192.168.60.200) à retourner.
 
 •   Autorise le trafic GRE entre les routeurs.
 
@@ -94,9 +92,9 @@ a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serve
 
 a. Vous devez effectuer un traceroute entre le PC RACK-F-PC1 et le PC RACK-F-PC2. Le trafic doit passer à travers le tunnel.
 
-b. Vous devez effectuer un traceroute entre le PC RACK-F-PC1 et google.com. Le trafic ne doit pas passer dans le tunnel.
+b. Vous devez effectuer un traceroute entre le PC RACK-F-PC1 et www.rack-f.local. Le trafic ne doit pas passer dans le tunnel.
 
-c. Vous devez effectuer un traceroute entre le PC RACK-F-PC2 et google.com. Le trafic ne doit pas passer dans le tunnel.
+c. Vous devez effectuer un traceroute entre le PC RACK-F-PC2 et www.rack-f.local. Le trafic ne doit pas passer dans le tunnel.
 
 d. Exécuter la commande "show ip access-list" sur les routeurs RACK-F-R1-MTL et RACK-F-R2-Ottawa. On doit voir des match sur toutes les lignes.
 
