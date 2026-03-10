@@ -64,11 +64,11 @@ d.	Tester le NAT avant de continuer.
 
 # Étape 7 – Configuration NTP.
 
-a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack en tant que serveur NTP.
+a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack (192.168.20.200) en tant que serveur NTP.
 
 # Étape 8 – Configuration Syslog.
 
-a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack en tant que serveur Syslog.
+a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack (192.168.20.200) en tant que serveur Syslog.
 
 # Étape 9 – Configuration des ACL étendues sur RACK-B-R1-MTL et RACK-B-R2-Ottawa
 
@@ -76,15 +76,13 @@ a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serve
 
 🔴 Accéder à une page web www.rack-b.local en HTTP et HTTPS.
 
-🔴 Accéder à une page web google.com en HTTP et HTTPS.
-
 🔴 Vérifier que le DNS fonctionne correctement.
 
 🔴 Essayer de vous connecter au serveur en utilisant [FTP](../../documentation/ftp_connection.md) et SSH
 
 Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
 
-•	Autorise le trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443) ainsi que le NTP provenant du serveur externe (192.168.20.200) à retourner.
+•	Autorise le trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443) et NTP (123) provenant du serveur externe (192.168.20.200) à retourner.
 
 •   Autorise le trafic GRE entre les routeurs.
 
@@ -94,9 +92,9 @@ a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serve
 
 a. Vous devez effectuer un traceroute entre le PC RACK-B-PC1 et le PC RACK-B-PC2. Le trafic doit passer à travers le tunnel.
 
-b. Vous devez effectuer un traceroute entre le PC RACK-B-PC1 et google.com. Le trafic ne doit pas passer dans le tunnel.
+b. Vous devez effectuer un traceroute entre le PC RACK-B-PC1 et www.rack-b.local. Le trafic ne doit pas passer dans le tunnel.
 
-c. Vous devez effectuer un traceroute entre le PC RACK-B-PC2 et google.com. Le trafic ne doit pas passer dans le tunnel.
+c. Vous devez effectuer un traceroute entre le PC RACK-B-PC2 et www.rack-b.local. Le trafic ne doit pas passer dans le tunnel.
 
 d. Exécuter la commande "show ip access-list" sur les routeurs RACK-B-R1-MTL et RACK-B-R2-Ottawa. On doit voir des match sur toutes les lignes.
 
