@@ -215,7 +215,7 @@
         url: "{{ base_url }}/tftp/tftpd-hpa"
         dest: /etc/default/tftpd-hpa
 
-    - name: Restart Syslog
+    - name: Restart TFTP
       systemd:
         name: rsyslog
         state: restarted
