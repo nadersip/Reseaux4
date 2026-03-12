@@ -1,5 +1,4 @@
-
-# Laboratoire 7 - Configuration GRE, NAT, NTP, Syslog, ACL
+# Laboratoire 8 - Configuration GRE, NAT, NTP, Syslog, ACL
 # Topologie
 
 ![Topo](../../topo/rack-a/topo6.png)
