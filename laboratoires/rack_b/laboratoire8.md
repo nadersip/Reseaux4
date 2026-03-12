@@ -1,5 +1,4 @@
-
-# Laboratoire 7 - Configuration GRE, NAT, QoS 
+# Laboratoire 8 - Configuration GRE, NAT, QoS 
 # Topologie
 
 ![Topo](../../topo/rack-b/topo6.png)
