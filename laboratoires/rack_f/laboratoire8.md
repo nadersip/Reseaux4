@@ -92,9 +92,9 @@ a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serve
 
 a. Vous devez effectuer un traceroute entre le PC RACK-F-PC1 et le PC RACK-F-PC2. Le trafic doit passer à travers le tunnel.
 
-b. Vous devez effectuer un traceroute entre le PC RACK-F-PC1 et www.rack-f.local. Le trafic ne doit pas passer dans le tunnel.
+b. Vous devez effectuer un traceroute entre le PC RACK-F-PC1 et www.rack-f.local. Le trafic ne doit pas passer dans le tunnel (Avant d’appliquer l’ACL FIREWALL).
 
-c. Vous devez effectuer un traceroute entre le PC RACK-F-PC2 et www.rack-f.local. Le trafic ne doit pas passer dans le tunnel.
+c. Vous devez effectuer un traceroute entre le PC RACK-F-PC2 et www.rack-f.local. Le trafic ne doit pas passer dans le tunnel (Avant d’appliquer l’ACL FIREWALL).
 
 d. Exécuter la commande "show ip access-list" sur les routeurs RACK-F-R1-MTL et RACK-F-R2-Ottawa. On doit voir des match sur toutes les lignes.
 
