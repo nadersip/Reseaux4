@@ -218,5 +218,5 @@
     - name: Restart TFTP
       systemd:
         name: rsyslog
-        state: restarted
+        state: tftpd-hpa
         enabled: true
