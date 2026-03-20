@@ -116,6 +116,8 @@
         <a href="#nat">NAT</a>
         <a href="#gre">Tunnel GRE</a>
         <a href="#masks">Mask/Wildcard</a>
+        <a href="#services">Service Réseaux</a>
+
     </nav>
 
     <main>
@@ -348,6 +350,25 @@ show ip nat statistics</code></pre>
                 <tr><td>255.255.255.248</td><td>0.0.0.7</td></tr>
                 <tr><td>255.255.255.252</td><td>0.0.0.3</td></tr>
                 <tr><td>255.255.255.255</td><td>0.0.0.0 (host)</td></tr>
+            </table>
+        </section>
+
+        <section id="services">
+            <h2>Service Réseaux</h2>
+
+            <h3>Ports et protocols</h3>
+            <table>
+                <tr>
+                    <th>Services</th>
+                    <th>Ports</th>
+                    <th>Protocoles</th>
+                </tr>
+                <tr><td>FTP</td><td>20 et 21</td><td>TCP</td></tr>
+                <tr><td>HTTP</td><td>80</td><td>TCP</td></tr>
+                <tr><td>HTTPS</td><td>443</td><td>TCP</td></tr>
+                <tr><td>SSH</td><td>22</td><td>TCP</td></tr>
+                <tr><td>DNS</td><td>53</td><td>TCP et UDP</td></tr>
+                <tr><td>NTP</td><td>123</td><td>UDP</td></tr>
             </table>
         </section>
     </main>
