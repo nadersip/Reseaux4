@@ -287,10 +287,10 @@ show ip ospf interface</code></pre>
             <h3>NAT dynamique</h3>
             <pre><code>ip nat pool [NOM_POOL] [IP_DEBUT] [IP_FIN] netmask [MASQUE]
 access-list [NUM] permit [RESEAU_INTERNE] [WILDCARD]
-ip nat inside source list [NUM] pool [NOM_POOL] [overload]</code></pre>
+ip nat inside source list [NUM ou NOM_ACL] pool [NOM_POOL] [overload]</code></pre>
 
             <h3>PAT (NAT surcharge) avec interface</h3>
-            <pre><code>ip nat inside source list [NUM] interface [INTERFACE_EXTERNE] overload</code></pre>
+            <pre><code>ip nat inside source list [NUM ou NOM_ACL] interface [INTERFACE_EXTERNE] overload</code></pre>
 
             <h3>Définir les interfaces internes et externes</h3>
             <pre><code>interface [INTERFACE_INTERNE]
@@ -309,13 +309,15 @@ show ip nat statistics</code></pre>
             <pre><code>interface Tunnel0
  ip address [TUNNEL_IP_ROUTER1] [MASQUE]
  tunnel source [INTERFACE_PHYSIQUE_WAN]
- tunnel destination [IP_ROUTER2]</code></pre>
+ tunnel destination [IP_PUBLIQUE_ROUTER2]</code></pre>
 
             <h3>Configurer le tunnel sur le Router 2</h3>
             <pre><code>interface Tunnel0
  ip address [TUNNEL_IP_ROUTER2] [MASQUE]
  tunnel source [INTERFACE_PHYSIQUE_WAN]
- tunnel destination [IP_ROUTER1]</code></pre>
+ tunnel destination [IP_PUBLIQUE_ROUTER1]</code></pre>
+             <h3>Vérification Tunnel</h3>
+            <pre><code>show ip interface tunnel[x]</code></pre>
         </section>
         <section id="masks">
             <h2>Masques Réseau et Wildcard</h2>
