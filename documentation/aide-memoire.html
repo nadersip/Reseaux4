@@ -118,7 +118,7 @@
         <a href="#masks">Mask/Wildcard</a>
         <a href="#services">Service Réseaux</a>
         <a href="#router-on-a-stick">Router-on-a-Stick</a>
-
+        <a href="#dhcp">DHCP / IP Helper</a>
     </nav>
 
     <main>
@@ -193,7 +193,27 @@ show running-config</code></pre>
         show ip interface brief
         </code></pre>
         </section>
+        <section id="dhcp">
+            <h2>DHCP et IP Helper</h2>
 
+            <h3>Configuration du serveur DHCP sur le routeur</h3>
+            <pre><code>Définir le pool DHCP
+        ip dhcp pool [NOM_POOL]
+        network [RESEAU] [MASQUE]
+        default-router [IP_PASSERELLE]
+        dns-server [IP_DNS]
+
+        Exclure certaines adresses du pool
+        ip dhcp excluded-address [IP_DEBUT] [IP_FIN]</code></pre>
+
+            <h3>Configurer IP Helper pour relayer les requêtes DHCP sur un autre réseau</h3>
+            <pre><code>interface [INTERFACE]
+        ip helper-address [IP_SERVEUR_DHCP]</code></pre>
+
+            <h3>Vérification</h3>
+            <pre><code>show ip dhcp binding
+        show running-config</code></pre>
+        </section>
         <section id="gestion-reseau">
             <h2>Gestion du Réseau</h2>
             <h3>Activer CDP pour découvrir les appareils Cisco voisins</h3>
@@ -361,7 +381,6 @@ show ip nat statistics</code></pre>
         </section>
         <section id="masks">
             <h2>Masques Réseau et Wildcard</h2>
-
             <h3>Correspondance Masque de Sous-Réseau / CIDR</h3>
             <table>
                 <tr>
@@ -377,7 +396,6 @@ show ip nat statistics</code></pre>
                 <tr><td>/29</td><td>255.255.255.248</td><td>6</td></tr>
                 <tr><td>/30</td><td>255.255.255.252</td><td>2</td></tr>
             </table>
-
             <h3>Correspondance Masque / Wildcard (ACL & OSPF)</h3>
             <table>
                 <tr>
@@ -394,10 +412,8 @@ show ip nat statistics</code></pre>
                 <tr><td>255.255.255.255</td><td>0.0.0.0 (host)</td></tr>
             </table>
         </section>
-
         <section id="services">
             <h2>Service Réseaux</h2>
-
             <h3>Ports et protocols</h3>
             <table>
                 <tr>
@@ -411,10 +427,11 @@ show ip nat statistics</code></pre>
                 <tr><td>SSH</td><td>22</td><td>TCP</td></tr>
                 <tr><td>DNS</td><td>53</td><td>TCP et UDP</td></tr>
                 <tr><td>NTP</td><td>123</td><td>UDP</td></tr>
+                <tr><td>ICMP</td><td>N/A</td><td>ICMP</td></tr>
+                <tr><td>GRE</td><td>N/A</td><td>GRE</td></tr>
             </table>
         </section>
     </main>
-
     <footer>
         &copy; 2026 Aide Mémoire Cisco
     </footer>
