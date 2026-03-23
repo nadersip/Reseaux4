@@ -369,13 +369,17 @@ show ip nat statistics</code></pre>
             <pre><code>interface Tunnel0
  ip address [TUNNEL_IP_ROUTER1] [MASQUE]
  tunnel source [INTERFACE_PHYSIQUE_WAN]
- tunnel destination [IP_PUBLIQUE_ROUTER2]</code></pre>
+ tunnel destination [IP_PUBLIQUE_ROUTER2]
+ tunnel mode gre ip
+</code></pre>
 
             <h3>Configurer le tunnel sur le Router 2</h3>
             <pre><code>interface Tunnel0
  ip address [TUNNEL_IP_ROUTER2] [MASQUE]
  tunnel source [INTERFACE_PHYSIQUE_WAN]
- tunnel destination [IP_PUBLIQUE_ROUTER1]</code></pre>
+ tunnel destination [IP_PUBLIQUE_ROUTER1]
+ tunnel mode gre ip
+</code></pre>
              <h3>Vérification Tunnel</h3>
             <pre><code>show ip interface tunnel[x]</code></pre>
         </section>
