@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Cisco - Aide Mémoire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #004080;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            background-color: #e6e6e6;
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #004080;
+            padding: 0.5rem 1rem;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        nav a:hover {
+            background-color: #004080;
+            color: white;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: auto;
+        }
+        section {
+            margin-bottom: 2rem;
+        }
+        h2 {
+            color: #004080;
+            border-bottom: 2px solid #004080;
+            padding-bottom: 0.3rem;
+        }
+        h3 {
+            color: #0066cc;
+            margin-top: 1rem;
+        }
+        pre {
+            background-color: #eaeaea;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        table {
+            background-color: #eaeaea;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            color: #004080;
+            font-weight: bold;
+        }
+        table {
+            color: #004080;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #004080;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 10px;
+        }
+
+        th {
+            background-color: #004080;
+            color: white;
+            padding: 12px 20px;
+        }
+
+        td {
+            background-color: #f9f9f9;
+            padding: 12px 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Configuration Cisco - Aide Mémoire</h1>
+    </header>
+
+    <nav>
+        <a href="#base">Configuration de Base</a>
+        <a href="#gestion-reseau">Gestion du Réseau</a>
+        <a href="#ntp">NTP</a>
+        <a href="#syslog">Syslog</a>
+        <a href="#routage">Routage Statique</a>
+        <a href="#acl">ACL</a>
+        <a href="#ospf">Routage Dynamique - OSPF</a>
+        <a href="#nat">NAT</a>
+        <a href="#gre">Tunnel GRE</a>
+        <a href="#masks">Mask/Wildcard</a>
+        <a href="#services">Service Réseaux</a>
+        <a href="#router-on-a-stick">Router-on-a-Stick</a>
+        <a href="#dhcp">DHCP / IP Helper</a>
+    </nav>
+
+    <main>
+        <section id="base">
+            <h2>Configuration de Base</h2>
+            <h3>Définir l’identité de l’équipement et sécuriser l’accès</h3>
+            <pre><code>hostname NOM
+enable secret [votre_mot_de_passe]
+no ip domain-lookup</code></pre>
+
+            <h3>Configurer l’accès console (accès local)</h3>
+            <pre><code>line console 0
+ password [mot_de_passe_console]
+ login
+ logging synchronous
+ exec-timeout 0 0
+exit</code></pre>
+
+            <h3>Configurer l’accès distant (Telnet/SSH via VTY)</h3>
+            <pre><code>line vty 0 15
+ password [mot_de_passe_vty]
+ login local
+exit</code></pre>
+
+            <h3>Sécuriser les mots de passe et afficher un message légal</h3>
+            <pre><code>service password-encryption
+banner motd #AUTHORIZED ACCESS ONLY#</code></pre>
+
+            <h3>Configurer la passerelle par défaut (gestion du switch)</h3>
+            <pre><code>ip default-gateway IP_ROUTER</code></pre>
+
+            <h3>Vérifier l’état des interfaces et la configuration</h3>
+            <pre><code>show ip interface brief
+show running-config</code></pre>
+        </section>
+
+        <section id="router-on-a-stick">
+            <h2>Router-on-a-Stick (Routage Inter-VLAN)</h2>
+
+            <h3>Configuration du switch</h3>
+            <pre><code>! Créer les VLANs
+        vlan [NUM_VLAN]
+        name [NOM_VLAN]
+
+        Configurer les ports VLAN (mode access)
+        interface [INTERFACE_ACCESS]
+        switchport mode access
+        switchport access vlan [NUM_VLAN]
+
+        Configurer le trunk vers le routeur
+        interface [INTERFACE_TRUNK]
+        switchport mode trunk
+        switchport trunk native vlan [VLAN_NATIVE]
+        switchport trunk allowed vlan [NUM_VLAN1],[NUM_VLAN2]</code></pre>
+
+            <h3>Configuration du routeur</h3>
+            <pre><code>Interface physique connectée au switch
+        interface [INTERFACE_PHYSIQUE]
+        no shutdown
+
+        Créer des sous-interfaces pour chaque VLAN
+        interface [INTERFACE_PHYSIQUE].[NUM_VLAN]
+        encapsulation dot1Q [NUM_VLAN] [NATIVE si applicable]
+        ip address [IP_VLAN] [MASQUE_VLAN]
+
+        Activer le routage
+        ip routing</code></pre>
+
+            <h3>Vérifications</h3>
+            <pre><code>show vlan brief
+        show interfaces trunk
+        show ip interface brief
+        </code></pre>
+        </section>
+        <section id="dhcp">
+            <h2>DHCP et IP Helper</h2>
+
+            <h3>Configuration du serveur DHCP sur le routeur</h3>
+            <pre><code>Définir le pool DHCP
+        ip dhcp pool [NOM_POOL]
+        network [RESEAU] [MASQUE]
+        default-router [IP_PASSERELLE]
+        dns-server [IP_DNS]
+
+        Exclure certaines adresses du pool
+        ip dhcp excluded-address [IP_DEBUT] [IP_FIN]</code></pre>
+
+            <h3>Configurer IP Helper pour relayer les requêtes DHCP sur un autre réseau</h3>
+            <pre><code>interface [INTERFACE]
+        ip helper-address [IP_SERVEUR_DHCP]</code></pre>
+
+            <h3>Vérification</h3>
+            <pre><code>show ip dhcp binding
+        show running-config</code></pre>
+        </section>
+        <section id="gestion-reseau">
+            <h2>Gestion du Réseau</h2>
+            <h3>Activer CDP pour découvrir les appareils Cisco voisins</h3>
+            <pre><code>cdp run</code></pre>
+
+            <h3>Désactiver CDP sur l’équipement</h3>
+            <pre><code>no cdp run</code></pre>
+
+            <h3>Vérifier les voisins et interfaces CDP</h3>
+            <pre><code>show cdp
+show cdp neighbors
+show cdp neighbors detail
+show cdp interface</code></pre>
+
+            <h3>Activer LLDP pour découvrir les appareils de différents fabricants</h3>
+            <pre><code>lldp run</code></pre>
+
+            <h3>Vérifier les voisins LLDP</h3>
+            <pre><code>show lldp
+show lldp neighbors
+show lldp neighbors detail</code></pre>
+        </section>
+
+        <section id="ntp">
+            <h2>NTP (Network Time Protocol)</h2>
+            <pre><code>ntp server IP_Serveur</code></pre>
+
+            <h3>Vérifier la synchronisation de l’heure</h3>
+            <pre><code>show clock detail
+show ntp associations
+show ntp status</code></pre>
+        </section>
+
+        <section id="syslog">
+            <h2>Syslog (Journalisation des événements)</h2>
+            <pre><code>logging [IP_serveur_syslog]
+service timestamps log datetime msec 
+logging trap debugging
+logging on</code></pre>
+        </section>
+
+        <section id="routage">
+            <h2>Routage Statique</h2>
+            <h3>Destination via interface de sortie</h3>
+            <pre><code>ip route [RESEAU] [MASQUE] [INTERFACE_SORTIE]</code></pre>
+
+            <h3>Route statique recursive</h3>
+            <pre><code>ip route [RESEAU] [MASQUE] [NEXT_HOP]</code></pre>
+
+            <h3>Vérification</h3>
+            <pre><code>show ip route</code></pre>
+        </section>
+
+        <section id="acl">
+            <h2>ACL – Access Control Lists</h2>
+            <h3>ACL standard numérotée</h3>
+            <pre><code>access-list [NUM] [permit | deny | remark [TEXTE]] [HOST|RESEAU] [wildcard]</code></pre>
+
+            <h3>ACL standard nommée</h3>
+            <pre><code>ip access-list standard [NOM_ACL]
+ remark [DESCRIPTION]
+ permit | deny [HOST|RESEAU] [wildcard]
+ deny any
+exit</code></pre>
+
+            <h3>ACL étendue numérotée</h3>
+            <pre><code>access-list [NUM] [permit | deny | remark [TEXTE]] [PROTOCOLE] [SOURCE] [WILDCARD] [PORT] [DESTINATION] [WILDCARD] [PORT] [established]</code></pre>
+
+            <h3>ACL étendue nommée</h3>
+            <pre><code>ip access-list extended [NOM_ACL]
+remark [DESCRIPTION]
+permit | deny [PROTOCOLE] [SOURCE] [WILDCARD] [PORT] [DESTINATION] [WILDCARD] [PORT] [established]
+deny ip [SOURCE] [DESTINATION]
+exit</code></pre>
+
+            <h3>Appliquer sur interface</h3>
+            <pre><code>interface [INTERFACE]
+ ip access-group [NUM] ou [NOM_ACL] [in | out]</code></pre>
+
+            <h3>Sécuriser les lignes VTY avec ACL</h3>
+            <pre><code>line vty 0 4
+login local
+transport input [telnet | ssh]
+access-class [ACL_VTY] in</code></pre>
+
+            <h3>Supprimer</h3>
+            <pre><code>no ip access-list [standard | extended ] [NUM | NOM_ACL]</code></pre>
+
+            <h3>Vérification</h3>
+            <pre><code>show access-lists
+show ip interface [INTERFACE] | include access list</code></pre>
+        </section>
+
+        <section id="ospf">
+            <h2>Routage Dynamique – OSPF</h2>
+            <h3>Activer OSPF et définir le Router ID</h3>
+            <pre><code>router ospf [PROCESS_ID]
+router-id [ROUTER_ID]</code></pre>
+
+            <h3>Annoncer des réseaux dans OSPF</h3>
+            <pre><code>network [RESEAU] [WILDCARD] area [AREA_ID]</code></pre>
+
+            <h3>Via interface</h3>
+            <pre><code>interface [INTERFACE]
+ ip ospf [PROCESS_ID] area [AREA_ID]</code></pre>
+
+            <h3>Interfaces passives</h3>
+            <pre><code>passive-interface [INTERFACE]</code></pre>
+
+            <h3>Interfaces passives sur toutes les interfaces</h3>
+            <pre><code>passive-interface default</code></pre>
+
+            <h3>Propagation d’une route statique</h3>
+            <pre><code>default-information originate</code></pre>
+
+            <h3>Effacer le processus OSPF</h3>
+            <pre><code>clear ip ospf process</code></pre>
+
+            <h3>Vérification OSPF</h3>
+            <pre><code>show ip ospf neighbor
+show ip protocols
+show ip ospf
+show ip ospf interface</code></pre>
+        </section>
+
+        <section id="nat">
+            <h2>NAT</h2>
+            <h3>NAT statique</h3>
+            <pre><code>ip nat inside source static [LOCAL_IP] [GLOBAL_IP]</code></pre>
+
+            <h3>NAT dynamique</h3>
+            <pre><code>ip nat pool [NOM_POOL] [IP_DEBUT] [IP_FIN] netmask [MASQUE]
+access-list [NUM] permit [RESEAU_INTERNE] [WILDCARD]
+ip nat inside source list [NUM ou NOM_ACL] pool [NOM_POOL] [overload]</code></pre>
+
+            <h3>PAT (NAT surcharge) avec interface</h3>
+            <pre><code>ip nat inside source list [NUM ou NOM_ACL] interface [INTERFACE_EXTERNE] overload</code></pre>
+
+            <h3>Définir les interfaces internes et externes</h3>
+            <pre><code>interface [INTERFACE_INTERNE]
+ ip nat inside
+interface [INTERFACE_EXTERNE]
+ ip nat outside</code></pre>
+
+            <h3>Vérification NAT</h3>
+            <pre><code>show ip nat translations
+show ip nat statistics</code></pre>
+        </section>
+
+        <section id="gre">
+            <h2>Tunnel GRE</h2>
+            <h3>Configurer le tunnel sur le Router 1</h3>
+            <pre><code>interface Tunnel0
+            ip address [TUNNEL_IP_ROUTER1] [MASQUE]
+            tunnel source [INTERFACE_PHYSIQUE_WAN]
+            tunnel destination [IP_PUBLIQUE_ROUTER2]
+            tunnel mode gre ip
+            </code></pre>
+
+            <h3>Configurer le tunnel sur le Router 2</h3>
+            <pre><code>interface Tunnel0
+            ip address [TUNNEL_IP_ROUTER2] [MASQUE]
+            tunnel source [INTERFACE_PHYSIQUE_WAN]
+            tunnel destination [IP_PUBLIQUE_ROUTER1]
+            tunnel mode gre ip
+            </code></pre>
+             <h3>Vérification Tunnel</h3>
+            <pre><code>show ip interface tunnel[x]</code></pre>
+        </section>
+        <section id="masks">
+            <h2>Masques Réseau et Wildcard</h2>
+            <h3>Correspondance Masque de Sous-Réseau / CIDR</h3>
+            <table>
+                <tr>
+                    <th>CIDR</th>
+                    <th>Masque</th>
+                    <th>Nombre d'hôtes</th>
+                </tr>
+                <tr><td>/24</td><td>255.255.255.0</td><td>254</td></tr>
+                <tr><td>/25</td><td>255.255.255.128</td><td>126</td></tr>
+                <tr><td>/26</td><td>255.255.255.192</td><td>62</td></tr>
+                <tr><td>/27</td><td>255.255.255.224</td><td>30</td></tr>
+                <tr><td>/28</td><td>255.255.255.240</td><td>14</td></tr>
+                <tr><td>/29</td><td>255.255.255.248</td><td>6</td></tr>
+                <tr><td>/30</td><td>255.255.255.252</td><td>2</td></tr>
+            </table>
+            <h3>Correspondance Masque / Wildcard (ACL & OSPF)</h3>
+            <table>
+                <tr>
+                    <th>Masque</th>
+                    <th>Wildcard</th>
+                </tr>
+                <tr><td>255.255.255.0</td><td>0.0.0.255</td></tr>
+                <tr><td>255.255.255.128</td><td>0.0.0.127</td></tr>
+                <tr><td>255.255.255.192</td><td>0.0.0.63</td></tr>
+                <tr><td>255.255.255.224</td><td>0.0.0.31</td></tr>
+                <tr><td>255.255.255.240</td><td>0.0.0.15</td></tr>
+                <tr><td>255.255.255.248</td><td>0.0.0.7</td></tr>
+                <tr><td>255.255.255.252</td><td>0.0.0.3</td></tr>
+                <tr><td>255.255.255.255</td><td>0.0.0.0 (host)</td></tr>
+            </table>
+        </section>
+        <section id="services">
+            <h2>Service Réseaux</h2>
+            <h3>Ports et protocols</h3>
+            <table>
+                <tr>
+                    <th>Services</th>
+                    <th>Ports</th>
+                    <th>Protocoles</th>
+                </tr>
+                <tr><td>FTP</td><td>20 et 21</td><td>TCP</td></tr>
+                <tr><td>HTTP</td><td>80</td><td>TCP</td></tr>
+                <tr><td>HTTPS</td><td>443</td><td>TCP</td></tr>
+                <tr><td>SSH</td><td>22</td><td>TCP</td></tr>
+                <tr><td>DNS</td><td>53</td><td>TCP et UDP</td></tr>
+                <tr><td>NTP</td><td>123</td><td>UDP</td></tr>
+                <tr><td>ICMP</td><td>N/A</td><td>ICMP</td></tr>
+                <tr><td>GRE</td><td>N/A</td><td>GRE</td></tr>
+            </table>
+        </section>
+    </main>
+    <footer>
+        &copy; 2026 Aide Mémoire Cisco
+    </footer>
+</body>
+</html>
