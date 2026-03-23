@@ -126,33 +126,33 @@
             <h2>Configuration de Base</h2>
             <h3>Définir l’identité de l’équipement et sécuriser l’accès</h3>
             <pre><code>hostname NOM
-            enable secret [votre_mot_de_passe]
-            no ip domain-lookup</code></pre>
+enable secret [votre_mot_de_passe]
+no ip domain-lookup</code></pre>
 
             <h3>Configurer l’accès console (accès local)</h3>
             <pre><code>line console 0
-                password [mot_de_passe_console]
-                login
-                logging synchronous
-                exec-timeout 0 0
-                exit</code></pre>
+ password [mot_de_passe_console]
+ login
+ logging synchronous
+ exec-timeout 0 0
+exit</code></pre>
 
             <h3>Configurer l’accès distant (Telnet/SSH via VTY)</h3>
             <pre><code>line vty 0 15
-            password [mot_de_passe_vty]
-            login local
-            exit</code></pre>
+ password [mot_de_passe_vty]
+ login local
+exit</code></pre>
 
             <h3>Sécuriser les mots de passe et afficher un message légal</h3>
             <pre><code>service password-encryption
-            banner motd #AUTHORIZED ACCESS ONLY#</code></pre>
+banner motd #AUTHORIZED ACCESS ONLY#</code></pre>
 
             <h3>Configurer la passerelle par défaut (gestion du switch)</h3>
             <pre><code>ip default-gateway IP_ROUTER</code></pre>
 
             <h3>Vérifier l’état des interfaces et la configuration</h3>
             <pre><code>show ip interface brief
-            show running-config</code></pre>
+show running-config</code></pre>
         </section>
 
         <section id="router-on-a-stick">
@@ -160,59 +160,59 @@
 
             <h3>Configuration du switch</h3>
             <pre><code>! Créer les VLANs
-            vlan [NUM_VLAN]
-            name [NOM_VLAN]
+        vlan [NUM_VLAN]
+        name [NOM_VLAN]
 
-            Configurer les ports VLAN (mode access)
-            interface [INTERFACE_ACCESS]
-            switchport mode access
-            switchport access vlan [NUM_VLAN]
+        Configurer les ports VLAN (mode access)
+        interface [INTERFACE_ACCESS]
+        switchport mode access
+        switchport access vlan [NUM_VLAN]
 
-            Configurer le trunk vers le routeur
-            interface [INTERFACE_TRUNK]
-            switchport mode trunk
-            switchport trunk native vlan [VLAN_NATIVE]
-            switchport trunk allowed vlan [NUM_VLAN1],[NUM_VLAN2]</code></pre>
+        Configurer le trunk vers le routeur
+        interface [INTERFACE_TRUNK]
+        switchport mode trunk
+        switchport trunk native vlan [VLAN_NATIVE]
+        switchport trunk allowed vlan [NUM_VLAN1],[NUM_VLAN2]</code></pre>
 
             <h3>Configuration du routeur</h3>
             <pre><code>Interface physique connectée au switch
-            interface [INTERFACE_PHYSIQUE]
-            no shutdown
+        interface [INTERFACE_PHYSIQUE]
+        no shutdown
 
-            Créer des sous-interfaces pour chaque VLAN
-            interface [INTERFACE_PHYSIQUE].[NUM_VLAN]
-            encapsulation dot1Q [NUM_VLAN] [NATIVE si applicable]
-            ip address [IP_VLAN] [MASQUE_VLAN]
+        Créer des sous-interfaces pour chaque VLAN
+        interface [INTERFACE_PHYSIQUE].[NUM_VLAN]
+        encapsulation dot1Q [NUM_VLAN] [NATIVE si applicable]
+        ip address [IP_VLAN] [MASQUE_VLAN]
 
-            Activer le routage
-            ip routing</code></pre>
+        Activer le routage
+        ip routing</code></pre>
 
-                <h3>Vérifications</h3>
-                <pre><code>show vlan brief
-            show interfaces trunk
-            show ip interface brief
-            </code></pre>
+            <h3>Vérifications</h3>
+            <pre><code>show vlan brief
+        show interfaces trunk
+        show ip interface brief
+        </code></pre>
         </section>
         <section id="dhcp">
             <h2>DHCP et IP Helper</h2>
 
             <h3>Configuration du serveur DHCP sur le routeur</h3>
             <pre><code>Définir le pool DHCP
-            ip dhcp pool [NOM_POOL]
-            network [RESEAU] [MASQUE]
-            default-router [IP_PASSERELLE]
-            dns-server [IP_DNS]
+        ip dhcp pool [NOM_POOL]
+        network [RESEAU] [MASQUE]
+        default-router [IP_PASSERELLE]
+        dns-server [IP_DNS]
 
-            Exclure certaines adresses du pool
-            ip dhcp excluded-address [IP_DEBUT] [IP_FIN]</code></pre>
+        Exclure certaines adresses du pool
+        ip dhcp excluded-address [IP_DEBUT] [IP_FIN]</code></pre>
 
             <h3>Configurer IP Helper pour relayer les requêtes DHCP sur un autre réseau</h3>
             <pre><code>interface [INTERFACE]
-            ip helper-address [IP_SERVEUR_DHCP]</code></pre>
+        ip helper-address [IP_SERVEUR_DHCP]</code></pre>
 
             <h3>Vérification</h3>
             <pre><code>show ip dhcp binding
-            show running-config</code></pre>
+        show running-config</code></pre>
         </section>
         <section id="gestion-reseau">
             <h2>Gestion du Réseau</h2>
@@ -224,17 +224,17 @@
 
             <h3>Vérifier les voisins et interfaces CDP</h3>
             <pre><code>show cdp
-            show cdp neighbors
-            show cdp neighbors detail
-            show cdp interface</code></pre>
+show cdp neighbors
+show cdp neighbors detail
+show cdp interface</code></pre>
 
             <h3>Activer LLDP pour découvrir les appareils de différents fabricants</h3>
             <pre><code>lldp run</code></pre>
 
             <h3>Vérifier les voisins LLDP</h3>
             <pre><code>show lldp
-            show lldp neighbors
-            show lldp neighbors detail</code></pre>
+show lldp neighbors
+show lldp neighbors detail</code></pre>
         </section>
 
         <section id="ntp">
@@ -243,16 +243,16 @@
 
             <h3>Vérifier la synchronisation de l’heure</h3>
             <pre><code>show clock detail
-            show ntp associations
-            show ntp status</code></pre>
+show ntp associations
+show ntp status</code></pre>
         </section>
 
         <section id="syslog">
             <h2>Syslog (Journalisation des événements)</h2>
             <pre><code>logging [IP_serveur_syslog]
-            service timestamps log datetime msec 
-            logging trap debugging
-            logging on</code></pre>
+service timestamps log datetime msec 
+logging trap debugging
+logging on</code></pre>
         </section>
 
         <section id="routage">
@@ -274,51 +274,51 @@
 
             <h3>ACL standard nommée</h3>
             <pre><code>ip access-list standard [NOM_ACL]
-            remark [DESCRIPTION]
-            permit | deny [HOST|RESEAU] [wildcard]
-            deny any
-            exit</code></pre>
+ remark [DESCRIPTION]
+ permit | deny [HOST|RESEAU] [wildcard]
+ deny any
+exit</code></pre>
 
             <h3>ACL étendue numérotée</h3>
             <pre><code>access-list [NUM] [permit | deny | remark [TEXTE]] [PROTOCOLE] [SOURCE] [WILDCARD] [PORT] [DESTINATION] [WILDCARD] [PORT] [established]</code></pre>
 
             <h3>ACL étendue nommée</h3>
             <pre><code>ip access-list extended [NOM_ACL]
-            remark [DESCRIPTION]
-            permit | deny [PROTOCOLE] [SOURCE] [WILDCARD] [PORT] [DESTINATION] [WILDCARD] [PORT] [established]
-            deny ip [SOURCE] [DESTINATION]
-            exit</code></pre>
+remark [DESCRIPTION]
+permit | deny [PROTOCOLE] [SOURCE] [WILDCARD] [PORT] [DESTINATION] [WILDCARD] [PORT] [established]
+deny ip [SOURCE] [DESTINATION]
+exit</code></pre>
 
             <h3>Appliquer sur interface</h3>
             <pre><code>interface [INTERFACE]
-            ip access-group [NUM] ou [NOM_ACL] [in | out]</code></pre>
+ ip access-group [NUM] ou [NOM_ACL] [in | out]</code></pre>
 
             <h3>Sécuriser les lignes VTY avec ACL</h3>
             <pre><code>line vty 0 4
-            login local
-            transport input [telnet | ssh]
-            access-class [ACL_VTY] in</code></pre>
+login local
+transport input [telnet | ssh]
+access-class [ACL_VTY] in</code></pre>
 
             <h3>Supprimer</h3>
             <pre><code>no ip access-list [standard | extended ] [NUM | NOM_ACL]</code></pre>
 
             <h3>Vérification</h3>
             <pre><code>show access-lists
-            show ip interface [INTERFACE] | include access list</code></pre>
-                    </section>
+show ip interface [INTERFACE] | include access list</code></pre>
+        </section>
 
         <section id="ospf">
             <h2>Routage Dynamique – OSPF</h2>
             <h3>Activer OSPF et définir le Router ID</h3>
             <pre><code>router ospf [PROCESS_ID]
-            router-id [ROUTER_ID]</code></pre>
+router-id [ROUTER_ID]</code></pre>
 
             <h3>Annoncer des réseaux dans OSPF</h3>
             <pre><code>network [RESEAU] [WILDCARD] area [AREA_ID]</code></pre>
 
             <h3>Via interface</h3>
             <pre><code>interface [INTERFACE]
-            ip ospf [PROCESS_ID] area [AREA_ID]</code></pre>
+ ip ospf [PROCESS_ID] area [AREA_ID]</code></pre>
 
             <h3>Interfaces passives</h3>
             <pre><code>passive-interface [INTERFACE]</code></pre>
@@ -334,9 +334,9 @@
 
             <h3>Vérification OSPF</h3>
             <pre><code>show ip ospf neighbor
-            show ip protocols
-            show ip ospf
-            show ip ospf interface</code></pre>
+show ip protocols
+show ip ospf
+show ip ospf interface</code></pre>
         </section>
 
         <section id="nat">
@@ -346,40 +346,36 @@
 
             <h3>NAT dynamique</h3>
             <pre><code>ip nat pool [NOM_POOL] [IP_DEBUT] [IP_FIN] netmask [MASQUE]
-            access-list [NUM] permit [RESEAU_INTERNE] [WILDCARD]
-            ip nat inside source list [NUM ou NOM_ACL] pool [NOM_POOL] [overload]</code></pre>
+access-list [NUM] permit [RESEAU_INTERNE] [WILDCARD]
+ip nat inside source list [NUM ou NOM_ACL] pool [NOM_POOL] [overload]</code></pre>
 
             <h3>PAT (NAT surcharge) avec interface</h3>
             <pre><code>ip nat inside source list [NUM ou NOM_ACL] interface [INTERFACE_EXTERNE] overload</code></pre>
 
             <h3>Définir les interfaces internes et externes</h3>
             <pre><code>interface [INTERFACE_INTERNE]
-            ip nat inside
-            interface [INTERFACE_EXTERNE]
-            ip nat outside</code></pre>
+ ip nat inside
+interface [INTERFACE_EXTERNE]
+ ip nat outside</code></pre>
 
             <h3>Vérification NAT</h3>
             <pre><code>show ip nat translations
-            show ip nat statistics</code></pre>
+show ip nat statistics</code></pre>
         </section>
 
         <section id="gre">
             <h2>Tunnel GRE</h2>
             <h3>Configurer le tunnel sur le Router 1</h3>
             <pre><code>interface Tunnel0
-            ip address [TUNNEL_IP_ROUTER1] [MASQUE]
-            tunnel source [INTERFACE_PHYSIQUE_WAN]
-            tunnel destination [IP_PUBLIQUE_ROUTER2]
-            tunnel mode gre ip
-            </code></pre>
+ ip address [TUNNEL_IP_ROUTER1] [MASQUE]
+ tunnel source [INTERFACE_PHYSIQUE_WAN]
+ tunnel destination [IP_PUBLIQUE_ROUTER2]</code></pre>
 
             <h3>Configurer le tunnel sur le Router 2</h3>
             <pre><code>interface Tunnel0
-            ip address [TUNNEL_IP_ROUTER2] [MASQUE]
-            tunnel source [INTERFACE_PHYSIQUE_WAN]
-            tunnel destination [IP_PUBLIQUE_ROUTER1]
-            tunnel mode gre ip
-            </code></pre>
+ ip address [TUNNEL_IP_ROUTER2] [MASQUE]
+ tunnel source [INTERFACE_PHYSIQUE_WAN]
+ tunnel destination [IP_PUBLIQUE_ROUTER1]</code></pre>
              <h3>Vérification Tunnel</h3>
             <pre><code>show ip interface tunnel[x]</code></pre>
         </section>
