@@ -117,6 +117,7 @@
         <a href="#gre">Tunnel GRE</a>
         <a href="#masks">Mask/Wildcard</a>
         <a href="#services">Service Réseaux</a>
+        <a href="#router-on-a-stick">Router-on-a-Stick</a>
 
     </nav>
 
@@ -152,6 +153,45 @@ banner motd #AUTHORIZED ACCESS ONLY#</code></pre>
             <h3>Vérifier l’état des interfaces et la configuration</h3>
             <pre><code>show ip interface brief
 show running-config</code></pre>
+        </section>
+
+        <section id="router-on-a-stick">
+            <h2>Router-on-a-Stick (Routage Inter-VLAN)</h2>
+
+            <h3>Configuration du switch</h3>
+            <pre><code>! Créer les VLANs
+        vlan [NUM_VLAN]
+        name [NOM_VLAN]
+
+        Configurer les ports VLAN (mode access)
+        interface [INTERFACE_ACCESS]
+        switchport mode access
+        switchport access vlan [NUM_VLAN]
+
+        Configurer le trunk vers le routeur
+        interface [INTERFACE_TRUNK]
+        switchport mode trunk
+        switchport trunk native vlan [VLAN_NATIVE]
+        switchport trunk allowed vlan [NUM_VLAN1],[NUM_VLAN2]</code></pre>
+
+            <h3>Configuration du routeur</h3>
+            <pre><code>Interface physique connectée au switch
+        interface [INTERFACE_PHYSIQUE]
+        no shutdown
+
+        Créer des sous-interfaces pour chaque VLAN
+        interface [INTERFACE_PHYSIQUE].[NUM_VLAN]
+        encapsulation dot1Q [NUM_VLAN] [NATIVE si applicable]
+        ip address [IP_VLAN] [MASQUE_VLAN]
+
+        Activer le routage
+        ip routing</code></pre>
+
+            <h3>Vérifications</h3>
+            <pre><code>show vlan brief
+        show interfaces trunk
+        show ip interface brief
+        </code></pre>
         </section>
 
         <section id="gestion-reseau">
