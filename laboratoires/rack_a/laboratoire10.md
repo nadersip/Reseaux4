@@ -1,4 +1,4 @@
-# Laboratoire 8 - Configuration GRE, NAT, TFTP, SNMP
+# Laboratoire 10 - Configuration GRE, OSPF, NAT, SNMP, ACL et TFTP
 # Topologie
 
 ![Topo](../../topo/rack-a/topo6.png)

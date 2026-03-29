@@ -1,4 +1,4 @@
-# Laboratoire 8 - Configuration GRE, NAT, QoS 
+# Laboratoire 10 - Configuration GRE, OSPF, NAT, SNMP, ACL et TFTP
 # Topologie
 
 ![Topo](../../topo/rack-b/topo6.png)
@@ -81,7 +81,7 @@ b. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-B-R1-MTL et 
 
 Écrire une ACL étendue nommée ACL-LAN-TO-WAN qui donne les accès suivants: 
 
-•	Autoriser le trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443), HTTP (80) et TFTP (69) provenant des réseaux locaux vers le serveur externe (192.168.10.200).
+•	Autoriser le trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443), HTTP (80) et TFTP (69) provenant des réseaux locaux vers le serveur externe (192.168.20.200).
 
 •	Autoriser le trafic HTTPS (443) et HTTP (80) provenant des réseaux locaux vers n’importe quelle destination.
 
@@ -93,7 +93,7 @@ b. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-B-R1-MTL et 
 
 # Étape 9 – Sauvegarde des configurations sur le serveur TFTP
 
-a. Effectuer la sauvegarde des configurations des routeurs et des commutateurs vers le serveur TFTP (192.168.10.200).
+a. Effectuer la sauvegarde des configurations des routeurs et des commutateurs vers le serveur TFTP (192.168.20.200).
 
 # Captures à remettre dans le pigeonnier
 
@@ -115,6 +115,6 @@ f. Ouvrir hackme.computcenter.ca dans le navigateur web sur RACK-B-PC1. Vous ne 
 
 g. Ouvrir hackme.computcenter.ca dans le navigateur web sur RACK-B-PC2. Vous ne devez pas être capable d’ouvrir cette page.
 
-h. Connectez-vous au serveur 192.168.10.200 en SSH, puis déplacez-vous dans le dossier « /backup ». Exécutez la commande « ls » pour voir les configurations de chaque routeur et switch. Exécutez ensuite un « cat » sur un des fichiers afin de vérifier les configurations.
+h. Connectez-vous au serveur 192.168.20.200 en SSH, puis déplacez-vous dans le dossier « /backup ». Exécutez la commande « ls » pour voir les configurations de chaque routeur et switch. Exécutez ensuite un « cat » sur un des fichiers afin de vérifier les configurations.
 
 i. Exécuter la commande "show ip access-lists" sur les routeurs RACK-B-R1-MTL et RACK-B-R2-Ottawa. Vous devez voir des correspondances (matches) sur toutes les lignes.
