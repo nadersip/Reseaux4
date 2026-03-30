@@ -65,7 +65,7 @@ d.	Tester le NAT avant de continuer.
 
 a. Configurer une communauté read-only nommée "rack-d" sur les routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa.
 
-b. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa. Suivre la documentation.
+b. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa. Suivre la documentation [SNMP](../../documentation/snmp_client.md).
 
 # Étape 8 – Configuration des ACL étendues sur RACK-D-R1-MTL et RACK-D-R2-Ottawa
 
