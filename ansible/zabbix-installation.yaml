@@ -1,0 +1,100 @@
+---
+- name: Install Zabbix Server on Ubuntu
+  hosts: rackservers
+  become: yes
+
+  vars:
+    zabbix_version: "6.4"
+    db_name: "zabbix"
+    db_user: "zabbix"
+    db_password: "cisco1234"
+
+  tasks:
+
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+
+  - name: Install required packages
+    apt:
+      name:
+        - wget
+        - gnupg
+        - lsb-release
+      state: present
+
+  - name: Download Zabbix repository package
+    get_url:
+      url: "https://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/pool/main/z/zabbix-release/zabbix-release_{{ zabbix_version }}-1+ubuntu{{ ansible_distribution_version }}_all.deb"
+      dest: /tmp/zabbix-release.deb
+
+  - name: Install Zabbix repository
+    apt:
+      deb: /tmp/zabbix-release.deb
+
+  - name: Update apt after adding repo
+    apt:
+      update_cache: yes
+
+  - name: Install Zabbix server, frontend and agent
+    apt:
+      name:
+        - zabbix-server-mysql
+        - zabbix-frontend-php
+        - zabbix-apache-conf
+        - zabbix-sql-scripts
+        - zabbix-agent
+        - mariadb-server
+        - snmp
+        - snmp-mibs-downloader
+      state: present
+
+  - name: Start and enable MariaDB
+    service:
+      name: mariadb
+      state: started
+      enabled: yes
+
+  - name: Install MySQL Python dependency
+    apt:
+      name: python3-pymysql
+      state: present
+
+  - name: Create Zabbix database
+    mysql_db:
+      name: "{{ db_name }}"
+      encoding: utf8mb4
+      collation: utf8mb4_bin
+      state: present
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+
+  - name: Create Zabbix DB user
+    mysql_user:
+      name: "{{ db_user }}"
+      password: "{{ db_password }}"
+      priv: "{{ db_name }}.*:ALL"
+      host: localhost
+      state: present
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+
+  - name: Import Zabbix schema
+    shell: |
+      zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -u {{ db_user }} -p{{ db_password }} {{ db_name }}
+    args:
+      creates: /var/lib/mysql/{{ db_name }}/users.ibd
+
+  - name: Configure DB password in Zabbix config
+    lineinfile:
+      path: /etc/zabbix/zabbix_server.conf
+      regexp: '^# DBPassword='
+      line: "DBPassword={{ db_password }}"
+
+  - name: Restart Zabbix and Apache
+    service:
+      name: "{{ item }}"
+      state: restarted
+      enabled: yes
+    loop:
+      - zabbix-server
+      - zabbix-agent
+      - apache2
