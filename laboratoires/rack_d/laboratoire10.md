@@ -61,44 +61,56 @@ b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-D-R2-Ottawa.
 
 d.	Tester le NAT avant de continuer.
 
-# Étape 7 – Configuration NTP.
+# Étape 7 – Configuration SNMP
 
-a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack (192.168.40.200) en tant que serveur NTP.
+a. Configurer une communauté read-only nommée "rack-d" sur les routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa.
 
-# Étape 8 – Configuration Syslog.
+b. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa. Suivre la documentation.
 
-a.  Configurer les routeurs et les commutateurs afin qu’ils utilisent le serveur de votre rack (192.168.40.200) en tant que serveur Syslog.
-
-# Étape 9 – Configuration des ACL étendues sur RACK-D-R1-MTL et RACK-D-R2-Ottawa
+# Étape 8 – Configuration des ACL étendues sur RACK-D-R1-MTL et RACK-D-R2-Ottawa
 
 🔴 Avant de commencer les ACL, assurez-vous de faire les tests sur les deux PC. Par exemple :
 
-🔴 Accéder à une page web www.rack-d.local en HTTP et HTTPS.
+🔴 Accéder à une page web www.RACK-D.local en HTTP et HTTPS.
+
+🔴 Accéder à une page web google.com en HTTP et HTTPS.
 
 🔴 Vérifier que le DNS fonctionne correctement.
 
 🔴 Essayer de vous connecter au serveur en utilisant [FTP](../../documentation/ftp_connection.md) et SSH
 
-Écrire une ACL étendue nommée FIREWALL qui donne les accès suivants: 
+Écrire une ACL étendue nommée ACL-LAN-TO-WAN qui donne les accès suivants: 
 
-•	Autorise le trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443) et NTP (123) provenant du serveur externe (192.168.40.200) à retourner.
+•	Autoriser le trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443), HTTP (80) et TFTP (69) provenant des réseaux locaux vers le serveur externe (192.168.40.200).
 
-•   Autorise le trafic GRE entre les routeurs.
+•	Autoriser le trafic HTTPS (443) et HTTP (80) provenant des réseaux locaux vers n’importe quelle destination.
+
+•	Autorise le trafic HTTPS (443) et HTTP (80) provenant des reseaux loceau vers n'import quelle destination.
+
+•	Refuser le trafic HTTP (80) provenant des réseaux locaux vers le serveur hackme.computcenter.ca.
 
 •	Interdire tout autres trafics.
+
+# Étape 9 – Sauvegarde des configurations sur le serveur TFTP
+
+a. Effectuer la sauvegarde des configurations des routeurs et des commutateurs vers le serveur TFTP (192.168.40.200).
 
 # Captures à remettre dans le pigeonnier
 
 a. Vous devez effectuer un traceroute entre le PC RACK-D-PC1 et le PC RACK-D-PC2. Le trafic doit passer à travers le tunnel.
 
-b. Vous devez effectuer un traceroute entre le PC RACK-D-PC1 et www.rack-d.local. Le trafic ne doit pas passer dans le tunnel (Avant d’appliquer l’ACL FIREWALL).
+b. Vous devez effectuer un traceroute entre le PC RACK-D-PC1 et www.rack-d.loca. Le trafic ne doit pas passer dans le tunnel.
 
-c. Vous devez effectuer un traceroute entre le PC RACK-D-PC2 et www.rack-d.local. Le trafic ne doit pas passer dans le tunnel (Avant d’appliquer l’ACL FIREWALL).
+c. Vous devez effectuer un traceroute entre le PC RACK-D-PC2 et www.rack-d.local. Le trafic ne doit pas passer dans le tunnel.
 
-d. Exécuter la commande "show ip access-list" sur les routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa. On doit voir des match sur toutes les lignes.
+d. Ouvrir www.google.com dans le navigateur web sur RACK-D-PC1. Vous devez être capable d’ouvrir cette page.
 
-e. Exécuter la commande "show ntp associations" sur les routeurs RACK-D-R1-MTL, RACK-D-R2-Ottawa, RACK-D-SW1-MTL et RACK-D-SW2-Ottawa. Vous devriez voir un résultat similaire à celui-ci.
+e. Ouvrir www.google.com dans le navigateur web sur RACK-D-PC2. Vous devez être capable d’ouvrir cette page.
 
-![NTP](../../documentation/screenshots/6.png)
+f. Ouvrir hackme.computcenter.ca dans le navigateur web sur RACK-D-PC1. Vous ne devez pas être capable d’ouvrir cette page.
 
-f. Connectez-vous au serveur et déplacez-vous dans le dossier suivant « /var/log/cisco ». Exécutez la commande « ls » pour voir les répertoires. Vous devriez voir un répertoire pour chaque routeur et pour chaque commutateur. Entrez dans les répertoires et utilisez la commande « cat » pour afficher les messages de log.
+g. Ouvrir hackme.computcenter.ca dans le navigateur web sur RACK-D-PC2. Vous ne devez pas être capable d’ouvrir cette page.
+
+h. Connectez-vous au serveur 192.168.20.200 en SSH, puis déplacez-vous dans le dossier « /backup ». Exécutez la commande « ls » pour voir les configurations de chaque routeur et switch. Exécutez ensuite un « cat » sur un des fichiers afin de vérifier les configurations.
+
+i. Exécuter la commande "show ip access-lists" sur les routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa. Vous devez voir des correspondances (matches) sur toutes les lignes.
