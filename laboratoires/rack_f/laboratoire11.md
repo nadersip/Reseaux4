@@ -115,6 +115,14 @@ f. Ouvrir hackme.computcenter.ca dans le navigateur web sur RACK-F-PC1. Vous ne 
 
 g. Ouvrir hackme.computcenter.ca dans le navigateur web sur RACK-F-PC2. Vous ne devez pas être capable d’ouvrir cette page.
 
-h. Connectez-vous au serveur 192.168.60.200 en SSH, puis déplacez-vous dans le dossier « /backup ». Exécutez la commande « ls » pour voir les configurations de chaque routeur et switch. Exécutez ensuite un « cat » sur un des fichiers afin de vérifier les configurations.
+h. Prenez une capture d’écran de la page web de Zabbix montrant vos appareils qui ont été ajoutés.
 
-i. Exécuter la commande "show ip access-lists" sur les routeurs RACK-F-R1-MTL et RACK-F-R2-Ottawa. Vous devez voir des correspondances (matches) sur toutes les lignes.
+i. Connectez-vous au serveur 192.168.60.200 en SSH, puis déplacez-vous dans le dossier « /backup ». Exécutez la commande « ls » pour voir les configurations de chaque routeur et switch. Exécutez ensuite un « cat » sur un des fichiers afin de vérifier les configurations.
+
+    Utilisez les identifiants suivants :
+    
+    • Nom d’utilisateur : user
+
+    • Mot de passe : cisco1234
+
+j. Exécuter la commande "show ip access-lists" sur les routeurs RACK-F-R1-MTL et RACK-F-R2-Ottawa. Vous devez voir des correspondances (matches) sur toutes les lignes.
