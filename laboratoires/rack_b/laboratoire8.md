@@ -99,6 +99,6 @@ d. Exécuter la commande "show ip access-list" sur les routeurs RACK-B-R1-MTL et
 
 e. Exécuter la commande "show ntp associations" sur les routeurs RACK-B-R1-MTL, RACK-B-R2-Ottawa, RACK-B-SW1-MTL et RACK-B-SW2-Ottawa. Vous devriez voir un résultat similaire à celui-ci.
 
-![NTP](../../documentation/screenshots/6.png)
+![NTP](../../documentation/screenshots/ntp/1.png)
 
 f. Connectez-vous au serveur et déplacez-vous dans le dossier suivant « /var/log/cisco ». Exécutez la commande « ls » pour voir les répertoires. Vous devriez voir un répertoire pour chaque routeur et pour chaque commutateur. Entrez dans les répertoires et utilisez la commande « cat » pour afficher les messages de log.
