@@ -65,7 +65,7 @@ d.	Tester le NAT avant de continuer.
 
 a. Configurer une communauté read-only nommée "rack-f" sur les routeurs RACK-F-R1-MTL et RACK-F-R2-Ottawa.
 
-b. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-F-R1-MTL et RACK-F-R2-Ottawa. Suivre la documentation.
+b. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-F-R1-MTL et RACK-F-R2-Ottawa. Suivre la documentation [SNMP](../../documentation/snmp_client.md).
 
 # Étape 8 – Configuration des ACL étendues sur RACK-F-R1-MTL et RACK-F-R2-Ottawa
 
