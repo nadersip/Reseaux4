@@ -1,6 +1,6 @@
 ---
 - name: Install Zabbix Server on Ubuntu
-  hosts: zabbix_server
+  hosts: rackservers
   become: yes
 
   vars:
@@ -55,12 +55,18 @@
       state: started
       enabled: yes
 
+  - name: Install MySQL Python dependency
+    apt:
+      name: python3-pymysql
+      state: present
+
   - name: Create Zabbix database
     mysql_db:
       name: "{{ db_name }}"
       encoding: utf8mb4
       collation: utf8mb4_bin
       state: present
+      login_unix_socket: /var/run/mysqld/mysqld.sock
 
   - name: Create Zabbix DB user
     mysql_user:
@@ -69,6 +75,7 @@
       priv: "{{ db_name }}.*:ALL"
       host: localhost
       state: present
+      login_unix_socket: /var/run/mysqld/mysqld.sock
 
   - name: Import Zabbix schema
     shell: |
