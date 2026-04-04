@@ -1,0 +1,16 @@
+- name: Configuration routeur RACK-A-R1-MTL
+  hosts: RACK-A-R1-MTL
+
+  tasks:
+
+    - name: Adress IP sur l'interface G0/0/0
+      cisco.ios.ios_config:
+        parents: interface Loopback0
+        lines:
+          - ip address 172.16.10.1 255.255.255.0
+          - no shutdown
+
+    - name: Route par defaut
+      cisco.ios.ios_config:
+        lines:
+          - ip route 0.0.0.0 0.0.0.0 g0/0/1 10.0.0.5
