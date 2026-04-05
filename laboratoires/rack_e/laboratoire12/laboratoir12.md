@@ -1,7 +1,7 @@
-# Laboratoire 11 - Configuration GRE, OSPF, NAT, SNMP, ACL et TFTP
+# Laboratoire 12 - Configuration GRE, OSPF, NAT, SNMP, ACL et TFTP
 # Topologie
 
-![Topo](../../topo/rack-e/topo6.png)
+![Topo](../../../topo/rack-e/topo6.png)
 
 # Table d’adressage :
 

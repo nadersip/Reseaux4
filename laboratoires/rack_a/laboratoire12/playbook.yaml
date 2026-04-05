@@ -3,14 +3,54 @@
 
   tasks:
 
-    - name: Adress IP sur l'interface G0/0/0
+    - name: Configuration d'adresse IP sur l'interface g0/0/0 de RACK-A-R1-MTL
       cisco.ios.ios_config:
-        parents: interface Loopback0
+        parents: interface g0/0/0
         lines:
           - ip address 172.16.10.1 255.255.255.0
           - no shutdown
 
-    - name: Route par defaut
+    - name: Configuration tunnel GRE sur RACK-A-R1-MTL
+      cisco.ios.ios_config:
+        parents: interface tunnel 1
+        lines:
+          - ip address 172.16.25.1 255.255.255.252
+          - tunnel source g0/0/1
+          - tunnel destination 10.0.0.10
+    
+    - name: Configuration OSPF sur RACK-A-R1-MTL
+      cisco.ios.ios_config:
+        parents: router ospf 1
+        lines:
+          - network 172.16.10.0 0.0.0.255 area 0
+          - network 172.16.25.0 0.0.0.3 area 0
+          - passive-interface g0/0/0
+          - passive-interface g0/0/1
+
+    - name: Configuration de l'acl du NAT sur RACK-A-R1-MTL
       cisco.ios.ios_config:
         lines:
-          - ip route 0.0.0.0 0.0.0.0 g0/0/1 10.0.0.5
+          - access-list 10 permit 172.16.10.0 0.0.0.255
+          - access-list 10 deny any
+
+    - name: Configuration du NAT sur RACK-A-R1-MTL
+      cisco.ios.ios_config:
+        lines:
+          - ip nat inside source list 10 interface g0/0/1
+
+    - name: Configuration du NAT sur l'interface g0/0/1 de RACK-A-R1-MTL
+      cisco.ios.ios_config:
+        parents: interface g0/0/1
+        lines:
+          - ip nat outside
+
+    - name: Configuration du NAT sur l'interface g0/0/0 de RACK-A-R1-MTL
+      cisco.ios.ios_config:
+        parents: interface g0/0/0
+        lines:
+          - ip nat inside
+
+    - name: Configuration de SNMP sur RACK-A-R1-MTL
+      cisco.ios.ios_config:
+        lines:
+          - snmp-server community rack-a ro
