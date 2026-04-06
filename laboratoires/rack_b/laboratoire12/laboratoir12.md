@@ -1,7 +1,7 @@
 # Laboratoire 12 - Automatisation
 # Topologie
 
-![Topo](../../../topo/rack-b/topo6.png)
+![Topo](../../../topo/rack-b/topo12.png)
 
 # Table d’adressage :
 
