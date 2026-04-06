@@ -74,6 +74,6 @@
 
     - name: Appliquer l'acl etendu sur l'interface g0/0/1 de RACK-C-R1-MTL
       cisco.ios.ios_config:
-        parents: interface g0/0/1
+        parents: interface g0/0/0
         lines:
           - ip access-group ACL-LAN-TO-WAN in
