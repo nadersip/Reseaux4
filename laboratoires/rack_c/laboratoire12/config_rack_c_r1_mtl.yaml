@@ -1,0 +1,79 @@
+- name: Configuration routeur RACK-C-R1-MTL
+  hosts: RACK-C-R1-MTL
+
+  tasks:
+
+    - name: Configuration d'adresse IP sur l'interface g0/0/0 de RACK-C-R1-MTL
+      cisco.ios.ios_config:
+        parents: interface g0/0/0
+        lines:
+          - ip address 172.16.50.1 255.255.255.0
+          - no shutdown
+
+    - name: Configuration tunnel GRE sur RACK-C-R1-MTL
+      cisco.ios.ios_config:
+        parents: interface tunnel 1
+        lines:
+          - ip address 172.16.65.1 255.255.255.252
+          - tunnel source g0/0/1
+          - tunnel destination 10.0.0.26
+    
+    - name: Configuration OSPF sur RACK-C-R1-MTL
+      cisco.ios.ios_config:
+        parents: router ospf 1
+        lines:
+          - network 172.16.50.0 0.0.0.255 area 0
+          - network 172.16.65.0 0.0.0.3 area 0
+          - passive-interface g0/0/0
+          - passive-interface g0/0/1
+
+    - name: Configuration de l'acl standard pour NAT sur RACK-C-R1-MTL
+      cisco.ios.ios_config:
+        parents: ip access-list standard NAT
+        lines:
+          - permit 172.16.50.0 0.0.0.255
+          - deny any
+
+    - name: Configuration du NAT sur RACK-C-R1-MTL
+      cisco.ios.ios_config:
+        lines:
+          - ip nat inside source list 10 interface g0/0/1 overload
+
+    - name: Configuration du NAT sur l'interface g0/0/1 de RACK-C-R1-MTL
+      cisco.ios.ios_config:
+        parents: interface g0/0/1
+        lines:
+          - ip nat outside
+
+    - name: Configuration du NAT sur l'interface g0/0/0 de RACK-C-R1-MTL
+      cisco.ios.ios_config:
+        parents: interface g0/0/0
+        lines:
+          - ip nat inside
+
+    - name: Configuration de SNMP sur RACK-C-R1-MTL
+      cisco.ios.ios_config:
+        lines:
+          - snmp-server community rack-c ro
+
+    - name: Configuration de l'acl etendu sur RACK-C-R1-MTL
+      cisco.ios.ios_config:
+        parents: ip access-list extended ACL-LAN-TO-WAN
+        lines:
+          - permit tcp 172.16.50.0 0.0.0.255 host 192.168.30.200 eq 20 
+          - permit tcp 172.16.50.0 0.0.0.255 host 192.168.30.200 eq 21
+          - permit tcp 172.16.50.0 0.0.0.255 host 192.168.30.200 eq 22
+          - permit tcp 172.16.50.0 0.0.0.255 host 192.168.30.200 eq 53
+          - permit udp 172.16.50.0 0.0.0.255 host 192.168.30.200 eq 53
+          - permit tcp 172.16.50.0 0.0.0.255 host 192.168.30.200 eq 80
+          - permit tcp 172.16.50.0 0.0.0.255 host 192.168.30.200 eq 443 
+          - deny tcp 172.16.50.0 0.0.0.255 host 20.151.204.134 eq 80
+          - permit tcp 172.16.50.0 0.0.0.255 any eq 80
+          - permit tcp 172.16.50.0 0.0.0.255 any eq 443
+          - permit icmp any any
+
+    - name: Appliquer l'acl etendu sur l'interface g0/0/1 de RACK-C-R1-MTL
+      cisco.ios.ios_config:
+        parents: interface g0/0/1
+        lines:
+          - ip access-group ACL-LAN-TO-WAN in
