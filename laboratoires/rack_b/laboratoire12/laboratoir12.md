@@ -1,4 +1,4 @@
-# Laboratoire 12 - Configuration GRE, OSPF, NAT, SNMP, ACL et TFTP
+# Laboratoire 12 - Automatisation
 # Topologie
 
 ![Topo](../../../topo/rack-b/topo6.png)
@@ -16,8 +16,6 @@
 |RACK-B-R2-Ottawa |G0/0/1   |10.0.0.18   |255.255.255.252| N/A|Connexion a ISP
 |          |G0/0/0|172.16.40.1|255.255.255.0  | N/A|Connexion au switch RACK B-SW-Ottawa
 |          |Tunnel 1   |172.16.45.2   |255.255.255.252| N/A|Connexion Tunnel au RACK-B-R1-MTL
-|RACK-B-SW1-MTL |SVI  |172.16.30.2   |255.255.255.0| 172.16.30.1|
-|RACK-B-SW2-Ottawa |SVI  |172.16.40.2   |255.255.255.0| 172.16.40.1|
 |RACK-B-PC1|Fa0      |172.16.30.100       |255.255.255.0  | 172.16.30.1   |    |
 |RACK-B-PC2|Fa0      |172.16.40.100       |255.255.255.0  | 172.16.40.1   |    |
 
@@ -26,8 +24,10 @@ Note: utiliser le serveur 192.168.20.200 pour DNS
 # Étape 1 – Configuration des paramètres de base
 a. Configurez les noms d’hôte (hostname)
 
+b. Configurez le mot de passe « class » pour le mode privilégié.
+
 # Étape 2 – Configuration des adresses IP
-a. À l’aide du tableau d’adresses IP, configurez les adresses IP.
+a. À l’aide du tableau d’adresses IP, configurez uniquement les adresses IP sur l’interface G0/0/1 des routeurs RACK-B-R1-MTL, RACK-B-R2-Ottawa ainsi que sur l’ISP.
 
 # Étape 3 – Configuration du routage statique
 a. Sur ISP, configurez une route par défaut route entièrement spécifiée pointant vers SW-Internet.
@@ -36,80 +36,56 @@ b. Sur RACK-B-R1-MTL, configurez une route par défaut route entièrement spéci
 
 c. Sur RACK-B-R2-Ottawa, configurez une route par défaut route entièrement spécifiée pointant vers ISP.
 
-# Étape 4 – Configuration du tunnel GRE
-a. Configurer le tunnel GRE entre les routeurs RACK-B-R1-MTL et RACK-B-R2-Ottawa
+# Étape 4 – Configurez SSH sur le routeur RACK-B-R1-MTL et RACK-B-R2-Ottawa.
 
-# Étape 5 – Configuration du routage dynamique 
-a. Configurez le routage OSPF sur tous les routeurs RACK-B-R1-MTL et RACK-B-R2-Ottawa.
+a. Définissez le nom de domaine à rack-b.local
 
-•   Utilisez le numéro de processus ID 1 et la zone 0.
+b. Créez un utilisateur « user » avec le mot de passe « cisco1234 ».
 
-•   Annoncez dans OSPF uniquement les réseaux connectés, sauf les réseaux qui mène vers ISP.
+c. Créez une clé RSA 2048 bits.
 
-•   Configurez les interfaces passives aux endroits appropriés.
+d. Version 2
 
-# Étape 6 – Configuration du NAT sur RACK-B-R1-MTL et RACK-B-R2-Ottawa
-a.	Créer une liste d’accès standard nommée NAT sur RACK-B-R1-MTL pour permettre le réseau
-172.16.30.0/24 et interdire tout autres réseaux.
+e. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
-b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-B-R1-MTL.
+# Étape 5 – Automatisation des tâches
 
-a.	Créer une liste d’accès standard nommée NAT sur RACK-B-R2-Ottawa pour permettre le réseau
-172.16.40.0/24 et interdire tout autres réseaux.
+a. À l’aide du RACK-B-PC3, connectez-vous au serveur 192.168.20.200 en SSH en utilisant le nom d’utilisateur « user » et le mot de passe « cisco1234 ».
 
-b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-B-R2-Ottawa.
+b. Exécutez la commande suivante pour télécharger le dépôt GitHub sur le serveur.
 
-d.	Tester le NAT avant de continuer.
+git clone https://github.com/nadersip/Reseaux4.git
 
-# Étape 7 – Configuration SNMP
+c. Déplacez-vous dans le répertoire Reseaux4/laboratoires/rack_b/laboratoire12.
 
-a. Configurer une communauté read-only nommée "rack-b" sur les routeurs RACK-B-R1-MTL et RACK-B-R2-Ottawa.
+d. Exécutez la commande suivante pour configurer le routeur RACK-B-R1-MTL.
 
-b. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-B-R1-MTL et RACK-B-R2-Ottawa. Suivre la documentation [SNMP](../../documentation/snmp_client.md).
+ansible-playbook config_rack_b_r1_mtl.yaml -i inventory.ini
 
-# Étape 8 – Configuration des ACL étendues sur RACK-B-R1-MTL et RACK-B-R2-Ottawa
+e. Exécutez la commande suivante pour configurer le routeur RACK-B-R2-Ottawa.
 
-🔴 Avant de commencer les ACL, assurez-vous de faire les tests sur les deux PC. Par exemple :
+ansible-playbook config_rack_b_r2_ottawa.yaml -i inventory.ini
 
-🔴 Accéder à une page web www.rack-b.local en HTTP et HTTPS.
+🔴 Exécutez la commande show run pour vous assurer que les configurations sont bien présentes sur les routeurs.
 
-🔴 Accéder à une page web google.com en HTTP et HTTPS.
+# Étape 6 – Configuration SNMP
+a. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-B-R1-MTL et RACK-B-R2-Ottawa. Suivre la documentation [SNMP](../../documentation/snmp_client.md).
 
-🔴 Vérifier que le DNS fonctionne correctement.
+# Étape 7 – Sauvegarde des configurations sur le serveur TFTP
 
-🔴 Essayer de vous connecter au serveur en utilisant [FTP](../../documentation/ftp_connection.md) et SSH
-
-Écrire une ACL étendue nommée ACL-LAN-TO-WAN qui donne les accès suivants: 
-
-•	Autoriser le trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443), HTTP (80) et TFTP (69) provenant des réseaux locaux vers le serveur externe (192.168.20.200).
-
-•	Autoriser le trafic HTTPS (443) et HTTP (80) provenant des réseaux locaux vers n’importe quelle destination.
-
-•	Autorise le trafic HTTPS (443) et HTTP (80) provenant des reseaux loceau vers n'import quelle destination.
-
-•	Refuser le trafic HTTP (80) provenant des réseaux locaux vers le serveur hackme.computcenter.ca.
-
-•	Interdire tout autres trafics.
-
-# Étape 9 – Sauvegarde des configurations sur le serveur TFTP
-
-a. Effectuer la sauvegarde des configurations des routeurs et des commutateurs vers le serveur TFTP (192.168.20.200).
+a. Effectuer la sauvegarde des configurations des routeurs vers le serveur TFTP (192.168.20.200).
 
 # Captures à remettre dans le pigeonnier
 
 a. Vous devez effectuer un traceroute entre le PC RACK-B-PC1 et le PC RACK-B-PC2. Le trafic doit passer à travers le tunnel.
 
-b. Vous devez effectuer un traceroute entre le PC RACK-B-PC1 et www.rack-b.local
-. Le trafic ne doit pas passer dans le tunnel.
+b. Vous devez effectuer un traceroute entre le PC RACK-B-PC1 et www.rack_b.local. Le trafic ne doit pas passer dans le tunnel.
 
-c. Vous devez effectuer un traceroute entre le PC RACK-B-PC2 et www.rack-b.local
-. Le trafic ne doit pas passer dans le tunnel.
+c. Vous devez effectuer un traceroute entre le PC RACK-B-PC2 et www.rack_b.local. Le trafic ne doit pas passer dans le tunnel.
 
-d. Ouvrir www.google.com
- dans le navigateur web sur RACK-B-PC1. Vous devez être capable d’ouvrir cette page.
+d. Ouvrir www.google.com dans le navigateur web sur RACK-B-PC1. Vous devez être capable d’ouvrir cette page.
 
-e. Ouvrir www.google.com
- dans le navigateur web sur RACK-B-PC2. Vous devez être capable d’ouvrir cette page.
+e. Ouvrir www.google.com dans le navigateur web sur RACK-B-PC2. Vous devez être capable d’ouvrir cette page.
 
 f. Ouvrir hackme.computcenter.ca dans le navigateur web sur RACK-B-PC1. Vous ne devez pas être capable d’ouvrir cette page.
 
@@ -126,3 +102,4 @@ i. Connectez-vous au serveur 192.168.20.200 en SSH, puis déplacez-vous dans le 
     • Mot de passe : cisco1234
 
 j. Exécuter la commande "show ip access-lists" sur les routeurs RACK-B-R1-MTL et RACK-B-R2-Ottawa. Vous devez voir des correspondances (matches) sur toutes les lignes.
+

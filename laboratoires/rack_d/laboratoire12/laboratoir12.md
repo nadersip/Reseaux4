@@ -1,4 +1,4 @@
-# Laboratoire 12 - Configuration GRE, OSPF, NAT, SNMP, ACL et TFTP
+# Laboratoire 12 - Automatisation
 # Topologie
 
 ![Topo](../../../topo/rack-d/topo6.png)
@@ -16,8 +16,6 @@
 |RACK-D-R2-Ottawa |G0/0/1   |10.0.0.34   |255.255.255.252| N/A|Connexion a ISP
 |          |G0/0/0|172.16.80.1|255.255.255.0  | N/A|Connexion au switch RACK D-SW-Ottawa
 |          |Tunnel 1   |172.16.85.2   |255.255.255.252| N/A|Connexion Tunnel au RACK-D-R1-MTL
-|RACK-D-SW1-MTL |SVI  |172.16.70.2   |255.255.255.0| 172.16.70.1|
-|RACK-D-SW2-Ottawa |SVI  |172.16.80.2   |255.255.255.0| 172.16.80.1|
 |RACK-D-PC1|Fa0      |172.16.70.100       |255.255.255.0  | 172.16.70.1   |    |
 |RACK-D-PC2|Fa0      |172.16.80.100       |255.255.255.0  | 172.16.80.1   |    |
 
@@ -26,8 +24,10 @@ Note: utiliser le serveur 192.168.40.200 pour DNS
 # Étape 1 – Configuration des paramètres de base
 a. Configurez les noms d’hôte (hostname)
 
+b. Configurez le mot de passe « class » pour le mode privilégié.
+
 # Étape 2 – Configuration des adresses IP
-a. À l’aide du tableau d’adresses IP, configurez les adresses IP.
+a. À l’aide du tableau d’adresses IP, configurez uniquement les adresses IP sur l’interface G0/0/1 des routeurs RACK-D-R1-MTL, RACK-D-R2-Ottawa ainsi que sur l’ISP.
 
 # Étape 3 – Configuration du routage statique
 a. Sur ISP, configurez une route par défaut route entièrement spécifiée pointant vers SW-Internet.
@@ -36,70 +36,50 @@ b. Sur RACK-D-R1-MTL, configurez une route par défaut route entièrement spéci
 
 c. Sur RACK-D-R2-Ottawa, configurez une route par défaut route entièrement spécifiée pointant vers ISP.
 
-# Étape 4 – Configuration du tunnel GRE
-a. Configurer le tunnel GRE entre les routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa
+# Étape 4 – Configurez SSH sur le routeur RACK-D-R1-MTL et RACK-D-R2-Ottawa.
 
-# Étape 5 – Configuration du routage dynamique 
-a. Configurez le routage OSPF sur tous les routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa.
+a. Définissez le nom de domaine à rack-d.local
 
-•   Utilisez le numéro de processus ID 1 et la zone 0.
+b. Créez un utilisateur « user » avec le mot de passe « cisco1234 ».
 
-•   Annoncez dans OSPF uniquement les réseaux connectés, sauf les réseaux qui mène vers ISP.
+c. Créez une clé RSA 2048 bits.
 
-•   Configurez les interfaces passives aux endroits appropriés.
+d. Version 2
 
-# Étape 6 – Configuration du NAT sur RACK-D-R1-MTL et RACK-D-R2-Ottawa
-a.	Créer une liste d’accès standard nommée NAT sur RACK-D-R1-MTL pour permettre le réseau
-172.16.70.0/24 et interdire tout autres réseaux.
+e. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
-b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-D-R1-MTL.
+# Étape 5 – Automatisation des tâches
 
-a.	Créer une liste d’accès standard nommée NAT sur RACK-D-R2-Ottawa pour permettre le réseau
-172.16.80.0/24 et interdire tout autres réseaux.
+a. À l’aide du RACK-D-PC3, connectez-vous au serveur 192.168.40.200 en SSH en utilisant le nom d’utilisateur « user » et le mot de passe « cisco1234 ».
 
-b.	Configurer le NAT avec PAT sur l'interface de sortie de RACK-D-R2-Ottawa.
+b. Exécutez la commande suivante pour télécharger le dépôt GitHub sur le serveur.
 
-d.	Tester le NAT avant de continuer.
+git clone https://github.com/nadersip/Reseaux4.git
 
-# Étape 7 – Configuration SNMP
+c. Déplacez-vous dans le répertoire Reseaux4/laboratoires/rack_d/laboratoire12.
 
-a. Configurer une communauté read-only nommée "rack-d" sur les routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa.
+d. Exécutez la commande suivante pour configurer le routeur RACK-D-R1-MTL.
 
-b. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa. Suivre la documentation [SNMP](../../documentation/snmp_client.md).
+ansible-playbook config_rack_d_r1_mtl.yaml -i inventory.ini
 
-# Étape 8 – Configuration des ACL étendues sur RACK-D-R1-MTL et RACK-D-R2-Ottawa
+e. Exécutez la commande suivante pour configurer le routeur RACK-D-R2-Ottawa.
 
-🔴 Avant de commencer les ACL, assurez-vous de faire les tests sur les deux PC. Par exemple :
+ansible-playbook config_rack_d_r2_ottawa.yaml -i inventory.ini
 
-🔴 Accéder à une page web www.RACK-D.local en HTTP et HTTPS.
+🔴 Exécutez la commande show run pour vous assurer que les configurations sont bien présentes sur les routeurs.
 
-🔴 Accéder à une page web google.com en HTTP et HTTPS.
+# Étape 6 – Configuration SNMP
+a. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa. Suivre la documentation [SNMP](../../documentation/snmp_client.md).
 
-🔴 Vérifier que le DNS fonctionne correctement.
+# Étape 7 – Sauvegarde des configurations sur le serveur TFTP
 
-🔴 Essayer de vous connecter au serveur en utilisant [FTP](../../documentation/ftp_connection.md) et SSH
-
-Écrire une ACL étendue nommée ACL-LAN-TO-WAN qui donne les accès suivants: 
-
-•	Autoriser le trafic FTP (ports 20 et 21), SSH (22), DNS (53), HTTPS (443), HTTP (80) et TFTP (69) provenant des réseaux locaux vers le serveur externe (192.168.40.200).
-
-•	Autoriser le trafic HTTPS (443) et HTTP (80) provenant des réseaux locaux vers n’importe quelle destination.
-
-•	Autorise le trafic HTTPS (443) et HTTP (80) provenant des reseaux loceau vers n'import quelle destination.
-
-•	Refuser le trafic HTTP (80) provenant des réseaux locaux vers le serveur hackme.computcenter.ca.
-
-•	Interdire tout autres trafics.
-
-# Étape 9 – Sauvegarde des configurations sur le serveur TFTP
-
-a. Effectuer la sauvegarde des configurations des routeurs et des commutateurs vers le serveur TFTP (192.168.40.200).
+a. Effectuer la sauvegarde des configurations des routeurs vers le serveur TFTP (192.168.40.200).
 
 # Captures à remettre dans le pigeonnier
 
 a. Vous devez effectuer un traceroute entre le PC RACK-D-PC1 et le PC RACK-D-PC2. Le trafic doit passer à travers le tunnel.
 
-b. Vous devez effectuer un traceroute entre le PC RACK-D-PC1 et www.rack-d.loca. Le trafic ne doit pas passer dans le tunnel.
+b. Vous devez effectuer un traceroute entre le PC RACK-D-PC1 et www.rack-d.local. Le trafic ne doit pas passer dans le tunnel.
 
 c. Vous devez effectuer un traceroute entre le PC RACK-D-PC2 et www.rack-d.local. Le trafic ne doit pas passer dans le tunnel.
 
@@ -113,7 +93,7 @@ g. Ouvrir hackme.computcenter.ca dans le navigateur web sur RACK-D-PC2. Vous ne 
 
 h. Prenez une capture d’écran de la page web de Zabbix montrant vos appareils qui ont été ajoutés.
 
-i. Connectez-vous au serveur 192.168.20.200 en SSH, puis déplacez-vous dans le dossier « /backup ». Exécutez la commande « ls » pour voir les configurations de chaque routeur et switch. Exécutez ensuite un « cat » sur un des fichiers afin de vérifier les configurations.
+i. Connectez-vous au serveur 192.168.40.200 en SSH, puis déplacez-vous dans le dossier « /backup ». Exécutez la commande « ls » pour voir les configurations de chaque routeur et switch. Exécutez ensuite un « cat » sur un des fichiers afin de vérifier les configurations.
 
     Utilisez les identifiants suivants :
     
@@ -122,3 +102,4 @@ i. Connectez-vous au serveur 192.168.20.200 en SSH, puis déplacez-vous dans le 
     • Mot de passe : cisco1234
 
 j. Exécuter la commande "show ip access-lists" sur les routeurs RACK-D-R1-MTL et RACK-D-R2-Ottawa. Vous devez voir des correspondances (matches) sur toutes les lignes.
+
