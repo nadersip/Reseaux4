@@ -27,7 +27,9 @@ a. Configurez les noms d’hôte (hostname)
 b. Configurez le mot de passe « class » pour le mode privilégié.
 
 # Étape 2 – Configuration des adresses IP
-a. À l’aide du tableau d’adresses IP, configurez uniquement les adresses IP sur l’interface G0/0/1 des routeurs RACK-F-R1-MTL, RACK-F-R2-Ottawa ainsi que sur l’ISP.
+a. À l’aide du tableau d’adresses IP, configurez les adresses IP de ISP.
+
+b. À l’aide du tableau d’adresses IP, configurez uniquement les adresses IP sur l’interface G0/0/1 des routeurs RACK-F-R1-MTL et RACK-F-R2-Ottawa.
 
 # Étape 3 – Configuration du routage statique
 a. Sur ISP, configurez une route par défaut route entièrement spécifiée pointant vers SW-Internet.
