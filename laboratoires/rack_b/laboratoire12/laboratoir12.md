@@ -71,7 +71,7 @@ ansible-playbook config_rack_b_r2_ottawa.yaml -i inventory.ini
 🔴 Exécutez la commande show run pour vous assurer que les configurations sont bien présentes sur les routeurs.
 
 # Étape 6 – Configuration SNMP
-a. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-B-R1-MTL et RACK-B-R2-Ottawa. Suivre la documentation [SNMP](../../documentation/snmp_client.md).
+a. Configurer le serveur Zabbix pour se connecter aux routeurs RACK-B-R1-MTL et RACK-B-R2-Ottawa. Suivre la documentation [SNMP](../../../documentation/snmp_client.md).
 
 # Étape 7 – Sauvegarde des configurations sur le serveur TFTP
 
