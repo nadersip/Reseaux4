@@ -54,6 +54,8 @@ e. Paramétrez toutes les lignes vty 0 4 pour utiliser SSH et un login local
 
 a. À l’aide du RACK-D-PC3, connectez-vous au serveur 192.168.40.200 en SSH en utilisant le nom d’utilisateur « user » et le mot de passe « cisco1234 ».
 
+🔴 Avant de lancer les scripts, essayez de vous connecter en SSH depuis le serveur vers les routeurs.
+
 b. Exécutez la commande suivante pour télécharger le dépôt GitHub sur le serveur.
 
 git clone https://github.com/nadersip/Reseaux4.git
